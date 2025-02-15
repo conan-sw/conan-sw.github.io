@@ -1,0 +1,226 @@
+---
+title: Pandas I
+execute:
+  echo: true
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    toc: true
+    toc-title: Pandas I
+    page-layout: full
+    theme:
+      - cosmo
+      - cerulean
+    callout-icon: false
+jupyter: python3
+---
+
+This discussion is all about practicing using `pandas`, and testing your knowledge about its various functionalities to accomplish small tasks.
+
+We will be using the `elections` dataset from lecture.
+
+```{python}
+#| code-fold: false
+# import packages
+import pandas as pd
+import numpy as np
+import warnings
+warnings.simplefilter(action='ignore', category=FutureWarning)
+```
+
+```{python}
+#| code-fold: false
+elections = pd.read_csv('elections.csv')
+elections.head(10)
+```
+
+Write a line of code that returns the elections table sorted in descending order by `"Popular vote"`. Store your result in a variable named `sorted`. Would calling `sorted.iloc[[0], :]` give the same result as `sorted.loc[[0], :]`?
+
+```{python}
+#| code-fold: true
+sorted = elections.sort_values("Popular vote", ascending = False)
+sorted
+```
+
+<details>
+<summary><b>Explanation</b></summary>
+<br>
+<div>
+
+We can sort a `DataFrame` by a column using the `.sort_values()` function! Remember to specify `ascending = False`, or else it will sort in *increasing* order.
+
+</div>
+</details>
+
+```{python}
+#| code-fold: false
+sorted.iloc[[0], :]
+```
+
+```{python}
+#| code-fold: false
+sorted.loc[[0], :]
+```
+
+<details>
+<summary><b>Explanation</b></summary>
+<br>
+<span style="color:blue">
+<div>
+
+The difference is that `.loc[]` uses **label-based** indexing, while `.iloc[]` uses **integer position-based** indexing. Using `.loc[]` will simply grab the row with the label **0** regardless of where it is, while `.iloc[]` will grab the first row of the sorted `DataFrame`.
+           
+</div>
+</span>
+</details>
+
+Using Boolean slicing, write one line of `pandas` code that returns a `DataFrame` that only contains election results from the 1900s.
+
+```{python}
+#| code-fold: true
+elections[(elections["Year"] >= 1900) & (elections["Year"] < 2000)]
+```
+
+<details>
+<summary><b>Explanation</b></summary>
+<br>
+<span style="color:blue">
+<div>
+
+We can "filter" `DataFrame`s by using boolean slicing! 
+1. Construct a boolean `Series` that is `True` if a row contains election results from the 1900s, and `False` otherwise.
+    * We can use the `&` (and) logical operator! 1900 or after **and** before 2000.
+2. Use the boolean `Series` to slice the `DataFrame`
+    * `df[boolean_array]`
+           
+</div>
+</span>
+</details>
+
+Write one line of `pandas` code that returns a `Series`, where the index is the `"Party"`, 
+and the values are how many times that party won an election. Only include parties that have won an election.
+
+```{python}
+#| code-fold: true
+elections[elections["Result"] == "win"]["Party"].value_counts()
+```
+
+```{python}
+#| code-fold: true
+elections[elections["Result"] == "win"].groupby("Party").size()
+```
+
+<details>
+<summary><b>Explanation</b></summary>
+<br>
+<span style="color:blue">
+<div>
+
+Two parts to this!
+1. Filter `DataFrame` to only include winners.
+    * Use boolean slicing again! Construct a boolean `Series` that has `True` if the row contains a winner, and `False` otherwise
+    * `elections[elections["Result"] == "win"]`
+2. Within filtered `DataFrame` (let's call this `winners`), count the number of times each party won an election. Two ways to do this.
+    * Extract the **Party** column from `winners`, and call `value_counts()`.
+        * `winners["Party"].value_counts()`
+    * Group by the **Party** column, and aggregate by the number of rows in each sub-`DataFrame`.
+        * `winners.groupby("Party").size()`
+    * The two methods above return the same thing, *except* `.value_counts()` sorts by the values in decreasing order, while `.groupby()` sort by the index in increasing order!
+           
+</div>
+</span>
+</details>
+
+Write a line of `pandas` code that returns a `Series` whose index is the years and whose values are the number of candidates that participated in those years' elections.
+
+```{python}
+#| code-fold: true
+elections["Year"].value_counts().head() #.head() to limit output
+```
+
+```{python}
+#| code-fold: true
+elections.groupby("Year").size().head() #.head() to limit output
+```
+
+<details>
+<summary><b>Explanation</b></summary>
+<br>
+<span style="color:blue">
+<div>
+
+Very similar to **Problem 3**! Might even be easier, actually. Each row corresponds to one candidate per election cycle, so we simply need to count the number of times each **Year** appears in the elections `DataFrame`. Just like in **Problem 3**, two ways to do this.
+           
+1. Extract the **Year** column as a `Series`, call `.value_counts()` on it.
+    * `elections["Year"].value_counts()`      
+2. Group by the **Year** column, creating a sub-`DataFrame` for each unique **Year**. Aggregate by `.size()`, counting the number of rows in each sub-`DataFrame`.
+    * `elections.groupby("Year").size()`
+           
+</div>
+</span>
+</details>
+
+Write a line of `pandas` code that creates a filtered `DataFrame` named `filtered_parties` from the elections dataset and keeps only the parties that have at least one election % more than 50%.
+
+```{python}
+#| code-fold: true
+filtered_parties = elections.groupby("Party").filter(lambda df: df["%"].max() > 50)
+filtered_parties
+```
+
+<details>
+<summary><b>Explanation</b></summary>
+<br>
+<span style="color:blue">
+<div>
+
+This filtering is different from boolean slicing! Boolean slicing considers rows individually, while `.filter()` considers *groups of rows*. Rows of a sub-`DataFrame` either *all* make it, or *none* make it.
+
+1. Group by the **Party** column, creating one sub-`DataFrame` for each party.
+    * `elections.groupby("Party")`
+2. Filter using `.filter()`
+    * Pass in a function into `.filter()` that takes in a `DataFrame` and returns `True` or `False`. Can be a lambda function!
+    * `.filter(lambda df: df["%"].max() > 50)`
+        * If the lambda function returns `True`, it means you keep the entire sub-`DataFrame`. `False` means you exclude it entirely!
+           
+</div>
+</span>
+</details>
+
+Write a line of `pandas` code that uses the `filtered_parties` `DataFrame` to return a new
+`DataFrame` with row indices that correspond to the year and columns that correspond
+to each party. Each entry should be the total percentage of votes for all the candidates
+that ran during that particular year for the specified party. Missing values from the dataset (the cases where a party did not have a candidate in a particular year) should be entered as 0. Below is an example.
+
+![](pivot.png)
+
+```{python}
+#| code-fold: true
+elections_pivot = filtered_parties.pivot_table(
+    index = "Year",
+    columns = "Party",
+    values = "%",
+    aggfunc = np.sum,
+    fill_value = 0)
+elections_pivot.head(10)
+```
+
+<details>
+<summary><b>Explanation</b></summary>
+<br>
+<span style="color:blue">
+<div>
+
+First thing to notice is that the columns are values of the **Party** column! This tells us that what we see is a **pivot table**. 
+
+* Use the `.pivot_table()` function on `filtered_parties`
+    * `index = "Year"` and `columns = "Party"`, saying that the unique values of **Year** should make up the row indices, and the unique values of **Party** should make up the columns.
+    * `values = "%"` indicates that we populate the cells with the **%** values for each combination of **Year, Party**
+    * `aggfunc = np.sum` describes how to aggregate the values in a cell
+    * `fill_value = 0` says to impute 0 in case there is no **%** value for a specific **Year, Party** combination
+           
+</div>
+</span>
+</details>
+

@@ -1,0 +1,14 @@
+project:
+    type: book
+    output-dir: docs
+
+book:
+    title: "Data 100 Discussion Notes"
+    author: Conan Smallwood
+    search: 
+      location: sidebar
+      type: textbox
+    chapters:
+      - index.qmd
+      - disc02/disc02.qmd
+      - disc03/disc03.qmd
