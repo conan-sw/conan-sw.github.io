@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
+<link href="../disc05/disc05.html" rel="next">
 <link href="../disc03/disc03.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -192,6 +193,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="../disc04/disc04.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc05/disc05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
   </div>
 </li>
     </ul>
@@ -417,7 +424,7 @@ window.Quarto = {
 <section id="visualizing-bigfoot" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="visualizing-bigfoot"><span class="header-section-number">4.2</span> Visualizing Bigfoot</h2>
 <p>Many of you have probably heard of Bigfoot before. It’s a mysterious ape-like creature that is said to live in North American forests. Most doubt its existence, but a passionate few swear that Bigfoot is real. In this discussion, you will be working with a dataset on Bigfoot sightings, visualizing variable distributions and combinations thereof to better understand how/when/where Bigfoot is reportedly spotted, and possibly either confirm or cast doubt on its existence. The Bigfoot data contains a ton of variables about each reported Bigfoot spotting, including location information, weather, and moon phase.</p>
-<div id="cc3d998f" class="cell" data-execution_count="1">
+<div id="1c4fa91c" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing packages</span></span>
@@ -430,7 +437,7 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="37484aad" class="cell" data-execution_count="2">
+<div id="8014950c" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading bigfoot data</span></span>
@@ -440,7 +447,7 @@ window.Quarto = {
 </details>
 </div>
 <p>This dataset is extremely messy, with observations missing many values across multiple columns. This is normally the case with data based on citizen reports (many do not fill out all required fields). For the purposes of this discussion, we will drop all observations with any missing values and some unneeded columns. However, note this is not a good practice and you should almost never do this in real life!</p>
-<div id="d3cc7562" class="cell" data-execution_count="3">
+<div id="33ba60b8" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop unneeded rows and observations with missing values</span></span>
@@ -453,12 +460,12 @@ window.Quarto = {
 </details>
 </div>
 <p>Here are the first few entries of the <code>bigfoot</code> table:</p>
-<div id="74707097" class="cell" data-execution_count="4">
+<div id="297889fe" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bigfoot.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="13">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
 
@@ -589,7 +596,7 @@ window.Quarto = {
 <figcaption>windspeed</figcaption>
 </figure>
 </div>
-<div id="3e478138" class="cell" data-execution_count="5">
+<div id="b0bb6910" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"wind_speed"</span>, kde <span class="op">=</span> <span class="va">True</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -609,7 +616,7 @@ window.Quarto = {
 <p>Now, let’s look at some qualitative variables. Write a line of code that produces a visualization that shows the distribution of bigfoot sightings across the variable <code>season</code> (example shown below).</p>
 <p><strong>Hint:</strong> Use <code>seaborn</code>’s <code>sns.countplot</code> or <code>matplotlib</code>’s <code>plt.bar</code>.</p>
 <p><img src="images/season_bar.png" class="img-fluid"></p>
-<div id="63a1bf5e" class="cell" data-execution_count="6">
+<div id="69dcc0e6" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -623,7 +630,7 @@ window.Quarto = {
 </div>
 </div>
 <p>In order to also replicate the colors of the bars, you would need to manually specify them.</p>
-<div id="0a15d8f2" class="cell" data-execution_count="7">
+<div id="f4977bc7" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>, palette <span class="op">=</span> [<span class="st">"blue"</span>, <span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -637,7 +644,7 @@ window.Quarto = {
 </div>
 </div>
 <p>You could have alternatively used Matplotlib!</p>
-<div id="8f043b1a" class="cell" data-execution_count="8">
+<div id="191f9614" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>season_counts <span class="op">=</span> bigfoot[<span class="st">"season"</span>].value_counts()</span>
@@ -657,7 +664,7 @@ window.Quarto = {
 <p>Finally, produce a single visualization that showcases how the prevalence of bigfoot sightings at particular combinations of <code>moon_phase</code> and <code>wind_speed</code> vary across each season.</p>
 <p><strong>Hint</strong>: Think about color as the third information channel in the plot.</p>
 <p><img src="images/moon_vs_wind.png" class="img-fluid"></p>
-<div id="c9c769ce" class="cell" data-execution_count="9">
+<div id="4a4aa4b2" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data <span class="op">=</span> bigfoot,</span>
@@ -1208,6 +1215,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../disc05/disc05.html" class="pagination-link" aria-label="Transformations, Sampling, and SLR">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
