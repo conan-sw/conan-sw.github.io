@@ -103,7 +103,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
+
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 
 
 </head>
@@ -210,14 +213,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This discussion is all about practicing using <code>pandas</code>, and testing your knowledge about its various functionalities to accomplish small tasks.</p>
 <p>We will be using the <code>elections</code> dataset from lecture.</p>
-<div id="1536b8d2" class="cell" data-execution_count="1">
+<div id="f1eaeee1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="19e36aeb" class="cell" data-execution_count="2">
+<div id="c9b2e3cd" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>elections <span class="op">=</span> pd.read_csv(<span class="st">'elections.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>elections.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -334,7 +337,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Write a line of code that returns the elections table sorted in descending order by <code>"Popular vote"</code>. Store your result in a variable named <code>sorted</code>. Would calling <code>sorted.iloc[[0], :]</code> give the same result as <code>sorted.loc[[0], :]</code>?</p>
-<div id="19f42b35" class="cell" data-execution_count="3">
+<div id="13092156" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span> <span class="op">=</span> elections.sort_values(<span class="st">"Popular vote"</span>, ascending <span class="op">=</span> <span class="va">False</span>)</span>
@@ -472,7 +475,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We can sort a <code>DataFrame</code> by a column using the <code>.sort_values()</code> function! Remember to specify <code>ascending = False</code>, or else it will sort in <em>increasing</em> order.</p>
 </div>
 </details>
-<div id="4ff53037" class="cell" data-execution_count="4">
+<div id="e26fdc71" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.iloc[[<span class="dv">0</span>], :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -506,7 +509,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="9c3772be" class="cell" data-execution_count="5">
+<div id="b32c0f89" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.loc[[<span class="dv">0</span>], :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -551,7 +554,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </span>
 </details>
 <p>Using Boolean slicing, write one line of <code>pandas</code> code that returns a <code>DataFrame</code> that only contains election results from the 1900s.</p>
-<div id="9cc49518" class="cell" data-execution_count="6">
+<div id="9fd11959" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>elections[(elections[<span class="st">"Year"</span>] <span class="op">&gt;=</span> <span class="dv">1900</span>) <span class="op">&amp;</span> (elections[<span class="st">"Year"</span>] <span class="op">&lt;</span> <span class="dv">2000</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -690,7 +693,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </span>
 </details>
 <p>Write one line of <code>pandas</code> code that returns a <code>Series</code>, where the index is the <code>"Party"</code>, and the values are how many times that party won an election. Only include parties that have won an election.</p>
-<div id="b8d3567a" class="cell" data-execution_count="7">
+<div id="93618ba1" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>][<span class="st">"Party"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -705,7 +708,7 @@ National Union            1
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="68646b1c" class="cell" data-execution_count="8">
+<div id="df1d34ee" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>].groupby(<span class="st">"Party"</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -731,7 +734,7 @@ dtype: int64</code></pre>
 </span>
 </details>
 <p>Write a line of <code>pandas</code> code that returns a <code>Series</code> whose index is the years and whose values are the number of candidates that participated in those years’ elections.</p>
-<div id="a79bc48f" class="cell" data-execution_count="9">
+<div id="9d16d84a" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>elections[<span class="st">"Year"</span>].value_counts().head() <span class="co">#.head() to limit output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -746,7 +749,7 @@ dtype: int64</code></pre>
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="6bead1cb" class="cell" data-execution_count="10">
+<div id="77ad9b02" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>elections.groupby(<span class="st">"Year"</span>).size().head() <span class="co">#.head() to limit output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -783,7 +786,7 @@ dtype: int64</code></pre>
 </span>
 </details>
 <p>Write a line of <code>pandas</code> code that creates a filtered <code>DataFrame</code> named <code>filtered_parties</code> from the elections dataset and keeps only the parties that have at least one election % more than 50%.</p>
-<div id="a22003a8" class="cell" data-execution_count="11">
+<div id="0fc5ab13" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filtered_parties <span class="op">=</span> elections.groupby(<span class="st">"Party"</span>).<span class="bu">filter</span>(<span class="kw">lambda</span> df: df[<span class="st">"%"</span>].<span class="bu">max</span>() <span class="op">&gt;</span> <span class="dv">50</span>)</span>
@@ -938,7 +941,7 @@ dtype: int64</code></pre>
 </details>
 <p>Write a line of <code>pandas</code> code that uses the <code>filtered_parties</code> <code>DataFrame</code> to return a new <code>DataFrame</code> with row indices that correspond to the year and columns that correspond to each party. Each entry should be the total percentage of votes for all the candidates that ran during that particular year for the specified party. Missing values from the dataset (the cases where a party did not have a candidate in a particular year) should be entered as 0. Below is an example.</p>
 <p><img src="pivot.png" class="img-fluid"></p>
-<div id="24abe8d0" class="cell" data-execution_count="12">
+<div id="e3c6eede" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>elections_pivot <span class="op">=</span> filtered_parties.pivot_table(</span>
