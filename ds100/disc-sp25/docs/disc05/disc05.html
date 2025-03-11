@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>5&nbsp; Transformations, Sampling, and SLR – Data 100 Discussion Notes</title>
+<title>6&nbsp; Transformations, Sampling, and SLR – Data 100 Discussion Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -143,7 +143,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../disc05/disc05.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../disc05/disc05.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -176,32 +176,38 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../disc01/disc01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math Prerequisites</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../disc02/disc02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pandas I</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas I</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc03/disc03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc04/disc04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc05/disc05.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc06/disc06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
   </div>
 </li>
     </ul>
@@ -214,22 +220,22 @@ window.Quarto = {
     <h2 id="toc-title">Transformations, Sampling, and SLR</h2>
    
   <ul>
-  <li><a href="#logarithmic-transformations" id="toc-logarithmic-transformations" class="nav-link active" data-scroll-target="#logarithmic-transformations"><span class="header-section-number">5.1</span> Logarithmic Transformations</a>
+  <li><a href="#logarithmic-transformations" id="toc-logarithmic-transformations" class="nav-link active" data-scroll-target="#logarithmic-transformations"><span class="header-section-number">6.1</span> Logarithmic Transformations</a>
   <ul class="collapse">
-  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a"><span class="header-section-number">5.1.1</span> (a)</a></li>
-  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">5.1.2</span> (b)</a></li>
-  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c"><span class="header-section-number">5.1.3</span> (c)</a></li>
-  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d"><span class="header-section-number">5.1.4</span> (d)</a></li>
-  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e"><span class="header-section-number">5.1.5</span> (e)</a></li>
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a"><span class="header-section-number">6.1.1</span> (a)</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">6.1.2</span> (b)</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c"><span class="header-section-number">6.1.3</span> (c)</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d"><span class="header-section-number">6.1.4</span> (d)</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e"><span class="header-section-number">6.1.5</span> (e)</a></li>
   </ul></li>
-  <li><a href="#data-collection-through-sampling" id="toc-data-collection-through-sampling" class="nav-link" data-scroll-target="#data-collection-through-sampling"><span class="header-section-number">5.2</span> Data Collection through Sampling</a>
+  <li><a href="#data-collection-through-sampling" id="toc-data-collection-through-sampling" class="nav-link" data-scroll-target="#data-collection-through-sampling"><span class="header-section-number">6.2</span> Data Collection through Sampling</a>
   <ul class="collapse">
-  <li><a href="#a-1" id="toc-a-1" class="nav-link" data-scroll-target="#a-1"><span class="header-section-number">5.2.1</span> (a)</a></li>
-  <li><a href="#b-1" id="toc-b-1" class="nav-link" data-scroll-target="#b-1"><span class="header-section-number">5.2.2</span> (b)</a></li>
+  <li><a href="#a-1" id="toc-a-1" class="nav-link" data-scroll-target="#a-1"><span class="header-section-number">6.2.1</span> (a)</a></li>
+  <li><a href="#b-1" id="toc-b-1" class="nav-link" data-scroll-target="#b-1"><span class="header-section-number">6.2.2</span> (b)</a></li>
   </ul></li>
-  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression"><span class="header-section-number">5.3</span> Simple Linear Regression</a>
+  <li><a href="#simple-linear-regression" id="toc-simple-linear-regression" class="nav-link" data-scroll-target="#simple-linear-regression"><span class="header-section-number">6.3</span> Simple Linear Regression</a>
   <ul class="collapse">
-  <li><a href="#a-2" id="toc-a-2" class="nav-link" data-scroll-target="#a-2"><span class="header-section-number">5.3.1</span> (a)</a></li>
+  <li><a href="#a-2" id="toc-a-2" class="nav-link" data-scroll-target="#a-2"><span class="header-section-number">6.3.1</span> (a)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -239,7 +245,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -256,8 +262,8 @@ window.Quarto = {
 </header>
 
 
-<section id="logarithmic-transformations" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="logarithmic-transformations"><span class="header-section-number">5.1</span> Logarithmic Transformations</h2>
+<section id="logarithmic-transformations" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="logarithmic-transformations"><span class="header-section-number">6.1</span> Logarithmic Transformations</h2>
 <p>Ishani is a development economist interested in studying the relationship between literacy rates and gross national income in countries across the world. Originally, she plotted the data on a linear (absolute) scale, shown on the left. She noticed that the non-linear relationship between the variables with a lot of points clustered towards the larger values of literacy rate, so she consults the Tukey-Mosteller Bulge diagram and decides to do a <span class="math inline">\(\log_{10}\)</span> transformation of the <span class="math inline">\(y\)</span>-axis, shown on the right. The solid blue line is a “line of best fit” (we’ll formalize this later in the course).</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -265,8 +271,8 @@ window.Quarto = {
 <figcaption>log transform plot</figcaption>
 </figure>
 </div>
-<section id="a" class="level3" data-number="5.1.1">
-<h3 data-number="5.1.1" class="anchored" data-anchor-id="a"><span class="header-section-number">5.1.1</span> (a)</h3>
+<section id="a" class="level3" data-number="6.1.1">
+<h3 data-number="6.1.1" class="anchored" data-anchor-id="a"><span class="header-section-number">6.1.1</span> (a)</h3>
 <p>Instead of using the <span class="math inline">\(\log_{10}\)</span> transformation of the <span class="math inline">\(y\)</span>-axis, what other transformations could Ishani have used to attempt to linearize the relationship between literacy rate (<span class="math inline">\(x\)</span>) and gross national income per capita (<span class="math inline">\(y\)</span>). Select all that apply.</p>
 <p><strong>A.</strong> <span class="math inline">\(\log_e(y)\)</span></p>
 <p><strong>B.</strong> <span class="math inline">\(10^y\)</span></p>
@@ -284,8 +290,8 @@ window.Quarto = {
 <p><span class="math inline">\(x^3\)</span>, <span class="math inline">\(\sqrt{y}\)</span>, and <span class="math inline">\(\log(y)\)</span> are also valid as suggested by the Tukey-Mosteller Bulge Diagram.</p>
 </details>
 </section>
-<section id="b" class="level3" data-number="5.1.2">
-<h3 data-number="5.1.2" class="anchored" data-anchor-id="b"><span class="header-section-number">5.1.2</span> (b)</h3>
+<section id="b" class="level3" data-number="6.1.2">
+<h3 data-number="6.1.2" class="anchored" data-anchor-id="b"><span class="header-section-number">6.1.2</span> (b)</h3>
 <p>Let <span class="math inline">\(C\)</span> and <span class="math inline">\(k\)</span> be some constant values and <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> represent literacy rate and gross national income per capita, respectively. Based on the plots, which of the following best describes the pattern seen in the data?</p>
 <p><strong>A.</strong> <span class="math inline">\(y = C + kx\)</span></p>
 <p><strong>B.</strong> <span class="math inline">\(y = C*10^{kx}\)</span></p>
@@ -307,8 +313,8 @@ y &amp;= 10^b*10^{kx}
 <p>where <span class="math inline">\(C = 10^b\)</span></p>
 </details>
 </section>
-<section id="c" class="level3" data-number="5.1.3">
-<h3 data-number="5.1.3" class="anchored" data-anchor-id="c"><span class="header-section-number">5.1.3</span> (c)</h3>
+<section id="c" class="level3" data-number="6.1.3">
+<h3 data-number="6.1.3" class="anchored" data-anchor-id="c"><span class="header-section-number">6.1.3</span> (c)</h3>
 <p>What parts of the plot could you use to make initial guesses on <span class="math inline">\(C\)</span> and <span class="math inline">\(k\)</span>?</p>
 <details>
 <summary>
@@ -320,8 +326,8 @@ y &amp;= 10^b*10^{kx}
 </ul>
 </details>
 </section>
-<section id="d" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="d"><span class="header-section-number">5.1.4</span> (d)</h3>
+<section id="d" class="level3" data-number="6.1.4">
+<h3 data-number="6.1.4" class="anchored" data-anchor-id="d"><span class="header-section-number">6.1.4</span> (d)</h3>
 <p>Ishani’s friend, Yash, points to the solid line on the transformed plot and says “since this line is going up and to the right, we can say that, in general, the higher the literacy rate, the greater the gross national income per capita”. Is this a reasonable interpretation of the plot?</p>
 <details>
 <summary>
@@ -330,8 +336,8 @@ y &amp;= 10^b*10^{kx}
 <p>Yes, the observation is equivalent to saying that the slope is positive, which means increases in <span class="math inline">\(x\)</span> correspond to increases in <span class="math inline">\(y\)</span>. This does not mean higher literacy rates <em>cause</em> higher gross national incomes, just that they are positively correlated.</p>
 </details>
 </section>
-<section id="e" class="level3" data-number="5.1.5">
-<h3 data-number="5.1.5" class="anchored" data-anchor-id="e"><span class="header-section-number">5.1.5</span> (e)</h3>
+<section id="e" class="level3" data-number="6.1.5">
+<h3 data-number="6.1.5" class="anchored" data-anchor-id="e"><span class="header-section-number">6.1.5</span> (e)</h3>
 <p>Suppose that instead of plotting positive quantities, our data contained some zero and negative values. How can we reasonably apply a logarithmic transform to this data?</p>
 <details>
 <summary>
@@ -346,11 +352,11 @@ y &amp;= 10^b*10^{kx}
 </details>
 </section>
 </section>
-<section id="data-collection-through-sampling" class="level2" data-number="5.2">
-<h2 data-number="5.2" class="anchored" data-anchor-id="data-collection-through-sampling"><span class="header-section-number">5.2</span> Data Collection through Sampling</h2>
+<section id="data-collection-through-sampling" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="data-collection-through-sampling"><span class="header-section-number">6.2</span> Data Collection through Sampling</h2>
 <p>It’s time for the Data 100 midterm, and the professors want to estimate the difficulty of the exam. They decided to survey students on the exam’s difficulty with a 10-point scale and then use the mean of the student’s responses as the estimate.</p>
-<section id="a-1" class="level3" data-number="5.2.1">
-<h3 data-number="5.2.1" class="anchored" data-anchor-id="a-1"><span class="header-section-number">5.2.1</span> (a)</h3>
+<section id="a-1" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="a-1"><span class="header-section-number">6.2.1</span> (a)</h3>
 <p>What is the population the professors are interested in trying to understand?</p>
 <p><strong>A.</strong> Students in Data 100</p>
 <p><strong>B.</strong> Students enrolled in the Data 100 Ed</p>
@@ -364,8 +370,8 @@ y &amp;= 10^b*10^{kx}
 <p>The professors are only interested in the students who <em>actually</em> took the midterm. Some students in the first three options might not have taken the midterm exam!</p>
 </details>
 </section>
-<section id="b-1" class="level3" data-number="5.2.2">
-<h3 data-number="5.2.2" class="anchored" data-anchor-id="b-1"><span class="header-section-number">5.2.2</span> (b)</h3>
+<section id="b-1" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="b-1"><span class="header-section-number">6.2.2</span> (b)</h3>
 <p>The professors consider a few different methods for collecting the survey data about the midterm. Which of the following methods is best? (think through which considerations go into “best”)</p>
 <p><strong>A.</strong> The professors add one Slido poll in the first lecture following the exam and only consider synchronous responses.</p>
 <p><strong>B.</strong> The professors add a question to the homework assignments of a simple random sample of students within every discussion section.</p>
@@ -386,8 +392,8 @@ y &amp;= 10^b*10^{kx}
 </details>
 </section>
 </section>
-<section id="simple-linear-regression" class="level2" data-number="5.3">
-<h2 data-number="5.3" class="anchored" data-anchor-id="simple-linear-regression"><span class="header-section-number">5.3</span> Simple Linear Regression</h2>
+<section id="simple-linear-regression" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="simple-linear-regression"><span class="header-section-number">6.3</span> Simple Linear Regression</h2>
 <p>Lillian and Prabhleen were watching their favorite chemistry Youtuber <a href="https://www.youtube.com/watch?v=zFZ5jQ0yuNA">NileRed</a> experimenting with turning gloves into grape soda and wanted to try it themselves. The experiment was done at various temperatures and yielded various amounts of grape soda. Since this reaction is very costly, they were only able to do it 10 times. This data set of size <span class="math inline">\(n = 10\)</span> (Yield data) contains measurements of yield from an experiment done at five different temperature levels. The variables are <span class="math inline">\(y\)</span> = <strong>yield in liters</strong> and <span class="math inline">\(x\)</span> = <strong>temperature in degrees Fahrenheit</strong>. Below is a scatter plot of our data. <img src="images/yield_temp_scatterplot.png" class="img-fluid" alt="Yield Temp Scatterplot"></p>
 <table class="caption-top table">
 <thead>
@@ -409,8 +415,8 @@ y &amp;= 10^b*10^{kx}
 </tr>
 </tbody>
 </table>
-<section id="a-2" class="level3" data-number="5.3.1">
-<h3 data-number="5.3.1" class="anchored" data-anchor-id="a-2"><span class="header-section-number">5.3.1</span> (a)</h3>
+<section id="a-2" class="level3" data-number="6.3.1">
+<h3 data-number="6.3.1" class="anchored" data-anchor-id="a-2"><span class="header-section-number">6.3.1</span> (a)</h3>
 <p>Given the above statistics, <strong>calculate</strong> the slope (<span class="math inline">\(\hat{\theta_1}\)</span>) and y-intercept (<span class="math inline">\(\hat{\theta_0}\)</span>) of the line of best fit using Mean Squared Error (MSE) as our loss function and <strong>plot the line on the graph above:</strong></p>
 <p><span class="math display">\[\begin{align*}
 y = \hat{\theta_0} + \hat{\theta_1}x
@@ -915,12 +921,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../disc04/disc04.html" class="pagination-link" aria-label="Regex, Visualization, and Transformation">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../disc06/disc06.html" class="pagination-link" aria-label="Models, OLS">
-        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Models, OLS</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

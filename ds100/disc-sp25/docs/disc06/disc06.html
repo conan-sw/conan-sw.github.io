@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Models, OLS – Data 100 Discussion Notes</title>
+<title>7&nbsp; Models, OLS – Data 100 Discussion Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -142,7 +142,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../disc06/disc06.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Models, OLS</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../disc06/disc06.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -175,32 +175,38 @@ window.Quarto = {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../disc01/disc01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math Prerequisites</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../disc02/disc02.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pandas I</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas I</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc03/disc03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc04/disc04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc05/disc05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc06/disc06.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
   </div>
 </li>
     </ul>
@@ -213,21 +219,21 @@ window.Quarto = {
     <h2 id="toc-title">Models, OLS</h2>
    
   <ul>
-  <li><a href="#driving-with-a-constant-model" id="toc-driving-with-a-constant-model" class="nav-link active" data-scroll-target="#driving-with-a-constant-model"><span class="header-section-number">6.1</span> Driving with a Constant Model</a>
+  <li><a href="#driving-with-a-constant-model" id="toc-driving-with-a-constant-model" class="nav-link active" data-scroll-target="#driving-with-a-constant-model"><span class="header-section-number">7.1</span> Driving with a Constant Model</a>
   <ul class="collapse">
-  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a"><span class="header-section-number">6.1.1</span> (a)</a></li>
-  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">6.1.2</span> (b)</a></li>
-  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c"><span class="header-section-number">6.1.3</span> (c)</a></li>
-  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d"><span class="header-section-number">6.1.4</span> (d)</a></li>
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a"><span class="header-section-number">7.1.1</span> (a)</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">7.1.2</span> (b)</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c"><span class="header-section-number">7.1.3</span> (c)</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d"><span class="header-section-number">7.1.4</span> (d)</a></li>
   </ul></li>
-  <li><a href="#geometry-of-least-squares" id="toc-geometry-of-least-squares" class="nav-link" data-scroll-target="#geometry-of-least-squares"><span class="header-section-number">6.2</span> Geometry of Least Squares</a></li>
-  <li><a href="#multiple-choice-questions" id="toc-multiple-choice-questions" class="nav-link" data-scroll-target="#multiple-choice-questions"><span class="header-section-number">6.3</span> Multiple Choice Questions</a>
+  <li><a href="#geometry-of-least-squares" id="toc-geometry-of-least-squares" class="nav-link" data-scroll-target="#geometry-of-least-squares"><span class="header-section-number">7.2</span> Geometry of Least Squares</a></li>
+  <li><a href="#multiple-choice-questions" id="toc-multiple-choice-questions" class="nav-link" data-scroll-target="#multiple-choice-questions"><span class="header-section-number">7.3</span> Multiple Choice Questions</a>
   <ul class="collapse">
-  <li><a href="#a-1" id="toc-a-1" class="nav-link" data-scroll-target="#a-1"><span class="header-section-number">6.3.1</span> (a)</a></li>
-  <li><a href="#b-1" id="toc-b-1" class="nav-link" data-scroll-target="#b-1"><span class="header-section-number">6.3.2</span> (b)</a></li>
-  <li><a href="#c-1" id="toc-c-1" class="nav-link" data-scroll-target="#c-1"><span class="header-section-number">6.3.3</span> (c)</a></li>
-  <li><a href="#d-1" id="toc-d-1" class="nav-link" data-scroll-target="#d-1"><span class="header-section-number">6.3.4</span> (d)</a></li>
-  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e"><span class="header-section-number">6.3.5</span> (e)</a></li>
+  <li><a href="#a-1" id="toc-a-1" class="nav-link" data-scroll-target="#a-1"><span class="header-section-number">7.3.1</span> (a)</a></li>
+  <li><a href="#b-1" id="toc-b-1" class="nav-link" data-scroll-target="#b-1"><span class="header-section-number">7.3.2</span> (b)</a></li>
+  <li><a href="#c-1" id="toc-c-1" class="nav-link" data-scroll-target="#c-1"><span class="header-section-number">7.3.3</span> (c)</a></li>
+  <li><a href="#d-1" id="toc-d-1" class="nav-link" data-scroll-target="#d-1"><span class="header-section-number">7.3.4</span> (d)</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e"><span class="header-section-number">7.3.5</span> (e)</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -237,7 +243,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Models, OLS</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -254,8 +260,8 @@ window.Quarto = {
 </header>
 
 
-<section id="driving-with-a-constant-model" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="driving-with-a-constant-model"><span class="header-section-number">6.1</span> Driving with a Constant Model</h2>
+<section id="driving-with-a-constant-model" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="driving-with-a-constant-model"><span class="header-section-number">7.1</span> Driving with a Constant Model</h2>
 <p>Lillian is trying to use modeling to drive her car autonomously. To do this, she collects a lot of data from driving around her neighborhood and stores it in <code>drive</code>. She wants your help to design a model that can drive on her behalf in the future using the outputs of the models you design. First, she wants to tackle two aspects of this autonomous car modeling framework: going forward and turning. Some statistics from the collected dataset are shown below using <code>drive.describe()</code>, which returns the mean, standard deviation, quartiles, minimum, and maximum for the two columns in the dataset: <code>target_speed</code> and <code>degree_turn</code>.</p>
 <table class="caption-top table">
 <thead>
@@ -308,8 +314,8 @@ window.Quarto = {
 </tr>
 </tbody>
 </table>
-<section id="a" class="level3" data-number="6.1.1">
-<h3 data-number="6.1.1" class="anchored" data-anchor-id="a"><span class="header-section-number">6.1.1</span> (a)</h3>
+<section id="a" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="a"><span class="header-section-number">7.1.1</span> (a)</h3>
 <p>Suppose the first part of the model predicts the target speed of the car. Using constant models trained on the speeds of the collected data shown above with <span class="math inline">\(L_1\)</span> and <span class="math inline">\(L_2\)</span> loss functions, which of the following is true?</p>
 <p>A. The model trained with the <span class="math inline">\(L_1\)</span> loss will always drive slower than the model trained with <span class="math inline">\(L_2\)</span> loss.</p>
 <p>B. The model trained with the <span class="math inline">\(L_2\)</span> loss will always drive slower than the model trained with <span class="math inline">\(L_1\)</span> loss.</p>
@@ -323,8 +329,8 @@ window.Quarto = {
 <p>Remember that when we have a constant model, using <span class="math inline">\(L_1\)</span> will always predict the <em>median</em> while <span class="math inline">\(L_2\)</span> loss will always predict the <em>mean</em>. Since the median (<span class="math inline">\(25.82\)</span>) is lower than the mean (<span class="math inline">\(32.92\)</span>), we know that the model trained on <span class="math inline">\(L_1\)</span> loss will always drive slower.</p>
 </details>
 </section>
-<section id="b" class="level3" data-number="6.1.2">
-<h3 data-number="6.1.2" class="anchored" data-anchor-id="b"><span class="header-section-number">6.1.2</span> (b)</h3>
+<section id="b" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="b"><span class="header-section-number">7.1.2</span> (b)</h3>
 <p>Finding that the model trained with the <span class="math inline">\(L_2\)</span> loss drives too slowly, Lillian changes the loss function for the constant model where the loss is penalized <strong>more</strong> if the true speed is higher. That way, in order to minimize loss, the model would have to output predictions closer to the true value, particularly as speeds get faster, the end result being a higher constant speed. Lillian writes this as <span class="math inline">\(L(y, \hat{y}) = y(y-\hat{y})^2\)</span>.</p>
 <p>Find the optimal <span class="math inline">\(\hat{\theta}_0\)</span> for the constant model using the new empirical risk function <span class="math inline">\(R(\theta_0)\)</span> below:</p>
 <p><span class="math display">\[\begin{align*}
@@ -347,8 +353,8 @@ R(\theta_0) = \frac{1}{n}\sum_i y_i(y_i-\theta_0)^2
 <p>Therefore, any critical point must be the global minimum and so the optimal value we found minimizes empirical risk.</p>
 </details>
 </section>
-<section id="c" class="level3" data-number="6.1.3">
-<h3 data-number="6.1.3" class="anchored" data-anchor-id="c"><span class="header-section-number">6.1.3</span> (c)</h3>
+<section id="c" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="c"><span class="header-section-number">7.1.3</span> (c)</h3>
 <p>Lillian’s friend, Yash, also begins working on a model that predicts the degree of turning at a particular time between 0 and 359 degrees using the data in the <code>degree_turn</code> column. Explain why a constant model is likely inappropriate in this use case.</p>
 <p><em>Extra</em>: If you’ve studied some physics, you may recognize the behavior of our constant model!</p>
 <details>
@@ -358,8 +364,8 @@ R(\theta_0) = \frac{1}{n}\sum_i y_i(y_i-\theta_0)^2
 <p>Any constant model will essentially be always turning at an angle and will be unable to turn either direction or go straight (i.e., it’ll essentially go in a circle forever).</p>
 </details>
 </section>
-<section id="d" class="level3" data-number="6.1.4">
-<h3 data-number="6.1.4" class="anchored" data-anchor-id="d"><span class="header-section-number">6.1.4</span> (d)</h3>
+<section id="d" class="level3" data-number="7.1.4">
+<h3 data-number="7.1.4" class="anchored" data-anchor-id="d"><span class="header-section-number">7.1.4</span> (d)</h3>
 <p>Suppose we finally expand our modeling framework to use simple linear regression (i.e., <span class="math inline">\(f_\theta(x) = \theta_{w,0}+\theta_{w,1}x\)</span>) For our first simple linear regression model, we predict the turn angle (<span class="math inline">\(y\)</span>) using target speed (<span class="math inline">\(x\)</span>). Our optimal parameters are: <span class="math inline">\(\hat{\theta}_{w, 1}=0.019\)</span> and <span class="math inline">\(\hat{\theta}_{w,0}=143.1\)</span></p>
 <p>However, we realize that we actually want a model that predicts target speed (our new <span class="math inline">\(y\)</span>) using turn angle, our new <span class="math inline">\(x\)</span> (instead of the other way around)! What are our new optimal parameters for this new model?</p>
 <details>
@@ -398,8 +404,8 @@ Note
 </details>
 </section>
 </section>
-<section id="geometry-of-least-squares" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="geometry-of-least-squares"><span class="header-section-number">6.2</span> Geometry of Least Squares</h2>
+<section id="geometry-of-least-squares" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="geometry-of-least-squares"><span class="header-section-number">7.2</span> Geometry of Least Squares</h2>
 <p>Suppose we have a dataset represented with the design matrix span(<span class="math inline">\(\mathbb{X}\)</span>) and response vector <span class="math inline">\(\mathbb{Y}\)</span>. We use linear regression to solve for this and obtain optimal weights as <span class="math inline">\(\hat{\theta}\)</span>. Label the following terms on the geometric interpretation of ordinary least squares:</p>
 <ul>
 <li><span class="math inline">\(\mathbb{X}\)</span> (i.e., span(<span class="math inline">\(\mathbb{X}\)</span>))</li>
@@ -432,11 +438,11 @@ Note
 </ul>
 </details>
 </section>
-<section id="multiple-choice-questions" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="multiple-choice-questions"><span class="header-section-number">6.3</span> Multiple Choice Questions</h2>
+<section id="multiple-choice-questions" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="multiple-choice-questions"><span class="header-section-number">7.3</span> Multiple Choice Questions</h2>
 <p>Using the geometry of least squares, let’s answer a few questions about Ordinary Least Squares (OLS)!</p>
-<section id="a-1" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="a-1"><span class="header-section-number">6.3.1</span> (a)</h3>
+<section id="a-1" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="a-1"><span class="header-section-number">7.3.1</span> (a)</h3>
 <p>Which of the following are true about the optimal solution <span class="math inline">\(\hat{\theta}\)</span> to OLS? Recall that the least squares estimate <span class="math inline">\(\hat{\theta}\)</span> solves the normal equation <span class="math inline">\((\mathbb{X}^T\mathbb{X})\theta = \mathbb{X}^T\mathbb{Y}\)</span></p>
 <p><span class="math display">\[\begin{align*}
 \hat{\theta} = (\mathbb{X}^T\mathbb{X})^{-1}\mathbb{X}^T\mathbb{Y}
@@ -460,8 +466,8 @@ Note
 <p>Conversely, option F is not linear in <span class="math inline">\(\theta\)</span> so we cannot use the normal equations.</p>
 </details>
 </section>
-<section id="b-1" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="b-1"><span class="header-section-number">6.3.2</span> (b)</h3>
+<section id="b-1" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="b-1"><span class="header-section-number">7.3.2</span> (b)</h3>
 <p>Which of the following conditions are required for the least squares estimate in the previous subpart?</p>
 <p><span class="math inline">\(\Box\)</span> A. <span class="math inline">\(\mathbb{X}\)</span> must be full column rank</p>
 <p><span class="math inline">\(\Box\)</span> B. <span class="math inline">\(\mathbb{Y}\)</span> must be full column rank</p>
@@ -475,8 +481,8 @@ Note
 <p><span class="math inline">\(\mathbb{X}\)</span> must be full column rank in order for the normal equation to have a unique solution. Otherwise, <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span> will not be invertible, and there will be infinite least squares estimates. Noth that invertibility is required of <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span>: neither <span class="math inline">\(\mathbb{X}\)</span> nor <span class="math inline">\(\mathbb{X}^T\)</span> need to be invertible. <span class="math inline">\(\mathbb{X}\)</span> and <span class="math inline">\(\mathbb{X}^T\)</span> don’t even need to be square matrices! <span class="math inline">\(\mathbb{Y}\)</span> is a vector so the matrix notion of “full column rank” does not really apply here (a vector will always span one dimension unless it is a vector of zeros).</p>
 </details>
 </section>
-<section id="c-1" class="level3" data-number="6.3.3">
-<h3 data-number="6.3.3" class="anchored" data-anchor-id="c-1"><span class="header-section-number">6.3.3</span> (c)</h3>
+<section id="c-1" class="level3" data-number="7.3.3">
+<h3 data-number="7.3.3" class="anchored" data-anchor-id="c-1"><span class="header-section-number">7.3.3</span> (c)</h3>
 <p>What is always true about the residuals in the least squares regression? Select all that apply.</p>
 <p><span class="math inline">\(\Box\)</span> A. They are orthogonal to the column space of the design matrix.</p>
 <p><span class="math inline">\(\Box\)</span> B. They represent the errors of the predictions.</p>
@@ -496,8 +502,8 @@ Note
 <p>After solving the least squares problem, the sum of the residuals is <span class="math inline">\(-0.0247\)</span>, which is not equal to zero. However, note that this statement is, in general, true if the design matrix <span class="math inline">\(\mathbb{X}\)</span> contains a column for the intercept!</p>
 </details>
 </section>
-<section id="d-1" class="level3" data-number="6.3.4">
-<h3 data-number="6.3.4" class="anchored" data-anchor-id="d-1"><span class="header-section-number">6.3.4</span> (d)</h3>
+<section id="d-1" class="level3" data-number="7.3.4">
+<h3 data-number="7.3.4" class="anchored" data-anchor-id="d-1"><span class="header-section-number">7.3.4</span> (d)</h3>
 <p>Which of the following are true about the predictions made by OLS? Select all that apply.</p>
 <p><span class="math inline">\(\Box\)</span> A. They are projections of the observations onto the column space of the design matrix.</p>
 <p><span class="math inline">\(\Box\)</span> B. They are linear combinations of the features.</p>
@@ -515,8 +521,8 @@ Note
 <p><strong>(D)</strong> is not correct because the predictions are in the column space of the features.</p>
 </details>
 </section>
-<section id="e" class="level3" data-number="6.3.5">
-<h3 data-number="6.3.5" class="anchored" data-anchor-id="e"><span class="header-section-number">6.3.5</span> (e)</h3>
+<section id="e" class="level3" data-number="7.3.5">
+<h3 data-number="7.3.5" class="anchored" data-anchor-id="e"><span class="header-section-number">7.3.5</span> (e)</h3>
 <p>Which of the following is true of the mystery quantity <span class="math inline">\(\vec{v} = (I - \mathbb{X}(\mathbb{X}^T\mathbb{X})^{-1}\mathbb{X}^T)\mathbb{Y}\)</span>?</p>
 <p><span class="math inline">\(\Box\)</span> A. The vector <span class="math inline">\(\vec{v}\)</span> represents the residuals for any linear model.</p>
 <p><span class="math inline">\(\Box\)</span> B. If the matrix <span class="math inline">\(\mathbb{X}\)</span> contains the <span class="math inline">\(\vec{1}\)</span> vector, then the sum of the elements in vector <span class="math inline">\(\vec{v}\)</span> is 0 (i.e., <span class="math inline">\(\sum_iv_i = 0\)</span>)</p>
@@ -1017,7 +1023,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../disc05/disc05.html" class="pagination-link" aria-label="Transformations, Sampling, and SLR">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">

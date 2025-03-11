@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>2&nbsp; Pandas I – Data 100 Discussion Notes</title>
+<title>3&nbsp; Pandas I – Data 100 Discussion Notes</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
 <link href="../disc03/disc03.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../disc01/disc01.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,10 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
 
 </head>
@@ -120,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../disc02/disc02.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pandas I</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../disc02/disc02.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas I</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -153,32 +150,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../disc01/disc01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math Prerequisites</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../disc02/disc02.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pandas I</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas I</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc03/disc03.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc04/disc04.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc05/disc05.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../disc06/disc06.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
   </div>
 </li>
     </ul>
@@ -194,7 +197,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Pandas I</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas I</span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -213,14 +216,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p>This discussion is all about practicing using <code>pandas</code>, and testing your knowledge about its various functionalities to accomplish small tasks.</p>
 <p>We will be using the <code>elections</code> dataset from lecture.</p>
-<div id="f1eaeee1" class="cell" data-execution_count="1">
+<div id="74ddc8e1" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="c9b2e3cd" class="cell" data-execution_count="2">
+<div id="399a77f9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>elections <span class="op">=</span> pd.read_csv(<span class="st">'elections.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>elections.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="2">
@@ -337,7 +340,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Write a line of code that returns the elections table sorted in descending order by <code>"Popular vote"</code>. Store your result in a variable named <code>sorted</code>. Would calling <code>sorted.iloc[[0], :]</code> give the same result as <code>sorted.loc[[0], :]</code>?</p>
-<div id="13092156" class="cell" data-execution_count="3">
+<div id="deae1f26" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span> <span class="op">=</span> elections.sort_values(<span class="st">"Popular vote"</span>, ascending <span class="op">=</span> <span class="va">False</span>)</span>
@@ -475,7 +478,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We can sort a <code>DataFrame</code> by a column using the <code>.sort_values()</code> function! Remember to specify <code>ascending = False</code>, or else it will sort in <em>increasing</em> order.</p>
 </div>
 </details>
-<div id="e26fdc71" class="cell" data-execution_count="4">
+<div id="78d841f2" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.iloc[[<span class="dv">0</span>], :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -509,7 +512,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="b32c0f89" class="cell" data-execution_count="5">
+<div id="3c8d35b1" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.loc[[<span class="dv">0</span>], :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
@@ -554,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </span>
 </details>
 <p>Using Boolean slicing, write one line of <code>pandas</code> code that returns a <code>DataFrame</code> that only contains election results from the 1900s.</p>
-<div id="9fd11959" class="cell" data-execution_count="6">
+<div id="a79a6460" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>elections[(elections[<span class="st">"Year"</span>] <span class="op">&gt;=</span> <span class="dv">1900</span>) <span class="op">&amp;</span> (elections[<span class="st">"Year"</span>] <span class="op">&lt;</span> <span class="dv">2000</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -693,7 +696,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </span>
 </details>
 <p>Write one line of <code>pandas</code> code that returns a <code>Series</code>, where the index is the <code>"Party"</code>, and the values are how many times that party won an election. Only include parties that have won an election.</p>
-<div id="93618ba1" class="cell" data-execution_count="7">
+<div id="3e51f98f" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>][<span class="st">"Party"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -708,7 +711,7 @@ National Union            1
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="df1d34ee" class="cell" data-execution_count="8">
+<div id="5f02669a" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>].groupby(<span class="st">"Party"</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -734,7 +737,7 @@ dtype: int64</code></pre>
 </span>
 </details>
 <p>Write a line of <code>pandas</code> code that returns a <code>Series</code> whose index is the years and whose values are the number of candidates that participated in those years’ elections.</p>
-<div id="9d16d84a" class="cell" data-execution_count="9">
+<div id="915abd33" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>elections[<span class="st">"Year"</span>].value_counts().head() <span class="co">#.head() to limit output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -743,13 +746,13 @@ dtype: int64</code></pre>
 <pre><code>Year
 1996    7
 1948    6
+2016    6
 1976    6
-2004    6
 2008    6
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="77ad9b02" class="cell" data-execution_count="10">
+<div id="cd5b4f6b" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>elections.groupby(<span class="st">"Year"</span>).size().head() <span class="co">#.head() to limit output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -786,7 +789,7 @@ dtype: int64</code></pre>
 </span>
 </details>
 <p>Write a line of <code>pandas</code> code that creates a filtered <code>DataFrame</code> named <code>filtered_parties</code> from the elections dataset and keeps only the parties that have at least one election % more than 50%.</p>
-<div id="0fc5ab13" class="cell" data-execution_count="11">
+<div id="e18f45fc" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filtered_parties <span class="op">=</span> elections.groupby(<span class="st">"Party"</span>).<span class="bu">filter</span>(<span class="kw">lambda</span> df: df[<span class="st">"%"</span>].<span class="bu">max</span>() <span class="op">&gt;</span> <span class="dv">50</span>)</span>
@@ -941,7 +944,7 @@ dtype: int64</code></pre>
 </details>
 <p>Write a line of <code>pandas</code> code that uses the <code>filtered_parties</code> <code>DataFrame</code> to return a new <code>DataFrame</code> with row indices that correspond to the year and columns that correspond to each party. Each entry should be the total percentage of votes for all the candidates that ran during that particular year for the specified party. Missing values from the dataset (the cases where a party did not have a candidate in a particular year) should be entered as 0. Below is an example.</p>
 <p><img src="pivot.png" class="img-fluid"></p>
-<div id="e3c6eede" class="cell" data-execution_count="12">
+<div id="9268df7a" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>elections_pivot <span class="op">=</span> filtered_parties.pivot_table(</span>
@@ -1557,13 +1560,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation column-page-right">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="disc-sp25">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">disc-sp25</span></span>
+      <a href="../disc01/disc01.html" class="pagination-link" aria-label="Math Prerequisites">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math Prerequisites</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../disc03/disc03.html" class="pagination-link" aria-label="Pandas II, EDA">
-        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
