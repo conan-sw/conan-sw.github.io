@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>8&nbsp; Gradient Descent, Feature Engineering, Housing – Data 100 Discussion Notes</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../disc06/disc06.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-ca5a086e270bb62b76934925835b48c3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../disc07/disc07.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Gradient Descent, Feature Engineering, Housing</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">Data 100 Discussion Notes</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">disc-sp25</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc01/disc01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math Prerequisites</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc02/disc02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Pandas I</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc03/disc03.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Pandas II, EDA</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc04/disc04.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Regex, Visualization, and Transformation</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc05/disc05.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Transformations, Sampling, and SLR</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc06/disc06.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc07/disc07.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Gradient Descent, Feature Engineering, Housing</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Gradient Descent, Feature Engineering, Housing</h2>
+   
+  <ul>
+  <li><a href="#link-to-slides" id="toc-link-to-slides" class="nav-link active" data-scroll-target="#link-to-slides"><span class="header-section-number">8.0.1</span> Link to Slides</a></li>
+  <li><a href="#dive-into-gradient-descent" id="toc-dive-into-gradient-descent" class="nav-link" data-scroll-target="#dive-into-gradient-descent"><span class="header-section-number">8.1</span> Dive into Gradient Descent</a>
+  <ul class="collapse">
+  <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a"><span class="header-section-number">8.1.1</span> (a)</a></li>
+  <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">8.1.2</span> (b)</a></li>
+  <li><a href="#c" id="toc-c" class="nav-link" data-scroll-target="#c"><span class="header-section-number">8.1.3</span> (c)</a></li>
+  <li><a href="#d" id="toc-d" class="nav-link" data-scroll-target="#d"><span class="header-section-number">8.1.4</span> (d)</a></li>
+  </ul></li>
+  <li><a href="#one-hot-encoding" id="toc-one-hot-encoding" class="nav-link" data-scroll-target="#one-hot-encoding"><span class="header-section-number">8.2</span> One-hot Encoding</a>
+  <ul class="collapse">
+  <li><a href="#a-1" id="toc-a-1" class="nav-link" data-scroll-target="#a-1"><span class="header-section-number">8.2.1</span> (a)</a></li>
+  <li><a href="#b-1" id="toc-b-1" class="nav-link" data-scroll-target="#b-1"><span class="header-section-number">8.2.2</span> (b)</a></li>
+  <li><a href="#c-1" id="toc-c-1" class="nav-link" data-scroll-target="#c-1"><span class="header-section-number">8.2.3</span> (c)</a></li>
+  <li><a href="#d-1" id="toc-d-1" class="nav-link" data-scroll-target="#d-1"><span class="header-section-number">8.2.4</span> (d)</a></li>
+  <li><a href="#e" id="toc-e" class="nav-link" data-scroll-target="#e"><span class="header-section-number">8.2.5</span> (e)</a></li>
+  </ul></li>
+  <li><a href="#human-contexts-and-ethics-case-study" id="toc-human-contexts-and-ethics-case-study" class="nav-link" data-scroll-target="#human-contexts-and-ethics-case-study"><span class="header-section-number">8.3</span> Human Contexts and Ethics: Case Study</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-body" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Gradient Descent, Feature Engineering, Housing</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta column-body">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="link-to-slides" class="level3" data-number="8.0.1">
+<h3 data-number="8.0.1" class="anchored" data-anchor-id="link-to-slides"><span class="header-section-number">8.0.1</span> <a href="https://docs.google.com/presentation/d/1F0IMB7RTXk-XbvDGfUlS13cwRPKp7pRtdv0HfZc2Irs/edit?usp=sharing">Link to Slides</a></h3>
+</section>
+<section id="dive-into-gradient-descent" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="dive-into-gradient-descent"><span class="header-section-number">8.1</span> Dive into Gradient Descent</h2>
+<p>We want to minimize the loss function <span class="math inline">\(L(\theta) = (\theta_1-1)^2 + |\theta_2-3|\)</span>. While you may notice that this function is not differentiable everywhere, we can still use gradient descent wherever the function <em>is</em> differentiable!</p>
+<p>Recall that for a function <span class="math inline">\(f(x) = k|x|\)</span>, <span class="math inline">\(\frac{df}{dx} = k\)</span> for all <span class="math inline">\(x &gt; 0\)</span> and <span class="math inline">\(\frac{df}{dx} = -k\)</span> for all <span class="math inline">\(x &lt; 0\)</span>.</p>
+<section id="a" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="a"><span class="header-section-number">8.1.1</span> (a)</h3>
+<p>What are the optimal values <span class="math inline">\(\hat{\theta}_1\)</span> and <span class="math inline">\(\hat{\theta}_2\)</span> to minimize <span class="math inline">\(L(\theta)\)</span>? What is the gradient at those values <span class="math inline">\(\nabla L = \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1 = \hat{\theta}_1, \theta_2 = \hat{\theta}_2}}\)</span>?</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>We can start off by finding the partial derivatives:</p>
+<ul>
+<li><span class="math inline">\(\frac{\partial L}{\partial \theta_1} = 2(\theta_1 - 1)\)</span>
+<ul>
+<li>The above derivative is <span class="math inline">\(0\)</span> when <span class="math inline">\(\theta_1 = 1\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\frac{\partial L}{\partial \theta_2} = \begin{cases}
+              1 &amp; \text{if } \theta_2 &gt; 3 \\
+              -1 &amp; \text{if } \theta_2 &lt; 3 \\
+              \text{undefined} &amp; \text{if } \theta_2 = 3
+          \end{cases}\)</span>
+<ul>
+<li>Although the partial derivative is undefined at <span class="math inline">\(\theta_2 = 3\)</span>, we can see that <span class="math inline">\(\theta_2 = 3\)</span> is a minimizing value of <span class="math inline">\(L(\theta)\)</span> (<span class="math inline">\(|3 - 3| = 0\)</span>, which is the smallest possible result).</li>
+</ul></li>
+</ul>
+<p>Therefore, the gradient at the optimal values of <span class="math inline">\(\theta_1, \theta_2\)</span> is:</p>
+<p><span class="math display">\[\begin{align*}
+\nabla L &amp;= \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1
+= \hat{\theta}_1, \theta_2 = \hat{\theta}_2}} \\
+&amp;= [0, \text{undefined}]
+\end{align*}\]</span></p>
+<div class="callout callout-style-default callout-note no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Setting the derivative to 0 only finds the minimum if the function is convex. Both <span class="math inline">\((\theta_1-1)^2\)</span> and <span class="math inline">\(|\theta_2-3|\)</span> are convex. We proved in homework 5 that the sum of convex functions is also convex. Therefore, <span class="math inline">\(L(\theta)\)</span> is convex and we can set its derivative to <span class="math inline">\(0\)</span> to find the minimum.</p>
+<p>Another way to test convexity is by performing the second derivative test, i.e., show <span class="math inline">\(L''(\theta) \geq 0\)</span></p>
+</div>
+</div>
+</details>
+</section>
+<section id="b" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="b"><span class="header-section-number">8.1.2</span> (b)</h3>
+<p>Suppose we initialize our gradient descent algorithm randomly at <span class="math inline">\(\theta_1 = 2\)</span> and <span class="math inline">\(\theta_2 = 5\)</span>. Calculate the gradient <span class="math inline">\(\nabla L = \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1 = 2, \theta_2 = 5}}\)</span> at the specified <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> values.</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>We can simply substitute the values into the partial derivates we obtained in the previous question:</p>
+<p><span class="math display">\[\begin{align*}
+\begin{bmatrix} \frac{\partial L}{\partial \theta_1} \\\\ \frac{\partial L}{\partial \theta_2} \end{bmatrix} &amp;= \begin{bmatrix} 2(\theta_1-1) \\ 1 \end{bmatrix} \\
+&amp;= \begin{bmatrix} 2 \\ 1 \end{bmatrix}
+\end{align*}\]</span></p>
+</details>
+</section>
+<section id="c" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="c"><span class="header-section-number">8.1.3</span> (c)</h3>
+<p>Apply the first gradient update with a learning rate <span class="math inline">\(\alpha = 0.5\)</span>. In other words, calculate <span class="math inline">\(\theta_1^{(1)}\)</span> and <span class="math inline">\(\theta_2^{(1)}\)</span> using the initializations <span class="math inline">\(\theta_1^{(0)} = 2\)</span> and <span class="math inline">\(\theta_2^{(0)} = 5\)</span>.</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p><span class="math display">\[\begin{align*}
+\theta^{(1)} &amp;= \theta^{(0)} - \alpha\nabla L\\
+&amp;= \begin{bmatrix} 2 \\ 5 \end{bmatrix} - 0.5\begin{bmatrix} 2 \\ 1 \end{bmatrix}\\
+&amp;= \begin{bmatrix} 2 - 0.5(2) \\ 5 - 0.5(1) \end{bmatrix}\\
+&amp;= \begin{bmatrix} 1 \\ 4.5 \end{bmatrix}
+\end{align*}\]</span></p>
+</details>
+</section>
+<section id="d" class="level3" data-number="8.1.4">
+<h3 data-number="8.1.4" class="anchored" data-anchor-id="d"><span class="header-section-number">8.1.4</span> (d)</h3>
+<p>How many gradient descent steps does it take for <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> to converge to their optimal values obtained in part (a) assuming we keep a constant learning rate of <span class="math inline">\(\alpha = 0.5\)</span>? In other words, what is the value of t when <span class="math inline">\(\theta^{(t)}=\begin{bmatrix} \hat{\theta}_1&amp; \hat{\theta}_2 \end{bmatrix}^T\)</span>.</p>
+<p><em>Hint:</em> After part (c), what is the derivative <span class="math inline">\(\frac{\partial L}{\partial \theta_1}\)</span> evaluated at <span class="math inline">\(\theta_1^{(1)}\)</span>?</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>Note that the derivative with respect to <span class="math inline">\(\theta_1\)</span> is 0 at <span class="math inline">\(\theta_1^{(1)} = 1\)</span> since it is the optimal solution! Then, we essentially only update <span class="math inline">\(\theta_2\)</span> where the partial derivative is always 1 (until we reach the optimal solution - then our derivative is undefined)! Every time, the partial derivative of <span class="math inline">\(\theta_2\)</span> is 1 - so the update is simply:</p>
+<p><span class="math display">\[\begin{align*}
+\theta_2^{(i+1)} = \theta_2^{(i)} - 0.5
+\end{align*}\]</span></p>
+<p>Hence, to update this from 5 to 3, we must take 4 gradient steps (i.e.&nbsp;from 5 to 4.5, 4.5 to 4, 4 to 3.5, 3.5 to 3).</p>
+<p>Writing this all out:</p>
+<p><span class="math display">\[ \theta^{(2)} = \theta^{(1)} - \alpha \nabla L = \begin{bmatrix} 1 - 0.5(0) \\ 4.5 - 0.5(1) \end{bmatrix} = \begin{bmatrix} 1 \\ 4 \end{bmatrix} \]</span></p>
+<p><span class="math display">\[ \theta^{(3)} = \theta^{(2)} - \alpha \nabla L = \begin{bmatrix} 1 - 0.5(0) \\ 4 - 0.5(1) \end{bmatrix} = \begin{bmatrix} 1 \\ 3.5 \end{bmatrix} \]</span></p>
+<p><span class="math display">\[ \theta^{(4)} = \theta^{(3)} - \alpha \nabla L = \begin{bmatrix} 1 - 0.5(0) \\ 3.5 - 0.5(1) \end{bmatrix} = \begin{bmatrix} 1 \\ 3 \end{bmatrix} \]</span></p>
+<p>Notice that every time, we reduce <span class="math inline">\(\theta_2\)</span> by 0.5 as expected, so the number of gradient descent steps is 4.</p>
+</details>
+</section>
+</section>
+<section id="one-hot-encoding" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="one-hot-encoding"><span class="header-section-number">8.2</span> One-hot Encoding</h2>
+<p>In order to include a qualitative variable in a model, we convert it into a collection of Boolean vectors that only contain the values 0 and 1. For example, suppose we have a qualitative variable with 3 possible values, call them <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>, and <span class="math inline">\(C\)</span>, respectively. For concreteness, we use a specific example with 10 observations: <span class="math display">\[
+[A, A, A, A, B, B, B, C, C, C]
+\]</span> We can represent this qualitative variable with 3 Boolean vectors that take on values <span class="math inline">\(1\)</span> or <span class="math inline">\(0\)</span> depending on the value of this qualitative variable. Specifically, the values of these 3 Boolean vectors for this dataset are <span class="math inline">\(x_A\)</span>, <span class="math inline">\(x_B\)</span>, and <span class="math inline">\(x_C\)</span>, arranged from left to right in the following design matrix, where we use the following indicator variable:</p>
+<p><span class="math display">\[\begin{align*}
+                x_{i,k} =\begin{cases}
+                        1 &amp;\text{if $i$-th observation has value $k$}\\
+                        0 &amp;\text{otherwise}.
+                \end{cases}
+\end{align*}\]</span></p>
+<p>Furthermore, let <span class="math inline">\(\vec{y}\)</span> represent any vector of outcome variables, and <span class="math inline">\(y_i\)</span> is the value of said outcome for the <span class="math inline">\(i\)</span>-th subject. This representation is also called one-hot encoding. It should be noted here that <span class="math inline">\(\vec{x_A}\)</span>, <span class="math inline">\(\vec{x_B}\)</span>, <span class="math inline">\(\vec{x_C}\)</span>, and <span class="math inline">\(\vec{y}\)</span> are all vectors.</p>
+<p><span class="math display">\[
+\Bbb{X}
+=
+\begin{bmatrix}
+\vert &amp; \vert &amp; \vert \\
+\vec{x_A} &amp; \vec{x_B} &amp; \vec{x_C} \\
+\vert &amp; \vert &amp; \vert \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0 &amp; 0\\
+1 &amp; 0 &amp; 0\\
+1 &amp; 0 &amp; 0\\
+1 &amp; 0 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 1 &amp; 0\\
+0 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 1\\
+0 &amp; 0 &amp; 1\\
+\end{bmatrix}
+\]</span></p>
+<p>We will show that the fitted coefficients for <span class="math inline">\(\vec{x_A}\)</span>, <span class="math inline">\(\vec{x_B}\)</span>, and <span class="math inline">\(\vec{x_C}\)</span> are <span class="math inline">\(\bar{y}_A\)</span>, <span class="math inline">\(\bar{y}_B\)</span>, and <span class="math inline">\(\bar{y}_C\)</span>, the average of the <span class="math inline">\(y_i\)</span> values for each of the groups, respectively.</p>
+<section id="a-1" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="a-1"><span class="header-section-number">8.2.1</span> (a)</h3>
+<p>Show that if you augment your <span class="math inline">\(\mathbb{X}\)</span> matrix with an additional <span class="math inline">\(\vec{1}\)</span> bias vector as shown below, <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span> is not full rank. Conclude that the new <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span> is not invertible, and we cannot use the least squares estimate in this situation.</p>
+<p><span class="math display">\[\begin{align*}
+\mathbb{X}
+=
+\begin{bmatrix}
+\vert &amp; \vert &amp; \vert  &amp; \vert \\
+\vec{1} &amp; \vec{x_A} &amp; \vec{x_B} &amp; \vec{x_C} \\
+\vert &amp; \vert &amp; \vert  &amp; \vert \\
+\end{bmatrix}
+\end{align*}\]</span></p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p><strong>Solution 1:</strong></p>
+<p>By the definition of one-hot encoding, the one-hot-encoded columns of <span class="math inline">\(\mathbb{X}\)</span> sum up to $ $:</p>
+<p><span class="math display">\[ \vec{x_A} + \vec{x_B} + \vec{x_C} = \vec{1}\]</span></p>
+<p>Since the leftmost vector of <span class="math inline">\(\mathbb{X}\)</span> is a linear combination of the other vectors, <span class="math inline">\(\mathbb{X}\)</span> is not full column rank. Since <span class="math inline">\(\mathbb{X}\)</span> has the same rank as <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span> (proof is out of scope), <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span> is not invertible.</p>
+<p><strong>Solution 2:</strong> We can show that <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span> is equal to the following.</p>
+<p><span class="math display">\[
+\mathbb{X}^T\mathbb{X} =
+\begin{bmatrix}
+n &amp; n_A &amp; n_B &amp; n_C \\
+n_A &amp; n_A &amp; 0 &amp; 0 \\
+n_B &amp; 0 &amp; n_B &amp; 0 \\
+n_C &amp; 0 &amp; 0 &amp; n_C
+\end{bmatrix}
+\]</span></p>
+<p>It can be observed that since <span class="math inline">\(n_A + n_B + n_C = n\)</span>, the sum of the final 3 columns subtracted from the first column yields the zero vector <span class="math inline">\(\vec{0}\)</span>. By the definition of linear dependence, we can conclude that this matrix is not full rank, and hence, we cannot invert it. As a result, we cannot compute our least squares estimate since it requires <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span>.</p>
+</details>
+</section>
+<section id="b-1" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="b-1"><span class="header-section-number">8.2.2</span> (b)</h3>
+<p>Show that the columns of <span class="math inline">\(\mathbb{X}\)</span> (without the additional <span class="math inline">\(\vec{1}\)</span> bias vector) are orthogonal, (i.e., the dot product between any pair of column vectors is 0).</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>The argument is the same for any pair of <span class="math inline">\(\Bbb{X}\)</span>’s columns so we show the orthogonality for one pair, <span class="math inline">\(\vec{x_A} \cdot \vec{x_B}\)</span>.</p>
+<p><span class="math display">\[\begin{align*}
+\vec{x_A} \cdot \vec{x_B} &amp;= \sum_{i=1}^{10} x_{A,i} x_{B,i} \\
+&amp;= \sum_{i=1}^4 (1 \times 0)  + \sum_{i=5}^7 (0 \times 1) +
+\sum_{i=8}^{10} (0 \times 0) \\
+&amp;= 0
+\end{align*}\]</span></p>
+</details>
+</section>
+<section id="c-1" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="c-1"><span class="header-section-number">8.2.3</span> (c)</h3>
+<p>Show that <span class="math display">\[
+\mathbb{X}^T\Bbb{X} =
+\begin{bmatrix}
+n_A &amp; 0 &amp; 0 \\
+0 &amp; n_B &amp; 0 \\
+0 &amp; 0&amp; n_C \\
+\end{bmatrix}
+\]</span> Here, <span class="math inline">\(n_A\)</span>, <span class="math inline">\(n_B\)</span>, and <span class="math inline">\(n_C\)</span> are the number of observations in each of the three groups defined by the levels of the qualitative variable.</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>Here, we note that <span class="math display">\[
+\mathbb{X}^T =
+\begin{bmatrix}
+1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp;0 \\
+0 &amp; 0 &amp; 0 &amp;0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0\\
+0 &amp; 0 &amp; 0 &amp;0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1\\
+\end{bmatrix}
+\]</span> We also note that <span class="math display">\[
+\mathbb{X}^T\mathbb{X} =
+\begin{bmatrix}
+\vec{x_A}^T\vec{x_A} &amp; \vec{x_A}^T\vec{x_B} &amp; \vec{x_A}^T\vec{x_C} \\
+\vec{x_B}^T\vec{x_A} &amp; \vec{x_B}^T\vec{x_B} &amp; \vec{x_B}^T\vec{x_C} \\
+\vec{x_C}^T\vec{x_A} &amp; \vec{x_C}^T\vec{x_B} &amp; \vec{x_C}^T\vec{x_C} \\
+\end{bmatrix}
+\]</span> Since we earlier established the orthogonality of the vectors in <span class="math inline">\(\mathbb{X}\)</span>, we find <span class="math inline">\(\mathbb{X}^T\mathbb{X}\)</span> to be the diagonal matrix: <span class="math display">\[
+\mathbb{X}^T\mathbb{X} =
+\begin{bmatrix}
+4 &amp; 0 &amp; 0 \\
+0 &amp; 3 &amp; 0 \\
+0 &amp; 0&amp; 3 \\
+\end{bmatrix} =
+\begin{bmatrix}
+n_A &amp; 0 &amp; 0 \\
+0 &amp; n_B &amp; 0 \\
+0 &amp; 0&amp; n_C \\
+\end{bmatrix}
+\]</span></p>
+</details>
+</section>
+<section id="d-1" class="level3" data-number="8.2.4">
+<h3 data-number="8.2.4" class="anchored" data-anchor-id="d-1"><span class="header-section-number">8.2.4</span> (d)</h3>
+<p>Show that <span class="math display">\[
+\mathbb{X}^T\mathbb{Y} =
+\begin{bmatrix}
+\sum_{i \in A} y_i\\
+\sum_{i \in B} y_i\\
+\sum_{i \in C} y_i\\
+\end{bmatrix}
+\]</span> where <span class="math inline">\(i\)</span> is an element in group <span class="math inline">\(A, B,\)</span> or <span class="math inline">\(C\)</span>.</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>Note in the previous solution we found <span class="math inline">\(\Bbb{X}^T\)</span>. The solution follows from recognizing that for a row in <span class="math inline">\(\Bbb{X}^T\)</span>, e.g., the first row, we have <span class="math display">\[
+\sum_{i=1}^{10} x_{A,i} \times y_i = \sum_{i=1}^4 y_i = \sum_{i \in \textrm{ group A}} y_i
+\]</span></p>
+</details>
+</section>
+<section id="e" class="level3" data-number="8.2.5">
+<h3 data-number="8.2.5" class="anchored" data-anchor-id="e"><span class="header-section-number">8.2.5</span> (e)</h3>
+<p>Use the results from the previous questions to solve the normal equations for <span class="math inline">\(\hat{\theta}\)</span>, i.e., <span class="math display">\[\begin{align*}
+\hat{\theta} &amp;= [\Bbb{X}^T\Bbb{X}]^{-1} \Bbb{X}^T\mathbb{Y} \\
+&amp;=
+\begin{bmatrix}
+\bar{y}_A\\
+\bar{y}_B\\
+\bar{y}_C\\
+\end{bmatrix}
+\end{align*}\]</span></p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>Using our results from part (c), we see that: <span class="math display">\[
+[\Bbb{X}^T\Bbb{X}]^{-1} =
+\begin{bmatrix}
+\frac{1}{n_A} &amp; 0 &amp; 0 \\
+0 &amp; \frac{1}{n_B} &amp; 0 \\
+0 &amp; 0 &amp; \frac{1}{n_C}\\
+\end{bmatrix}
+\]</span></p>
+<p>When we pre-multiply <span class="math inline">\(\Bbb{X}^T \mathbb{Y}\)</span> by this matrix, we get</p>
+<p><span class="math display">\[
+\begin{bmatrix}
+\frac{1}{n_A} &amp; 0 &amp; 0 \\
+0 &amp; \frac{1}{n_B} &amp; 0 \\
+0 &amp; 0 &amp; \frac{1}{n_C}\\
+\end{bmatrix}
+\begin{bmatrix}
+\sum_{i \in A} y_i\\
+\sum_{i \in B} y_i\\
+\sum_{i \in C} y_i\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+\bar{y}_A\\
+\bar{y}_B\\
+\bar{y}_C\\
+\end{bmatrix}
+\]</span></p>
+</details>
+</section>
+</section>
+<section id="human-contexts-and-ethics-case-study" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="human-contexts-and-ethics-case-study"><span class="header-section-number">8.3</span> Human Contexts and Ethics: Case Study</h2>
+<p>Which of the following scenarios strike you as unfair and why? You can choose more than one. There is no single right answer, but you must explain your reasoning.</p>
+<p><span class="math inline">\(\Box\)</span> <strong>A.</strong> A homeowner those home is assessed at a higher price than it would sell for.</p>
+<p><span class="math inline">\(\Box\)</span> <strong>B.</strong> A homeowner whose home is assessed at a lower price than it would sell for.</p>
+<p><span class="math inline">\(\Box\)</span> <strong>C.</strong> An assessment process that systematically overvalues inexpensive properties and under- values expensive properties.</p>
+<p><span class="math inline">\(\Box\)</span> <strong>D.</strong> An assessment process that systematically undervalues inexpensive properties and over- values expensive properties.</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>Findings can be used for Project A2, so explicit solutions will not be released for this question. However, here are some discussion points:</p>
+<ul>
+<li>What is the definition of “fairness” in this context?</li>
+<li>Which individual or group of people are considered when we evaluate fairness?</li>
+<li>Are we talking about whether each situation above is fair to an individual home- owner, a subgroup of society, or the whole society?</li>
+<li>At the level of the individual homeowner, any error can feel unfair: why am I be over-/under-taxed?</li>
+<li>At the level of the society, is it fair to have a general over or underestimation that varies with the value of the home (a regressive or progressive tax scheme)?</li>
+</ul>
+<p>Other important things to note:</p>
+<ul>
+<li>Some may feel that both regressive and progressive are unfair; that any systematic errors should not depend at all on the value of the property</li>
+<li>It is possible to have a tax scheme that is systematically fair tax (i.e., not regressive or progressive) but is still quite inaccurate and still generates errors for individual homeowners. However, a tax scheme that generates no errors for homeowners will also have no systematic unfairness.</li>
+<li>Unfairness of the second type (scenarios C and D) is a form of statistical bias that varies as a function of y (the response variable).</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Points from Discussion">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Points from Discussion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</details>
+<p>Suppose you created a model to predict property values (as you are doing presently!) and wanted to understand whether your model’s predictions align more with Scenario C or D from the last question. You decide to break down your data into different intervals depending on the true Log Sale Price and compute the Root Mean Squared Error (RMSE) and percentage of property values overestimated for each interval. Using this information, you create the plots below:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/plots.png" class="img-fluid figure-img"></p>
+<figcaption>Log Sale Price plots</figcaption>
+</figure>
+</div>
+<p>Which plot would be more useful in determining whether the model’s predicted property val- ues align more with Scenario C or D? Provide a brief justification for your answer.</p>
+<details>
+<summary>
+<b>Answer</b>
+</summary>
+<p>Again, findings here can be used for Project A2, so explicit solutions will not be released. However, some questions to consider:</p>
+<ul>
+<li>How does the sign of the residual relate to whether a property is overvalued or undervalued?</li>
+<li>Does a low RMSE necessarily mean a model’s predictions are more accurate?</li>
+<li>Does a low RMSE necessarily mean a model’s predictions are more “fair”?</li>
+<li>What is the difference between your answers to both questions?</li>
+</ul>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Points from Discussion">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Points from Discussion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</details>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation column-body">
+  <div class="nav-page nav-page-previous">
+      <a href="../disc06/disc06.html" class="pagination-link" aria-label="Models, OLS">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> Gradient Descent, Feature Engineering, Housing</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: true</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    toc-title: Gradient Descent, Feature Engineering, Housing</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    page-layout: full</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    theme:</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">      - cosmo</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">      - cerulean</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    callout-icon: false</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### [Link to Slides](https://docs.google.com/presentation/d/1F0IMB7RTXk-XbvDGfUlS13cwRPKp7pRtdv0HfZc2Irs/edit?usp=sharing)</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dive into Gradient Descent</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>We want to minimize the loss function $L(\theta) = (\theta_1-1)^2 + |\theta_2-3|$. While you may notice that this function is not differentiable everywhere, we can still use gradient descent wherever the function *is* differentiable!</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Recall that for a function $f(x) = k|x|$, $\frac{df}{dx} = k$ for all $x &gt; 0$ and $\frac{df}{dx} = -k$ for all $x &lt; 0$.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### (a)</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>What are the optimal values $\hat{\theta}_1$ and $\hat{\theta}_2$ to minimize $L(\theta)$? </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    What is the gradient at those values $\nabla L = \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1 = \hat{\theta}_1, \theta_2 = \hat{\theta}_2}}$? </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>We can start off by finding the partial derivatives:</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\frac{\partial L}{\partial \theta_1} = 2(\theta_1 - 1)$</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>The above derivative is $0$ when $\theta_1 = 1$</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\frac{\partial L}{\partial \theta_2} = \begin{cases}</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>                1 &amp; \text{if } \theta_2 &gt; 3 <span class="sc">\\</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>                -1 &amp; \text{if } \theta_2 &lt; 3 <span class="sc">\\</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>                \text{undefined} &amp; \text{if } \theta_2 = 3</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>            \end{cases}$</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Although the partial derivative is undefined at $\theta_2 = 3$, we can see that $\theta_2 = 3$ is a minimizing value of $L(\theta)$ ($|3 - 3| = 0$, which is the smallest possible result).</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>Therefore, the gradient at the optimal values of $\theta_1, \theta_2$ is:</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>\nabla L &amp;= \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>= \hat{\theta}_1, \theta_2 = \hat{\theta}_2}} <span class="sc">\\</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>&amp;= <span class="co">[</span><span class="ot">0, \text{undefined}</span><span class="co">]</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>Setting the derivative to 0 only finds the minimum if the function is convex. Both $(\theta_1-1)^2$ and $|\theta_2-3|$ are convex. We proved in homework 5 that the sum of convex functions is also convex. Therefore, $L(\theta)$ is convex and we can set its derivative to $0$ to find the minimum. </span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>Another way to test convexity is by performing the second derivative test, i.e., show $L''(\theta) \geq 0$</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="fu">### (b)</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>Suppose we initialize our gradient descent algorithm randomly at $\theta_1 = 2$ and $\theta_2 = 5$. Calculate the gradient $\nabla L = \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1 = 2, \theta_2 = 5}}$ at the specified $\theta_1$ and $\theta_2$ values.</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>We can simply substitute the values into the partial derivates we obtained in the previous question:</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix} \frac{\partial L}{\partial \theta_1} <span class="sc">\\\\</span> \frac{\partial L}{\partial \theta_2} \end{bmatrix} &amp;= \begin{bmatrix} 2(\theta_1-1) <span class="sc">\\</span> 1 \end{bmatrix} <span class="sc">\\</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>&amp;= \begin{bmatrix} 2 <span class="sc">\\</span> 1 \end{bmatrix}</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### (c)</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>Apply the first gradient update with a learning rate $\alpha = 0.5$. In other words, calculate $\theta_1^{(1)}$ and $\theta_2^{(1)}$ using the initializations $\theta_1^{(0)} = 2$ and $\theta_2^{(0)} = 5$.</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>\theta^{(1)} &amp;= \theta^{(0)} - \alpha\nabla L<span class="sc">\\</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>&amp;= \begin{bmatrix} 2 <span class="sc">\\</span> 5 \end{bmatrix} - 0.5\begin{bmatrix} 2 <span class="sc">\\</span> 1 \end{bmatrix}<span class="sc">\\</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>&amp;= \begin{bmatrix} 2 - 0.5(2) <span class="sc">\\</span> 5 - 0.5(1) \end{bmatrix}<span class="sc">\\</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>&amp;= \begin{bmatrix} 1 <span class="sc">\\</span> 4.5 \end{bmatrix}</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### (d)</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>How many gradient descent steps does it take for $\theta_1$ and $\theta_2$ to converge to their optimal values obtained in part (a) assuming we keep a constant learning rate of $\alpha = 0.5$? In other words, what is the value of t when $\theta^{(t)}=\begin{bmatrix} \hat{\theta}_1&amp; \hat{\theta}_2 \end{bmatrix}^T$.</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>*Hint:* After part (c), what is the derivative $\frac{\partial L}{\partial \theta_1}$ evaluated at $\theta_1^{(1)}$?</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>Note that the derivative with respect to $\theta_1$ is 0 at $\theta_1^{(1)} = 1$ since it is the optimal solution! Then, we essentially only update $\theta_2$ where the partial derivative is always 1 (until we reach the optimal solution - then our derivative is undefined)! Every time, the partial derivative of $\theta_2$ is 1 - so the update is simply:</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>\theta_2^{(i+1)} = \theta_2^{(i)} - 0.5</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Hence, to update this from 5 to 3, we must take 4 gradient steps (i.e. from 5 to 4.5, 4.5 to 4, 4 to 3.5, 3.5 to 3).</span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>Writing this all out:</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>$$ \theta^{(2)} = \theta^{(1)} - \alpha \nabla L = \begin{bmatrix} 1 - 0.5(0) <span class="sc">\\</span> 4.5 - 0.5(1) \end{bmatrix} = \begin{bmatrix} 1 <span class="sc">\\</span> 4 \end{bmatrix} $$</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>$$ \theta^{(3)} = \theta^{(2)} - \alpha \nabla L = \begin{bmatrix} 1 - 0.5(0) <span class="sc">\\</span> 4 - 0.5(1) \end{bmatrix} = \begin{bmatrix} 1 <span class="sc">\\</span> 3.5 \end{bmatrix} $$</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>$$ \theta^{(4)} = \theta^{(3)} - \alpha \nabla L = \begin{bmatrix} 1 - 0.5(0) <span class="sc">\\</span> 3.5 - 0.5(1) \end{bmatrix} = \begin{bmatrix} 1 <span class="sc">\\</span> 3 \end{bmatrix} $$</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>Notice that every time, we reduce $\theta_2$ by 0.5 as expected, so the number of gradient descent steps is 4.</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="fu">## One-hot Encoding</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>In order to include a qualitative variable in a model, we convert</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>it into a collection of Boolean vectors that only contain the values 0 and 1. For example, suppose we have a qualitative variable</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>with 3 possible values, call them $A$, $B$, and $C$, respectively.</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>For concreteness, we use a specific example with 10 observations:</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">A, A, A, A, B, B, B, C, C, C</span><span class="co">]</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>We can represent this qualitative variable with 3 Boolean vectors that take on </span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>values $1$ or $0$ depending on the value of this qualitative variable. Specifically, the values of these 3 Boolean vectors for this dataset are $x_A$, $x_B$, and $x_C$, arranged from left to right in the following design matrix, where we use the following indicator variable:</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>                x_{i,k} =\begin{cases}</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>                        1 &amp;\text{if $i$-th observation has value $k$}<span class="sc">\\</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>                        0 &amp;\text{otherwise}.</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>                \end{cases}</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>Furthermore, let $\vec{y}$ represent any vector of outcome variables, and $y_i$ is the value of said outcome for the $i$-th subject. This representation is also called one-hot encoding. It should be noted here that $\vec{x_A}$, $\vec{x_B}$,  $\vec{x_C}$, and $\vec{y}$ are all vectors.</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>\Bbb{X}</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>=</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>\vert &amp; \vert &amp; \vert <span class="sc">\\</span></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>\vec{x_A} &amp; \vec{x_B} &amp; \vec{x_C} <span class="sc">\\</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>\vert &amp; \vert &amp; \vert <span class="sc">\\</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>=</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>1 &amp; 0 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>0 &amp; 1 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>0 &amp; 1 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>0 &amp; 1 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; 1<span class="sc">\\</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; 1<span class="sc">\\</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; 1<span class="sc">\\</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>We will show that the fitted coefficients for </span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>$\vec{x_A}$, $\vec{x_B}$, and $\vec{x_C}$ are </span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>$\bar{y}_A$, $\bar{y}_B$, and $\bar{y}_C$, the average of the </span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>$y_i$ values for each of the groups, respectively. </span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="fu">### (a)</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>Show that if you augment your $\mathbb{X}$ matrix with an additional $\vec{1}$ bias vector as shown below, $\mathbb{X}^T\mathbb{X}$ is not full rank. Conclude that the new $\mathbb{X}^T\mathbb{X}$ is not invertible, and we cannot use the least squares estimate in this situation.</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>\mathbb{X}</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>=</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>\vert &amp; \vert &amp; \vert  &amp; \vert <span class="sc">\\</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>\vec{1} &amp; \vec{x_A} &amp; \vec{x_B} &amp; \vec{x_C} <span class="sc">\\</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>\vert &amp; \vert &amp; \vert  &amp; \vert <span class="sc">\\</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>**Solution 1:**</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>By the definition of one-hot encoding, the one-hot-encoded columns of $\mathbb{X}$ sum up to $ \vec{1}$: </span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>$$ \vec{x_A} + \vec{x_B} + \vec{x_C} = \vec{1}$$</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>Since the leftmost vector of $\mathbb{X}$ is a linear combination of the other vectors, $\mathbb{X}$ is not full column rank. Since $\mathbb{X}$ has the same rank as $\mathbb{X}^T\mathbb{X}$ (proof is out of scope), $\mathbb{X}^T\mathbb{X}$ is not invertible. </span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>**Solution 2:**</span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>We can show that $\mathbb{X}^T\mathbb{X}$ is equal to the following.</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>\mathbb{X}^T\mathbb{X} = </span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>n &amp; n_A &amp; n_B &amp; n_C <span class="sc">\\</span></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>n_A &amp; n_A &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>n_B &amp; 0 &amp; n_B &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>n_C &amp; 0 &amp; 0 &amp; n_C</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>It can be observed that since $n_A + n_B + n_C = n$, the sum of the final 3 columns subtracted from the first column yields the zero vector $\vec{0}$. By the definition of linear dependence, we can conclude that this matrix is not full rank, and hence, we cannot invert it. As a result, we cannot compute our least squares estimate since it requires $\mathbb{X}^T\mathbb{X}$.</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="fu">### (b)</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>Show that the columns of $\mathbb{X}$ (without the additional $\vec{1}$ bias vector) are orthogonal, (i.e.,</span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>the dot product between any pair of column vectors is 0).</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>The argument is the same for any pair of $\Bbb{X}$'s columns so we show </span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>the orthogonality for one pair, $\vec{x_A} \cdot \vec{x_B}$.</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>\vec{x_A} \cdot \vec{x_B} &amp;= \sum_{i=1}^{10} x_{A,i} x_{B,i} <span class="sc">\\</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a> &amp;= \sum_{i=1}^4 (1 \times 0)  + \sum_{i=5}^7 (0 \times 1) + </span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a> \sum_{i=8}^{10} (0 \times 0) <span class="sc">\\</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a> &amp;= 0</span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="fu">### (c)</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>Show that</span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>\mathbb{X}^T\Bbb{X} = </span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix} </span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>n_A &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>0 &amp; n_B &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>0 &amp; 0&amp; n_C <span class="sc">\\</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>Here, $n_A$, $n_B$, and $n_C$ are the number of observations in each of</span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>the three groups defined by the levels of the qualitative variable.</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>Here, we note that </span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>\mathbb{X}^T = </span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a>1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp;0 <span class="sc">\\</span></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; 0 &amp;0 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0<span class="sc">\\</span></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; 0 &amp;0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1<span class="sc">\\</span></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>We also note that</span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>\mathbb{X}^T\mathbb{X} = </span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>\vec{x_A}^T\vec{x_A} &amp; \vec{x_A}^T\vec{x_B} &amp; \vec{x_A}^T\vec{x_C} <span class="sc">\\</span> </span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>\vec{x_B}^T\vec{x_A} &amp; \vec{x_B}^T\vec{x_B} &amp; \vec{x_B}^T\vec{x_C} <span class="sc">\\</span> </span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>\vec{x_C}^T\vec{x_A} &amp; \vec{x_C}^T\vec{x_B} &amp; \vec{x_C}^T\vec{x_C} <span class="sc">\\</span> </span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>Since we earlier established the orthogonality of the vectors in $\mathbb{X}$,</span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>we find $\mathbb{X}^T\mathbb{X}$ to be the diagonal matrix:</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>\mathbb{X}^T\mathbb{X} = </span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix} </span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>4 &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>0 &amp; 3 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>0 &amp; 0&amp; 3 <span class="sc">\\</span></span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>\end{bmatrix} =</span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix} </span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>n_A &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>0 &amp; n_B &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a>0 &amp; 0&amp; n_C <span class="sc">\\</span></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="fu">### (d)</span></span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a>Show that </span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a>\mathbb{X}^T\mathbb{Y} = </span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix} </span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>\sum_{i \in A} y_i<span class="sc">\\</span></span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>\sum_{i \in B} y_i<span class="sc">\\</span></span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>\sum_{i \in C} y_i<span class="sc">\\</span></span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a>where $i$ is an element in group $A, B,$ or $C$.</span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>Note in the previous solution we found $\Bbb{X}^T$.</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>The solution follows from recognizing that for a row in $\Bbb{X}^T$,</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>e.g., the first row, we have</span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>\sum_{i=1}^{10} x_{A,i} \times y_i = \sum_{i=1}^4 y_i = \sum_{i \in \textrm{ group A}} y_i</span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a><span class="fu">### (e)</span></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a>Use the results from the previous questions to solve the normal equations</span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a>for $\hat{\theta}$,</span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a>i.e.,</span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a>\hat{\theta} &amp;= <span class="co">[</span><span class="ot">\Bbb{X}^T\Bbb{X}</span><span class="co">]</span>^{-1} \Bbb{X}^T\mathbb{Y} <span class="sc">\\</span></span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a>&amp;=</span>
+<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix} </span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>\bar{y}_A<span class="sc">\\</span></span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a>\bar{y}_B<span class="sc">\\</span></span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a>\bar{y}_C<span class="sc">\\</span></span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>Using our results from part (c), we see that: </span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a> <span class="co">[</span><span class="ot">\Bbb{X}^T\Bbb{X}</span><span class="co">]</span>^{-1} = </span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a> \begin{bmatrix}</span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a> \frac{1}{n_A} &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a> 0 &amp; \frac{1}{n_B} &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a> 0 &amp; 0 &amp; \frac{1}{n_C}<span class="sc">\\</span></span>
+<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a> \end{bmatrix}</span>
+<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a>When we pre-multiply $\Bbb{X}^T \mathbb{Y}$ by this matrix, we </span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>get</span>
+<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix}</span>
+<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a> \frac{1}{n_A} &amp; 0 &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a> 0 &amp; \frac{1}{n_B} &amp; 0 <span class="sc">\\</span></span>
+<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a> 0 &amp; 0 &amp; \frac{1}{n_C}<span class="sc">\\</span></span>
+<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a> \end{bmatrix}</span>
+<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a>\begin{bmatrix} </span>
+<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a>\sum_{i \in A} y_i<span class="sc">\\</span></span>
+<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a>\sum_{i \in B} y_i<span class="sc">\\</span></span>
+<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a>\sum_{i \in C} y_i<span class="sc">\\</span></span>
+<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a>=</span>
+<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a> \begin{bmatrix} </span>
+<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a>\bar{y}_A<span class="sc">\\</span></span>
+<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a>\bar{y}_B<span class="sc">\\</span></span>
+<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a>\bar{y}_C<span class="sc">\\</span></span>
+<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a>\end{bmatrix}</span>
+<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a><span class="fu">## Human Contexts and Ethics: Case Study</span></span>
+<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a>Which of the following scenarios strike you as unfair and why? You can choose more than</span>
+<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a>one. There is no single right answer, but you must explain your reasoning.</span>
+<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a>$\Box$ **A.** A homeowner those home is assessed at a higher price than it would sell for.</span>
+<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>$\Box$ **B.** A homeowner whose home is assessed at a lower price than it would sell for.</span>
+<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a>$\Box$ **C.** An assessment process that systematically overvalues inexpensive properties and under-</span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>values expensive properties.</span>
+<span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>$\Box$ **D.** An assessment process that systematically undervalues inexpensive properties and over-</span>
+<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a>values expensive properties.</span>
+<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a>Findings can be used for Project A2, so explicit solutions will not be released for this question. However, here are some discussion points:</span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is the definition of “fairness” in this context?</span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which individual or group of people are considered when we evaluate fairness?</span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Are we talking about whether each situation above is fair to an individual home-</span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>owner, a subgroup of society, or the whole society?</span>
+<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At the level of the individual homeowner, any error can feel unfair: why am I be</span>
+<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a>over-/under-taxed?</span>
+<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At the level of the society, is it fair to have a general over or underestimation that varies with the value of the home (a regressive or progressive tax scheme)?</span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a>Other important things to note:</span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Some may feel that both regressive and progressive are unfair; that any systematic</span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>errors should not depend at all on the value of the property</span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>It is possible to have a tax scheme that is systematically fair tax (i.e., not regressive</span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a>or progressive) but is still quite inaccurate and still generates errors for individual</span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a>homeowners. However, a tax scheme that generates no errors for homeowners will</span>
+<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a>also have no systematic unfairness.</span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Unfairness of the second type (scenarios C and D) is a form of statistical bias that</span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a>varies as a function of y (the response variable).</span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Points from Discussion"}</span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a>Suppose you created a model to predict property values (as you are doing presently!) and</span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a>wanted to understand whether your model’s predictions align more with Scenario C or D from</span>
+<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a>the last question. You decide to break down your data into different intervals depending on</span>
+<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a>the true Log Sale Price and compute the Root Mean Squared Error (RMSE) and percentage of</span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a>property values overestimated for each interval. Using this information, you create the plots</span>
+<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a>below:</span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a><span class="al">![Log Sale Price plots](images/plots.png)</span></span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>Which plot would be more useful in determining whether the model’s predicted property val-</span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a>ues align more with Scenario C or D? Provide a brief justification for your answer.</span>
+<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a>Again, findings here can be used for Project A2, so explicit solutions will not be released. However, some questions to consider:</span>
+<span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>How does the sign of the residual relate to whether a property is overvalued or</span>
+<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a>undervalued?</span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Does a low RMSE necessarily mean a model’s predictions are more accurate?</span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Does a low RMSE necessarily mean a model’s predictions are more "fair"?</span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is the difference between your answers to both questions?</span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Points from Discussion"}</span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
