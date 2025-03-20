@@ -213,6 +213,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc07/disc07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Gradient Descent, Feature Engineering, Housing</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -223,7 +229,8 @@ window.Quarto = {
     <h2 id="toc-title">Regex, Visualization, and Transformation</h2>
    
   <ul>
-  <li><a href="#regular-expressions" id="toc-regular-expressions" class="nav-link active" data-scroll-target="#regular-expressions"><span class="header-section-number">5.1</span> Regular Expressions</a>
+  <li><a href="#link-to-slides" id="toc-link-to-slides" class="nav-link active" data-scroll-target="#link-to-slides"><span class="header-section-number">5.0.1</span> Link to Slides</a></li>
+  <li><a href="#regular-expressions" id="toc-regular-expressions" class="nav-link" data-scroll-target="#regular-expressions"><span class="header-section-number">5.1</span> Regular Expressions</a>
   <ul class="collapse">
   <li><a href="#a" id="toc-a" class="nav-link" data-scroll-target="#a"><span class="header-section-number">5.1.1</span> <strong>(a)</strong></a></li>
   <li><a href="#b" id="toc-b" class="nav-link" data-scroll-target="#b"><span class="header-section-number">5.1.2</span> <strong>(b)</strong></a></li>
@@ -267,6 +274,9 @@ window.Quarto = {
 </header>
 
 
+<section id="link-to-slides" class="level3" data-number="5.0.1">
+<h3 data-number="5.0.1" class="anchored" data-anchor-id="link-to-slides"><span class="header-section-number">5.0.1</span> <a href="https://docs.google.com/presentation/d/1juHg1jKsVhO4dPRu9xqz-XZ0LhqHRX59ziTh53htfk4/edit?usp=sharing">Link to Slides</a></h3>
+</section>
 <section id="regular-expressions" class="level2" data-number="5.1">
 <h2 data-number="5.1" class="anchored" data-anchor-id="regular-expressions"><span class="header-section-number">5.1</span> Regular Expressions</h2>
 <p>Regular Expressions (RegEx for short) are an immensely powerful tool for parsing strings. However, it’s many rules make RegEx very confusing, even for veteran users, so please don’t hesitate to ask questions! Here’s a snippet of the RegEx portion of the Fall 2023 Midterm</p>
@@ -436,7 +446,7 @@ window.Quarto = {
 <section id="visualizing-bigfoot" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="visualizing-bigfoot"><span class="header-section-number">5.2</span> Visualizing Bigfoot</h2>
 <p>Many of you have probably heard of Bigfoot before. It’s a mysterious ape-like creature that is said to live in North American forests. Most doubt its existence, but a passionate few swear that Bigfoot is real. In this discussion, you will be working with a dataset on Bigfoot sightings, visualizing variable distributions and combinations thereof to better understand how/when/where Bigfoot is reportedly spotted, and possibly either confirm or cast doubt on its existence. The Bigfoot data contains a ton of variables about each reported Bigfoot spotting, including location information, weather, and moon phase.</p>
-<div id="b8051b8b" class="cell" data-execution_count="1">
+<div id="91e35d8e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing packages</span></span>
@@ -449,7 +459,7 @@ window.Quarto = {
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="a57277dc" class="cell" data-execution_count="2">
+<div id="27d86575" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading bigfoot data</span></span>
@@ -459,7 +469,7 @@ window.Quarto = {
 </details>
 </div>
 <p>This dataset is extremely messy, with observations missing many values across multiple columns. This is normally the case with data based on citizen reports (many do not fill out all required fields). For the purposes of this discussion, we will drop all observations with any missing values and some unneeded columns. However, note this is not a good practice and you should almost never do this in real life!</p>
-<div id="d82ecdd4" class="cell" data-execution_count="3">
+<div id="81c49ec9" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop unneeded rows and observations with missing values</span></span>
@@ -472,7 +482,7 @@ window.Quarto = {
 </details>
 </div>
 <p>Here are the first few entries of the <code>bigfoot</code> table:</p>
-<div id="bb647fa0" class="cell" data-execution_count="4">
+<div id="f30a6b6f" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>bigfoot.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -608,7 +618,7 @@ window.Quarto = {
 <figcaption>windspeed</figcaption>
 </figure>
 </div>
-<div id="3a319cbe" class="cell" data-execution_count="5">
+<div id="b2907b6d" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sns.histplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"wind_speed"</span>, kde <span class="op">=</span> <span class="va">True</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -628,7 +638,7 @@ window.Quarto = {
 <p>Now, let’s look at some qualitative variables. Write a line of code that produces a visualization that shows the distribution of bigfoot sightings across the variable <code>season</code> (example shown below).</p>
 <p><strong>Hint:</strong> Use <code>seaborn</code>’s <code>sns.countplot</code> or <code>matplotlib</code>’s <code>plt.bar</code>.</p>
 <p><img src="images/season_bar.png" class="img-fluid"></p>
-<div id="ace06f14" class="cell" data-execution_count="6">
+<div id="95638279" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>)<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -642,7 +652,7 @@ window.Quarto = {
 </div>
 </div>
 <p>In order to also replicate the colors of the bars, you would need to manually specify them.</p>
-<div id="bce7d237" class="cell" data-execution_count="7">
+<div id="36c62193" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>, palette <span class="op">=</span> [<span class="st">"blue"</span>, <span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>])<span class="op">;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -656,7 +666,7 @@ window.Quarto = {
 </div>
 </div>
 <p>You could have alternatively used Matplotlib!</p>
-<div id="591cff8f" class="cell" data-execution_count="8">
+<div id="ac7e99ca" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>season_counts <span class="op">=</span> bigfoot[<span class="st">"season"</span>].value_counts()</span>
@@ -676,7 +686,7 @@ window.Quarto = {
 <p>Finally, produce a single visualization that showcases how the prevalence of bigfoot sightings at particular combinations of <code>moon_phase</code> and <code>wind_speed</code> vary across each season.</p>
 <p><strong>Hint</strong>: Think about color as the third information channel in the plot.</p>
 <p><img src="images/moon_vs_wind.png" class="img-fluid"></p>
-<div id="c19f9985" class="cell" data-execution_count="9">
+<div id="60eaf6e5" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data <span class="op">=</span> bigfoot,</span>
@@ -1250,276 +1260,278 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
 <span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regular Expressions</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### [Link to Slides](https://docs.google.com/presentation/d/1juHg1jKsVhO4dPRu9xqz-XZ0LhqHRX59ziTh53htfk4/edit?usp=sharing)</span></span>
 <span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>Regular Expressions (RegEx for short) are an immensely powerful tool for parsing strings.</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>However, it’s many rules make RegEx very confusing, even for veteran users, so please don’t</span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>hesitate to ask questions! Here’s a snippet of the RegEx portion of the Fall 2023 Midterm</span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>Reference Sheet:</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Regular Expressions</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>Regular Expressions (RegEx for short) are an immensely powerful tool for parsing strings.</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>However, it’s many rules make RegEx very confusing, even for veteran users, so please don’t</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>hesitate to ask questions! Here’s a snippet of the RegEx portion of the Fall 2023 Midterm</span>
 <span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="al">![Regex Reference](images/regex_reference.png)</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>Reference Sheet:</span>
 <span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(a)** </span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="al">![Regex Reference](images/regex_reference.png)</span></span>
 <span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>Which string contains a match for the following regular expression, "$\texttt{1+1\$}$"?</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(a)** </span></span>
 <span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{What is 1+1}$</span>
-<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{Make a wish at 11:11}$</span>
-<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{111 Ways to Succeed}$</span>
-<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{Make a wish at 11:11}$</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>Which string contains a match for the following regular expression, "$\texttt{1+1\$}$"?</span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{What is 1+1}$</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{Make a wish at 11:11}$</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{111 Ways to Succeed}$</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>Note that there are two operators here, the + and the \$. The \$ operator states that our match must occur at the end of the string, so that already rules out the third option. Furthermore, the + operator indicates that we need "one or more 1s" which is followed by another 1 (so two or more 1s in total). The only string ending with two or more consecutive 1s is the second option.</span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{Make a wish at 11:11}$</span>
 <span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>Note that there are two operators here, the + and the \$. The \$ operator states that our match must occur at the end of the string, so that already rules out the third option. Furthermore, the + operator indicates that we need "one or more 1s" which is followed by another 1 (so two or more 1s in total). The only string ending with two or more consecutive 1s is the second option.</span>
 <span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(b)** </span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>Write a regular expression that matches a string which contains only one word containing</span>
-<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>only lowercase letters and numbers (including the empty string).</span>
-<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>$\texttt{\^{}<span class="co">[</span><span class="ot">a-z0-9</span><span class="co">]</span>*\$}$</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(b)** </span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>Write a regular expression that matches a string which contains only one word containing</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>only lowercase letters and numbers (including the empty string).</span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="co">[</span><span class="ot">a-z0-9</span><span class="co">]</span>}$ to indicate that the word only include lowercase letters and/or numbers</span>
-<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{*}$ operator to state that the word can contain "0 or more" of $\texttt{[a-z0-9]}$. Note that we also want to match empty strings, which is why $\texttt{*}$ is preferred over $\texttt{+}$ here.</span>
-<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{\^{}}$ and $\texttt{\$}$ to indicate that the pattern must match the string at the beginning of the string, and at the end of the string respectively. This ensures that the pattern only matches strings with one word (not two or more words).</span>
-<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>$\texttt{\^{}<span class="co">[</span><span class="ot">a-z0-9</span><span class="co">]</span>*\$}$</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="co">[</span><span class="ot">a-z0-9</span><span class="co">]</span>}$ to indicate that the word only include lowercase letters and/or numbers</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{*}$ operator to state that the word can contain "0 or more" of $\texttt{[a-z0-9]}$. Note that we also want to match empty strings, which is why $\texttt{*}$ is preferred over $\texttt{+}$ here.</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{\^{}}$ and $\texttt{\$}$ to indicate that the pattern must match the string at the beginning of the string, and at the end of the string respectively. This ensures that the pattern only matches strings with one word (not two or more words).</span>
 <span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(c)** </span></span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>Given $\texttt{sometext = "I've got 10 eggs, 20 gooses, and 30 giants."}$, use $\texttt{re.findall}$ to extract all items and quantities from the string. The result should</span>
-<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>look like $\texttt{<span class="co">[</span><span class="ot">"10 eggs", "20 gooses", "30 giants"</span><span class="co">]</span>}$. You may assume that</span>
-<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>a space separates quantity and type, and that each item ends in s.</span>
-<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>$\texttt{re.findall(r"<span class="sc">\\</span>d+<span class="sc">\\</span>s<span class="sc">\\</span>w+", sometext)}$</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(c)** </span></span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>Given $\texttt{sometext = "I've got 10 eggs, 20 gooses, and 30 giants."}$, use $\texttt{re.findall}$ to extract all items and quantities from the string. The result should</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>look like $\texttt{<span class="co">[</span><span class="ot">"10 eggs", "20 gooses", "30 giants"</span><span class="co">]</span>}$. You may assume that</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>a space separates quantity and type, and that each item ends in s.</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>The strings we want to match begin with a number, followed by a space, followed by a word. We can use this to construct our pattern.</span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>$\texttt{re.findall(r"<span class="sc">\\</span>d+<span class="sc">\\</span>s<span class="sc">\\</span>w+", sometext)}$</span>
 <span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="sc">\\</span>d+}$ to match one or more digits</span>
-<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="sc">\\</span>s}$ to match a *single* space</span>
-<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="sc">\\</span>w+}$ to match one or more word characters $\texttt{<span class="co">[</span><span class="ot">A-Za-z0-9\_</span><span class="co">]</span>}$</span>
-<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>The strings we want to match begin with a number, followed by a space, followed by a word. We can use this to construct our pattern.</span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="sc">\\</span>d+}$ to match one or more digits</span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="sc">\\</span>s}$ to match a *single* space</span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\texttt{<span class="sc">\\</span>w+}$ to match one or more word characters $\texttt{<span class="co">[</span><span class="ot">A-Za-z0-9\_</span><span class="co">]</span>}$</span>
 <span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(d)** </span></span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>For each pattern specify the starting and ending position of the first match in the string.</span>
-<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a>The index starts at zero and we are using closed intervals (both endpoints are included).</span>
-<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>|   | $\texttt{abcdefg}$ | $\texttt{abcs!}$ | $\texttt{ab abc}$ | $\texttt{abc, 123}$ |</span>
-<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a>| :-: | :-: | :-: | :-: | :-: |</span>
-<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>| $\texttt{abc*}$ | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | | | |</span>
-<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot"> \^{} \\s</span><span class="co">]</span>+}$ | | | | |</span>
-<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>| $\texttt{ab.*c}$ | | | | |</span>
-<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot">a-z1,9</span><span class="co">]</span>+}$ | | | | |</span>
-<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(d)** </span></span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>For each pattern specify the starting and ending position of the first match in the string.</span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>The index starts at zero and we are using closed intervals (both endpoints are included).</span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>|   | $\texttt{abcdefg}$ | $\texttt{abcs!}$ | $\texttt{ab abc}$ | $\texttt{abc, 123}$ |</span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>| :-: | :-: | :-: | :-: | :-: |</span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>| $\texttt{abc*}$ | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | | | |</span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot"> \^{} \\s</span><span class="co">]</span>+}$ | | | | |</span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a>| $\texttt{ab.*c}$ | | | | |</span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot">a-z1,9</span><span class="co">]</span>+}$ | | | | |</span>
 <span id="cb10-94"><a href="#cb10-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>|   | $\texttt{abcdefg}$ | $\texttt{abcs!}$ | $\texttt{ab abc}$ | $\texttt{abc, 123}$ |</span>
-<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a>| :-: | :-: | :-: | :-: | :-: |</span>
-<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>| $\texttt{abc*}$ | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> |</span>
-<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot"> \^{} \\s</span><span class="co">]</span>+}$ | <span class="co">[</span><span class="ot">0,6</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,4</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,3</span><span class="co">]</span> |</span>
-<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>| $\texttt{ab.*c}$ | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,5</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> |</span>
-<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot">a-z1,9</span><span class="co">]</span>+}$ | <span class="co">[</span><span class="ot">0,6</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,3</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,3</span><span class="co">]</span> |</span>
-<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb10-95"><a href="#cb10-95" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a>|   | $\texttt{abcdefg}$ | $\texttt{abcs!}$ | $\texttt{ab abc}$ | $\texttt{abc, 123}$ |</span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a>| :-: | :-: | :-: | :-: | :-: |</span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a>| $\texttt{abc*}$ | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> |</span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot"> \^{} \\s</span><span class="co">]</span>+}$ | <span class="co">[</span><span class="ot">0,6</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,4</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,3</span><span class="co">]</span> |</span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a>| $\texttt{ab.*c}$ | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,5</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,2</span><span class="co">]</span> |</span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a>| $\texttt{<span class="co">[</span><span class="ot">a-z1,9</span><span class="co">]</span>+}$ | <span class="co">[</span><span class="ot">0,6</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,3</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,1</span><span class="co">]</span> | <span class="co">[</span><span class="ot">0,3</span><span class="co">]</span> |</span>
 <span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualizing Bigfoot</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a>Many of you have probably heard of Bigfoot before. It's a mysterious ape-like creature that is said to live in North American forests. Most doubt its existence, but a passionate few swear that Bigfoot is real. In this discussion, you will be working with a dataset on Bigfoot sightings, visualizing variable distributions and combinations thereof to better understand how/when/where Bigfoot is reportedly spotted, and possibly either confirm or cast doubt on its existence. The Bigfoot data contains a ton of variables about each reported Bigfoot spotting, including location information, weather, and moon phase.</span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualizing Bigfoot</span></span>
 <span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing packages</span></span>
-<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
-<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading bigfoot data</span></span>
-<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-13/bigfoot.csv'</span></span>
-<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
-<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a>This dataset is extremely messy, with observations missing many values across multiple columns. This is normally the case with data based on citizen reports (many do not fill out all required fields). For the purposes of this discussion, we will drop all observations with any missing values and some unneeded columns. However, note this is not a good practice and you should almost never do this in real life!</span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a>Many of you have probably heard of Bigfoot before. It's a mysterious ape-like creature that is said to live in North American forests. Most doubt its existence, but a passionate few swear that Bigfoot is real. In this discussion, you will be working with a dataset on Bigfoot sightings, visualizing variable distributions and combinations thereof to better understand how/when/where Bigfoot is reportedly spotted, and possibly either confirm or cast doubt on its existence. The Bigfoot data contains a ton of variables about each reported Bigfoot spotting, including location information, weather, and moon phase.</span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a><span class="co"># Importing packages</span></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a>warnings.filterwarnings(<span class="st">'ignore'</span>)</span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading bigfoot data</span></span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">'https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2022/2022-09-13/bigfoot.csv'</span></span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(url)</span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop unneeded rows and observations with missing values</span></span>
-<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="op">=</span> df.dropna().rename({<span class="st">'temperature_high'</span>:<span class="st">'temp_high'</span> ,<span class="st">'temperature_low'</span>:<span class="st">'temp_low'</span>},axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="op">=</span> bigfoot.drop([<span class="st">'observed'</span>, <span class="st">'location_details'</span>, <span class="st">'county'</span>, <span class="st">'state'</span>, <span class="st">'title'</span>,</span>
-<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>       <span class="st">'latitude'</span>, <span class="st">'longitude'</span>, <span class="st">'number'</span>, <span class="st">'classification'</span>, <span class="st">'geohash'</span>,</span>
-<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>       <span class="st">'temperature_mid'</span>, <span class="st">'dew_point'</span>,<span class="st">'precip_probability'</span>, <span class="st">'precip_type'</span>,<span class="st">'summary'</span>, </span>
-<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>       <span class="st">'wind_bearing'</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
-<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a>Here are the first few entries of the <span class="in">`bigfoot`</span> table:</span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>This dataset is extremely messy, with observations missing many values across multiple columns. This is normally the case with data based on citizen reports (many do not fill out all required fields). For the purposes of this discussion, we will drop all observations with any missing values and some unneeded columns. However, note this is not a good practice and you should almost never do this in real life!</span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop unneeded rows and observations with missing values</span></span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="op">=</span> df.dropna().rename({<span class="st">'temperature_high'</span>:<span class="st">'temp_high'</span> ,<span class="st">'temperature_low'</span>:<span class="st">'temp_low'</span>},axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a>bigfoot <span class="op">=</span> bigfoot.drop([<span class="st">'observed'</span>, <span class="st">'location_details'</span>, <span class="st">'county'</span>, <span class="st">'state'</span>, <span class="st">'title'</span>,</span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>       <span class="st">'latitude'</span>, <span class="st">'longitude'</span>, <span class="st">'number'</span>, <span class="st">'classification'</span>, <span class="st">'geohash'</span>,</span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>       <span class="st">'temperature_mid'</span>, <span class="st">'dew_point'</span>,<span class="st">'precip_probability'</span>, <span class="st">'precip_type'</span>,<span class="st">'summary'</span>, </span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>       <span class="st">'wind_bearing'</span>], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>bigfoot.head(<span class="dv">5</span>)</span>
-<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a>Let's first look at distributions of individual quantitative variables. Let's say we're interested in <span class="in">`wind_speed`</span>.</span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a>Here are the first few entries of the <span class="in">`bigfoot`</span> table:</span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>bigfoot.head(<span class="dv">5</span>)</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(a)**</span></span>
-<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a>Which of the following are appropriate visualizations for plotting the distribution of a quantitative variable? (Select all that apply.)</span>
-<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>A. Pie charts</span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>Let's first look at distributions of individual quantitative variables. Let's say we're interested in <span class="in">`wind_speed`</span>.</span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(a)**</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a>Which of the following are appropriate visualizations for plotting the distribution of a quantitative variable? (Select all that apply.)</span>
 <span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>B. Kernel Density Plot</span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a>A. Pie charts</span>
 <span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>C. Scatter plot</span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>B. Kernel Density Plot</span>
 <span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>D. Box plot</span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a>C. Scatter plot</span>
 <span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>E. Histogram</span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a>D. Box plot</span>
 <span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>F. Hex plot</span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>E. Histogram</span>
 <span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a>F. Hex plot</span>
 <span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>**Kernel Density Plot, Box plot, Histogram**</span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>A Pie chart would not be appropriate because they are used to visualize the distribution of categories, or of a single qualitative variables. Scatter plots and Hex plots are also not appropriate as they visualize the relationship between *two* quantitative variables.</span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a>**Kernel Density Plot, Box plot, Histogram**</span>
 <span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(b)**</span></span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a>A Pie chart would not be appropriate because they are used to visualize the distribution of categories, or of a single qualitative variables. Scatter plots and Hex plots are also not appropriate as they visualize the relationship between *two* quantitative variables.</span>
 <span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a>Write a line of code that produces a visualization that depicts the variable’s **distribution** (example shown below).</span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(b)**</span></span>
 <span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a><span class="al">![windspeed](images/windspeed.png)</span></span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a>Write a line of code that produces a visualization that depicts the variable’s **distribution** (example shown below).</span>
 <span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>sns.histplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"wind_speed"</span>, kde <span class="op">=</span> <span class="va">True</span>)<span class="op">;</span></span>
-<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a>Note that <span class="in">`kde = True`</span> is required to overlay the KDE curve over the actual histogram!</span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a><span class="al">![windspeed](images/windspeed.png)</span></span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>sns.histplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"wind_speed"</span>, kde <span class="op">=</span> <span class="va">True</span>)<span class="op">;</span></span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(c)**</span></span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>Note that <span class="in">`kde = True`</span> is required to overlay the KDE curve over the actual histogram!</span>
 <span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a>Now, let's look at some qualitative variables. Write a line of code that produces a visualization that shows the distribution of bigfoot sightings across the variable <span class="in">`season`</span> (example shown below). </span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(c)**</span></span>
 <span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>**Hint:** Use <span class="in">`seaborn`</span>'s <span class="in">`sns.countplot`</span> or <span class="in">`matplotlib`</span>'s <span class="in">`plt.bar`</span>.</span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>Now, let's look at some qualitative variables. Write a line of code that produces a visualization that shows the distribution of bigfoot sightings across the variable <span class="in">`season`</span> (example shown below). </span>
 <span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/season_bar.png)</span></span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a>**Hint:** Use <span class="in">`seaborn`</span>'s <span class="in">`sns.countplot`</span> or <span class="in">`matplotlib`</span>'s <span class="in">`plt.bar`</span>.</span>
 <span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>)<span class="op">;</span></span>
-<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a>In order to also replicate the colors of the bars, you would need to manually specify them.</span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/season_bar.png)</span></span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>)<span class="op">;</span></span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>, palette <span class="op">=</span> [<span class="st">"blue"</span>, <span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>])<span class="op">;</span></span>
-<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a>You could have alternatively used Matplotlib!</span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a>In order to also replicate the colors of the bars, you would need to manually specify them.</span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a>sns.countplot(data <span class="op">=</span> bigfoot, x <span class="op">=</span> <span class="st">"season"</span>, palette <span class="op">=</span> [<span class="st">"blue"</span>, <span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>])<span class="op">;</span></span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>season_counts <span class="op">=</span> bigfoot[<span class="st">"season"</span>].value_counts()</span>
-<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>plt.bar(season_counts.index, season_counts.values, color <span class="op">=</span> [<span class="st">"blue"</span>, <span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>])<span class="op">;</span></span>
-<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(d)**</span></span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a>You could have alternatively used Matplotlib!</span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>season_counts <span class="op">=</span> bigfoot[<span class="st">"season"</span>].value_counts()</span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>plt.bar(season_counts.index, season_counts.values, color <span class="op">=</span> [<span class="st">"blue"</span>, <span class="st">"orange"</span>, <span class="st">"green"</span>, <span class="st">"red"</span>, <span class="st">"purple"</span>])<span class="op">;</span></span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a>Finally, produce a single visualization that showcases how the prevalence of bigfoot sightings at particular combinations of <span class="in">`moon_phase`</span> and <span class="in">`wind_speed`</span> vary across each season.</span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(d)**</span></span>
 <span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>**Hint**: Think about color as the third information channel in the plot.</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a>Finally, produce a single visualization that showcases how the prevalence of bigfoot sightings at particular combinations of <span class="in">`moon_phase`</span> and <span class="in">`wind_speed`</span> vary across each season.</span>
 <span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/moon_vs_wind.png)</span></span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a>**Hint**: Think about color as the third information channel in the plot.</span>
 <span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data <span class="op">=</span> bigfoot,</span>
-<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> <span class="st">"moon_phase"</span>,</span>
-<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>                y <span class="op">=</span> <span class="st">"wind_speed"</span>,</span>
-<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>                hue <span class="op">=</span> <span class="st">"season"</span>,</span>
-<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>                alpha <span class="op">=</span> <span class="fl">0.2</span>)<span class="op">;</span></span>
-<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>Note the two rather unfamiliar arguments:</span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/moon_vs_wind.png)</span></span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(data <span class="op">=</span> bigfoot,</span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a>                x <span class="op">=</span> <span class="st">"moon_phase"</span>,</span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a>                y <span class="op">=</span> <span class="st">"wind_speed"</span>,</span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>                hue <span class="op">=</span> <span class="st">"season"</span>,</span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a>                alpha <span class="op">=</span> <span class="fl">0.2</span>)<span class="op">;</span></span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**hue** specifies which column of <span class="in">`bigfoot`</span> we want to color the points according to</span>
-<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**alpha** specifies how transparent the points should be. Higher values of **alpha** lead to more opaque points.</span>
-<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kernel Density Estimation (KDE)</span></span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a>Note the two rather unfamiliar arguments:</span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**hue** specifies which column of <span class="in">`bigfoot`</span> we want to color the points according to</span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**alpha** specifies how transparent the points should be. Higher values of **alpha** lead to more opaque points.</span>
 <span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a>Kernel Density Estimation is used to estimate a probability density function (or density curve)</span>
-<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>from a set of data. A kernel with a bandwidth parameter α is placed on data observations $x_i$</span>
-<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>with $i ∈ <span class="sc">\{</span>1, ..., n<span class="sc">\}</span>$, and the density estimation is calculated by averaging all kernels. Below,</span>
-<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>Gaussian and Boxcar kernel equations are listed:</span>
-<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Gaussian Kernel: $K_{\alpha}(x, x_i) = \frac{1}{\sqrt{2\pi\alpha^2}}\exp({-\frac{(x-x_i)^2}{2\alpha^2}})$</span>
-<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Boxcar Kernel: $B_{\alpha}(x, x_i) = \begin{cases} </span>
-<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>      \frac{1}{\alpha} &amp; \text{ if }-\frac{\alpha}{2} \leq x - x_i \leq \frac{\alpha}{2} <span class="sc">\\</span></span>
-<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>      0 &amp; \text{ else}</span>
-<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>  \end{cases}$</span>
-<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>The KDE is calculated as follows: $f_\alpha(x) = \frac{1}{n}\sum_{i = 1}^{n} K_\alpha(x, x_i)$.</span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a><span class="fu">## Kernel Density Estimation (KDE)</span></span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>Kernel Density Estimation is used to estimate a probability density function (or density curve)</span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>from a set of data. A kernel with a bandwidth parameter α is placed on data observations $x_i$</span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>with $i ∈ <span class="sc">\{</span>1, ..., n<span class="sc">\}</span>$, and the density estimation is calculated by averaging all kernels. Below,</span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>Gaussian and Boxcar kernel equations are listed:</span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Gaussian Kernel: $K_{\alpha}(x, x_i) = \frac{1}{\sqrt{2\pi\alpha^2}}\exp({-\frac{(x-x_i)^2}{2\alpha^2}})$</span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Boxcar Kernel: $B_{\alpha}(x, x_i) = \begin{cases} </span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>      \frac{1}{\alpha} &amp; \text{ if }-\frac{\alpha}{2} \leq x - x_i \leq \frac{\alpha}{2} <span class="sc">\\</span></span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a>      0 &amp; \text{ else}</span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>  \end{cases}$</span>
 <span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(a)** </span></span>
-<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a>Draw a KDE plot (by hand is fine) for data points <span class="co">[</span><span class="ot">1, 4, 8, 9</span><span class="co">]</span> using Gaussian</span>
-<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a>Kernel and $\alpha = 1$. On the plot show $x$, $x_i$, $\alpha$, and the KDE.</span>
-<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>With $\alpha = 1$, we get a Gaussian Kernel of $K_{1}(x, x_i) = \frac{1}{\sqrt{2 \pi}} \exp\left(-\frac{(x - x_i)^2}{2} \right)$. </span>
+<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a>The KDE is calculated as follows: $f_\alpha(x) = \frac{1}{n}\sum_{i = 1}^{n} K_\alpha(x, x_i)$.</span>
+<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(a)** </span></span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a>Draw a KDE plot (by hand is fine) for data points <span class="co">[</span><span class="ot">1, 4, 8, 9</span><span class="co">]</span> using Gaussian</span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>Kernel and $\alpha = 1$. On the plot show $x$, $x_i$, $\alpha$, and the KDE.</span>
+<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a>This kernel is greatest when $x = x_i$, giving us maximum point at </span>
-<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>$$K_{1}(x, x) = \frac{1}{\sqrt{2 \pi}} = 0.3989 \approx 0.4$$</span>
-<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>Each individual kernel is a Gaussian centered, respectively, at \texttt{<span class="co">[</span><span class="ot">1, 4, 8, 9</span><span class="co">]</span>}. Since we have 4 kernels, each with an area of 1, we normalize by dividing each kernel by 4. This gives us a maximum height of $0.1$. We then sum those kernels together to obtain the final KDE plot: </span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a>With $\alpha = 1$, we get a Gaussian Kernel of $K_{1}(x, x_i) = \frac{1}{\sqrt{2 \pi}} \exp\left(-\frac{(x - x_i)^2}{2} \right)$. </span>
+<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a>This kernel is greatest when $x = x_i$, giving us maximum point at </span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>$$K_{1}(x, x) = \frac{1}{\sqrt{2 \pi}} = 0.3989 \approx 0.4$$</span>
 <span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a><span class="al">![KDE](images/kde.png)</span></span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a>Each individual kernel is a Gaussian centered, respectively, at \texttt{<span class="co">[</span><span class="ot">1, 4, 8, 9</span><span class="co">]</span>}. Since we have 4 kernels, each with an area of 1, we normalize by dividing each kernel by 4. This gives us a maximum height of $0.1$. We then sum those kernels together to obtain the final KDE plot: </span>
 <span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a><span class="al">![KDE](images/kde.png)</span></span>
 <span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(b)** </span></span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a>We wish to compare the results of KDE using a Gaussian kernel and a boxcar kernel. For</span>
-<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>$\alpha &gt; 0$, which of the following statements is true? Choose all that apply.</span>
-<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>**A**. Decreasing $\alpha$ for a Gaussian kernel decreases the smoothness of the KDE.</span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a><span class="fu">### **(b)** </span></span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a>We wish to compare the results of KDE using a Gaussian kernel and a boxcar kernel. For</span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>$\alpha &gt; 0$, which of the following statements is true? Choose all that apply.</span>
 <span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>**B**. The Gaussian kernel is always better than the boxcar kernel for KDEs.</span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>**A**. Decreasing $\alpha$ for a Gaussian kernel decreases the smoothness of the KDE.</span>
 <span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>**C**. Because the Gaussian kernel is smooth, we can safely use large $\alpha$ values for</span>
-<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a>kernel density estimation without worrying about the actual distribution of data.</span>
-<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a>**D**. The area under the boxcar kernel is 1, regardless of the value of $\alpha$.</span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>**B**. The Gaussian kernel is always better than the boxcar kernel for KDEs.</span>
+<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a>**C**. Because the Gaussian kernel is smooth, we can safely use large $\alpha$ values for</span>
+<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a>kernel density estimation without worrying about the actual distribution of data.</span>
 <span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a>**E**. None of the above.</span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a>**D**. The area under the boxcar kernel is 1, regardless of the value of $\alpha$.</span>
 <span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>**Correct options: A, D**</span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a>**E**. None of the above.</span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb10-302"><a href="#cb10-302" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>**B** is false because a boxcar kernel can perform better is $\alpha$ is not chosen properly for the Gaussian kernel</span>
+<span id="cb10-303"><a href="#cb10-303" aria-hidden="true" tabindex="-1"></a>**Correct options: A, D**</span>
 <span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>**C** is false because an $\alpha$ that is too high risks including too many points in the estimate, resulting in a flatter curve.</span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a>**B** is false because a boxcar kernel can perform better is $\alpha$ is not chosen properly for the Gaussian kernel</span>
 <span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a>**C** is false because an $\alpha$ that is too high risks including too many points in the estimate, resulting in a flatter curve.</span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

@@ -16,12 +16,13 @@ format:
 jupyter: python3
 ---
 
+### [Link to Slides](https://docs.google.com/presentation/d/1CGPeBfe1Obqr5DhOHwoCBtplzcTD6GEos8EoiEPKVvQ/edit?usp=sharing)
+
 This discussion is all about practicing using `pandas`, and testing your knowledge about its various functionalities to accomplish small tasks.
 
 We will be using the `elections` dataset from lecture.
 
 ```{python}
-#| code-fold: false
 # import packages
 import pandas as pd
 import numpy as np
@@ -30,7 +31,6 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 ```
 
 ```{python}
-#| code-fold: false
 elections = pd.read_csv('elections.csv')
 elections.head(10)
 ```
@@ -54,12 +54,10 @@ We can sort a `DataFrame` by a column using the `.sort_values()` function! Remem
 </details>
 
 ```{python}
-#| code-fold: false
 sorted.iloc[[0], :]
 ```
 
 ```{python}
-#| code-fold: false
 sorted.loc[[0], :]
 ```
 

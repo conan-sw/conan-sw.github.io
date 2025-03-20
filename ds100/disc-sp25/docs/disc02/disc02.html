@@ -103,10 +103,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
-
-
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
-
 
 
 </head>
@@ -198,11 +195,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Pandas I</h2>
+   
+  <ul>
+  <li><a href="#link-to-slides" id="toc-link-to-slides" class="nav-link active" data-scroll-target="#link-to-slides"><span class="header-section-number">3.0.1</span> Link to Slides</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
-<main class="content column-page-right" id="quarto-document-content">
+<main class="content column-body" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -211,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div class="quarto-title-meta column-page-right">
+<div class="quarto-title-meta column-body">
 
     
   
@@ -223,18 +226,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="link-to-slides" class="level3" data-number="3.0.1">
+<h3 data-number="3.0.1" class="anchored" data-anchor-id="link-to-slides"><span class="header-section-number">3.0.1</span> <a href="https://docs.google.com/presentation/d/1CGPeBfe1Obqr5DhOHwoCBtplzcTD6GEos8EoiEPKVvQ/edit?usp=sharing">Link to Slides</a></h3>
 <p>This discussion is all about practicing using <code>pandas</code>, and testing your knowledge about its various functionalities to accomplish small tasks.</p>
 <p>We will be using the <code>elections</code> dataset from lecture.</p>
-<div id="74ddc8e1" class="cell" data-execution_count="1">
+<div id="3b2c8e9e" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 </div>
-<div id="399a77f9" class="cell" data-execution_count="2">
+<div id="c01325d4" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>elections <span class="op">=</span> pd.read_csv(<span class="st">'elections.csv'</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>elections.head(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="2">
 <div>
 
@@ -349,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Write a line of code that returns the elections table sorted in descending order by <code>"Popular vote"</code>. Store your result in a variable named <code>sorted</code>. Would calling <code>sorted.iloc[[0], :]</code> give the same result as <code>sorted.loc[[0], :]</code>?</p>
-<div id="deae1f26" class="cell" data-execution_count="3">
+<div id="a412ff24" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span> <span class="op">=</span> elections.sort_values(<span class="st">"Popular vote"</span>, ascending <span class="op">=</span> <span class="va">False</span>)</span>
@@ -487,8 +498,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>We can sort a <code>DataFrame</code> by a column using the <code>.sort_values()</code> function! Remember to specify <code>ascending = False</code>, or else it will sort in <em>increasing</em> order.</p>
 </div>
 </details>
-<div id="78d841f2" class="cell" data-execution_count="4">
+<div id="cd7f94a9" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.iloc[[<span class="dv">0</span>], :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 
@@ -521,8 +535,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<div id="3c8d35b1" class="cell" data-execution_count="5">
+<div id="64b3b26b" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.loc[[<span class="dv">0</span>], :]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <div>
 
@@ -566,7 +583,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </span>
 </details>
 <p>Using Boolean slicing, write one line of <code>pandas</code> code that returns a <code>DataFrame</code> that only contains election results from the 1900s.</p>
-<div id="a79a6460" class="cell" data-execution_count="6">
+<div id="a39c402b" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>elections[(elections[<span class="st">"Year"</span>] <span class="op">&gt;=</span> <span class="dv">1900</span>) <span class="op">&amp;</span> (elections[<span class="st">"Year"</span>] <span class="op">&lt;</span> <span class="dv">2000</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -705,7 +722,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </span>
 </details>
 <p>Write one line of <code>pandas</code> code that returns a <code>Series</code>, where the index is the <code>"Party"</code>, and the values are how many times that party won an election. Only include parties that have won an election.</p>
-<div id="3e51f98f" class="cell" data-execution_count="7">
+<div id="c94dff72" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>][<span class="st">"Party"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -720,7 +737,7 @@ National Union            1
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="5f02669a" class="cell" data-execution_count="8">
+<div id="c33b77e6" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>].groupby(<span class="st">"Party"</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -746,7 +763,7 @@ dtype: int64</code></pre>
 </span>
 </details>
 <p>Write a line of <code>pandas</code> code that returns a <code>Series</code> whose index is the years and whose values are the number of candidates that participated in those years’ elections.</p>
-<div id="915abd33" class="cell" data-execution_count="9">
+<div id="6a1d7d0b" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>elections[<span class="st">"Year"</span>].value_counts().head() <span class="co">#.head() to limit output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -755,13 +772,13 @@ dtype: int64</code></pre>
 <pre><code>Year
 1996    7
 1948    6
-2016    6
 1976    6
+2004    6
 2008    6
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="cd5b4f6b" class="cell" data-execution_count="10">
+<div id="5e8ca228" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>elections.groupby(<span class="st">"Year"</span>).size().head() <span class="co">#.head() to limit output</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -798,7 +815,7 @@ dtype: int64</code></pre>
 </span>
 </details>
 <p>Write a line of <code>pandas</code> code that creates a filtered <code>DataFrame</code> named <code>filtered_parties</code> from the elections dataset and keeps only the parties that have at least one election % more than 50%.</p>
-<div id="e18f45fc" class="cell" data-execution_count="11">
+<div id="87255c24" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>filtered_parties <span class="op">=</span> elections.groupby(<span class="st">"Party"</span>).<span class="bu">filter</span>(<span class="kw">lambda</span> df: df[<span class="st">"%"</span>].<span class="bu">max</span>() <span class="op">&gt;</span> <span class="dv">50</span>)</span>
@@ -953,7 +970,7 @@ dtype: int64</code></pre>
 </details>
 <p>Write a line of <code>pandas</code> code that uses the <code>filtered_parties</code> <code>DataFrame</code> to return a new <code>DataFrame</code> with row indices that correspond to the year and columns that correspond to each party. Each entry should be the total percentage of votes for all the candidates that ran during that particular year for the specified party. Missing values from the dataset (the cases where a party did not have a candidate in a particular year) should be entered as 0. Below is an example.</p>
 <p><img src="pivot.png" class="img-fluid"></p>
-<div id="9268df7a" class="cell" data-execution_count="12">
+<div id="45b425a4" class="cell" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>elections_pivot <span class="op">=</span> filtered_parties.pivot_table(</span>
@@ -1097,6 +1114,7 @@ dtype: int64</code></pre>
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -1567,7 +1585,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<nav class="page-navigation column-page-right">
+<nav class="page-navigation column-body">
   <div class="nav-page nav-page-previous">
       <a href="../disc01/disc01.html" class="pagination-link" aria-label="Math Prerequisites">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Math Prerequisites</span></span>
@@ -1597,21 +1615,21 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
 <span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>This discussion is all about practicing using <span class="in">`pandas`</span>, and testing your knowledge about its various functionalities to accomplish small tasks.</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### [Link to Slides](https://docs.google.com/presentation/d/1CGPeBfe1Obqr5DhOHwoCBtplzcTD6GEos8EoiEPKVvQ/edit?usp=sharing)</span></span>
 <span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>We will be using the <span class="in">`elections`</span> dataset from lecture.</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>This discussion is all about practicing using <span class="in">`pandas`</span>, and testing your knowledge about its various functionalities to accomplish small tasks.</span>
 <span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>We will be using the <span class="in">`elections`</span> dataset from lecture.</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a><span class="co"># import packages</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
 <span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>elections <span class="op">=</span> pd.read_csv(<span class="st">'elections.csv'</span>)</span>
 <span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>elections.head(<span class="dv">10</span>)</span>
 <span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1635,175 +1653,173 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-64"><a href="#cb17-64" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.iloc[[<span class="dv">0</span>], :]</span>
-<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-68"><a href="#cb17-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: false</span></span>
-<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.loc[[<span class="dv">0</span>], :]</span>
-<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
-<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
-<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>The difference is that <span class="in">`.loc[]`</span> uses **label-based** indexing, while `.iloc[]` uses **integer position-based** indexing. Using `.loc[]` will simply grab the row with the label **0** regardless of where it is, while <span class="in">`.iloc[]`</span> will grab the first row of the sorted <span class="in">`DataFrame`</span>.</span>
-<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
-<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
-<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-65"><a href="#cb17-65" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.iloc[[<span class="dv">0</span>], :]</span>
+<span id="cb17-66"><a href="#cb17-66" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-67"><a href="#cb17-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-70"><a href="#cb17-70" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-71"><a href="#cb17-71" aria-hidden="true" tabindex="-1"></a><span class="bu">sorted</span>.loc[[<span class="dv">0</span>], :]</span>
+<span id="cb17-72"><a href="#cb17-72" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-73"><a href="#cb17-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-74"><a href="#cb17-74" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb17-75"><a href="#cb17-75" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb17-76"><a href="#cb17-76" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-77"><a href="#cb17-77" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
+<span id="cb17-78"><a href="#cb17-78" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-79"><a href="#cb17-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-80"><a href="#cb17-80" aria-hidden="true" tabindex="-1"></a>The difference is that <span class="in">`.loc[]`</span> uses **label-based** indexing, while `.iloc[]` uses **integer position-based** indexing. Using `.loc[]` will simply grab the row with the label **0** regardless of where it is, while <span class="in">`.iloc[]`</span> will grab the first row of the sorted <span class="in">`DataFrame`</span>.</span>
+<span id="cb17-81"><a href="#cb17-81" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb17-82"><a href="#cb17-82" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb17-83"><a href="#cb17-83" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
+<span id="cb17-84"><a href="#cb17-84" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-85"><a href="#cb17-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-86"><a href="#cb17-86" aria-hidden="true" tabindex="-1"></a>Using Boolean slicing, write one line of <span class="in">`pandas`</span> code that returns a <span class="in">`DataFrame`</span> that only contains election results from the 1900s.</span>
 <span id="cb17-87"><a href="#cb17-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-88"><a href="#cb17-88" aria-hidden="true" tabindex="-1"></a>Using Boolean slicing, write one line of <span class="in">`pandas`</span> code that returns a <span class="in">`DataFrame`</span> that only contains election results from the 1900s.</span>
-<span id="cb17-89"><a href="#cb17-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a>elections[(elections[<span class="st">"Year"</span>] <span class="op">&gt;=</span> <span class="dv">1900</span>) <span class="op">&amp;</span> (elections[<span class="st">"Year"</span>] <span class="op">&lt;</span> <span class="dv">2000</span>)]</span>
-<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
-<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
-<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a>We can "filter" <span class="in">`DataFrame`</span>s by using boolean slicing! </span>
-<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Construct a boolean <span class="in">`Series`</span> that is <span class="in">`True`</span> if a row contains election results from the 1900s, and <span class="in">`False`</span> otherwise.</span>
-<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>We can use the <span class="in">`&amp;`</span> (and) logical operator! 1900 or after **and** before 2000.</span>
-<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Use the boolean <span class="in">`Series`</span> to slice the <span class="in">`DataFrame`</span></span>
-<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`df[boolean_array]`</span></span>
-<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
-<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
-<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
-<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a>Write one line of <span class="in">`pandas`</span> code that returns a <span class="in">`Series`</span>, where the index is the <span class="in">`"Party"`</span>, </span>
-<span id="cb17-114"><a href="#cb17-114" aria-hidden="true" tabindex="-1"></a>and the values are how many times that party won an election. Only include parties that have won an election.</span>
-<span id="cb17-115"><a href="#cb17-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>][<span class="st">"Party"</span>].value_counts()</span>
-<span id="cb17-121"><a href="#cb17-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-122"><a href="#cb17-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>].groupby(<span class="st">"Party"</span>).size()</span>
-<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
-<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
-<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a>Two parts to this!</span>
-<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Filter <span class="in">`DataFrame`</span> to only include winners.</span>
-<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Use boolean slicing again! Construct a boolean <span class="in">`Series`</span> that has <span class="in">`True`</span> if the row contains a winner, and <span class="in">`False`</span> otherwise</span>
-<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections[elections["Result"] == "win"]`</span></span>
-<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Within filtered <span class="in">`DataFrame`</span> (let's call this <span class="in">`winners`</span>), count the number of times each party won an election. Two ways to do this.</span>
-<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Extract the **Party** column from <span class="in">`winners`</span>, and call <span class="in">`value_counts()`</span>.</span>
-<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a><span class="ss">        * </span><span class="in">`winners["Party"].value_counts()`</span></span>
-<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Group by the **Party** column, and aggregate by the number of rows in each sub-<span class="in">`DataFrame`</span>.</span>
-<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a><span class="ss">        * </span><span class="in">`winners.groupby("Party").size()`</span></span>
-<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>The two methods above return the same thing, *except* <span class="in">`.value_counts()`</span> sorts by the values in decreasing order, while <span class="in">`.groupby()`</span> sort by the index in increasing order!</span>
-<span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
-<span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
-<span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-90"><a href="#cb17-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-91"><a href="#cb17-91" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb17-92"><a href="#cb17-92" aria-hidden="true" tabindex="-1"></a>elections[(elections[<span class="st">"Year"</span>] <span class="op">&gt;=</span> <span class="dv">1900</span>) <span class="op">&amp;</span> (elections[<span class="st">"Year"</span>] <span class="op">&lt;</span> <span class="dv">2000</span>)]</span>
+<span id="cb17-93"><a href="#cb17-93" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-94"><a href="#cb17-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-95"><a href="#cb17-95" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb17-96"><a href="#cb17-96" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb17-97"><a href="#cb17-97" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-98"><a href="#cb17-98" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
+<span id="cb17-99"><a href="#cb17-99" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-100"><a href="#cb17-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-101"><a href="#cb17-101" aria-hidden="true" tabindex="-1"></a>We can "filter" <span class="in">`DataFrame`</span>s by using boolean slicing! </span>
+<span id="cb17-102"><a href="#cb17-102" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Construct a boolean <span class="in">`Series`</span> that is <span class="in">`True`</span> if a row contains election results from the 1900s, and <span class="in">`False`</span> otherwise.</span>
+<span id="cb17-103"><a href="#cb17-103" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>We can use the <span class="in">`&amp;`</span> (and) logical operator! 1900 or after **and** before 2000.</span>
+<span id="cb17-104"><a href="#cb17-104" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Use the boolean <span class="in">`Series`</span> to slice the <span class="in">`DataFrame`</span></span>
+<span id="cb17-105"><a href="#cb17-105" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`df[boolean_array]`</span></span>
+<span id="cb17-106"><a href="#cb17-106" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb17-107"><a href="#cb17-107" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb17-108"><a href="#cb17-108" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
+<span id="cb17-109"><a href="#cb17-109" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-110"><a href="#cb17-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-111"><a href="#cb17-111" aria-hidden="true" tabindex="-1"></a>Write one line of <span class="in">`pandas`</span> code that returns a <span class="in">`Series`</span>, where the index is the <span class="in">`"Party"`</span>, </span>
+<span id="cb17-112"><a href="#cb17-112" aria-hidden="true" tabindex="-1"></a>and the values are how many times that party won an election. Only include parties that have won an election.</span>
+<span id="cb17-113"><a href="#cb17-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-116"><a href="#cb17-116" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-117"><a href="#cb17-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb17-118"><a href="#cb17-118" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>][<span class="st">"Party"</span>].value_counts()</span>
+<span id="cb17-119"><a href="#cb17-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-120"><a href="#cb17-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-123"><a href="#cb17-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-124"><a href="#cb17-124" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb17-125"><a href="#cb17-125" aria-hidden="true" tabindex="-1"></a>elections[elections[<span class="st">"Result"</span>] <span class="op">==</span> <span class="st">"win"</span>].groupby(<span class="st">"Party"</span>).size()</span>
+<span id="cb17-126"><a href="#cb17-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-127"><a href="#cb17-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-128"><a href="#cb17-128" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb17-129"><a href="#cb17-129" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb17-130"><a href="#cb17-130" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-131"><a href="#cb17-131" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
+<span id="cb17-132"><a href="#cb17-132" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-133"><a href="#cb17-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-134"><a href="#cb17-134" aria-hidden="true" tabindex="-1"></a>Two parts to this!</span>
+<span id="cb17-135"><a href="#cb17-135" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Filter <span class="in">`DataFrame`</span> to only include winners.</span>
+<span id="cb17-136"><a href="#cb17-136" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Use boolean slicing again! Construct a boolean <span class="in">`Series`</span> that has <span class="in">`True`</span> if the row contains a winner, and <span class="in">`False`</span> otherwise</span>
+<span id="cb17-137"><a href="#cb17-137" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections[elections["Result"] == "win"]`</span></span>
+<span id="cb17-138"><a href="#cb17-138" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Within filtered <span class="in">`DataFrame`</span> (let's call this <span class="in">`winners`</span>), count the number of times each party won an election. Two ways to do this.</span>
+<span id="cb17-139"><a href="#cb17-139" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Extract the **Party** column from <span class="in">`winners`</span>, and call <span class="in">`value_counts()`</span>.</span>
+<span id="cb17-140"><a href="#cb17-140" aria-hidden="true" tabindex="-1"></a><span class="ss">        * </span><span class="in">`winners["Party"].value_counts()`</span></span>
+<span id="cb17-141"><a href="#cb17-141" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Group by the **Party** column, and aggregate by the number of rows in each sub-<span class="in">`DataFrame`</span>.</span>
+<span id="cb17-142"><a href="#cb17-142" aria-hidden="true" tabindex="-1"></a><span class="ss">        * </span><span class="in">`winners.groupby("Party").size()`</span></span>
+<span id="cb17-143"><a href="#cb17-143" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>The two methods above return the same thing, *except* <span class="in">`.value_counts()`</span> sorts by the values in decreasing order, while <span class="in">`.groupby()`</span> sort by the index in increasing order!</span>
+<span id="cb17-144"><a href="#cb17-144" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb17-145"><a href="#cb17-145" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb17-146"><a href="#cb17-146" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
+<span id="cb17-147"><a href="#cb17-147" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-148"><a href="#cb17-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-149"><a href="#cb17-149" aria-hidden="true" tabindex="-1"></a>Write a line of <span class="in">`pandas`</span> code that returns a <span class="in">`Series`</span> whose index is the years and whose values are the number of candidates that participated in those years' elections.</span>
 <span id="cb17-150"><a href="#cb17-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-151"><a href="#cb17-151" aria-hidden="true" tabindex="-1"></a>Write a line of <span class="in">`pandas`</span> code that returns a <span class="in">`Series`</span> whose index is the years and whose values are the number of candidates that participated in those years' elections.</span>
-<span id="cb17-152"><a href="#cb17-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-156"><a href="#cb17-156" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a>elections[<span class="st">"Year"</span>].value_counts().head() <span class="co">#.head() to limit output</span></span>
-<span id="cb17-158"><a href="#cb17-158" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-159"><a href="#cb17-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a>elections.groupby(<span class="st">"Year"</span>).size().head() <span class="co">#.head() to limit output</span></span>
-<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
-<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
-<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a>Very similar to **Problem 3**! Might even be easier, actually. Each row corresponds to one candidate per election cycle, so we simply need to count the number of times each **Year** appears in the elections `DataFrame`. Just like in **Problem 3**, two ways to do this.</span>
-<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Extract the **Year** column as a <span class="in">`Series`</span>, call <span class="in">`.value_counts()`</span> on it.</span>
-<span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections["Year"].value_counts()`</span>      </span>
-<span id="cb17-177"><a href="#cb17-177" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Group by the **Year** column, creating a sub-`DataFrame` for each unique **Year**. Aggregate by <span class="in">`.size()`</span>, counting the number of rows in each sub-<span class="in">`DataFrame`</span>.</span>
-<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections.groupby("Year").size()`</span></span>
-<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
-<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
-<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-153"><a href="#cb17-153" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-154"><a href="#cb17-154" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb17-155"><a href="#cb17-155" aria-hidden="true" tabindex="-1"></a>elections[<span class="st">"Year"</span>].value_counts().head() <span class="co">#.head() to limit output</span></span>
+<span id="cb17-156"><a href="#cb17-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-157"><a href="#cb17-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-160"><a href="#cb17-160" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-161"><a href="#cb17-161" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb17-162"><a href="#cb17-162" aria-hidden="true" tabindex="-1"></a>elections.groupby(<span class="st">"Year"</span>).size().head() <span class="co">#.head() to limit output</span></span>
+<span id="cb17-163"><a href="#cb17-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-164"><a href="#cb17-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-165"><a href="#cb17-165" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb17-166"><a href="#cb17-166" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb17-167"><a href="#cb17-167" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-168"><a href="#cb17-168" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
+<span id="cb17-169"><a href="#cb17-169" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-170"><a href="#cb17-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-171"><a href="#cb17-171" aria-hidden="true" tabindex="-1"></a>Very similar to **Problem 3**! Might even be easier, actually. Each row corresponds to one candidate per election cycle, so we simply need to count the number of times each **Year** appears in the elections `DataFrame`. Just like in **Problem 3**, two ways to do this.</span>
+<span id="cb17-172"><a href="#cb17-172" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb17-173"><a href="#cb17-173" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Extract the **Year** column as a <span class="in">`Series`</span>, call <span class="in">`.value_counts()`</span> on it.</span>
+<span id="cb17-174"><a href="#cb17-174" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections["Year"].value_counts()`</span>      </span>
+<span id="cb17-175"><a href="#cb17-175" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Group by the **Year** column, creating a sub-`DataFrame` for each unique **Year**. Aggregate by <span class="in">`.size()`</span>, counting the number of rows in each sub-<span class="in">`DataFrame`</span>.</span>
+<span id="cb17-176"><a href="#cb17-176" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections.groupby("Year").size()`</span></span>
+<span id="cb17-177"><a href="#cb17-177" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb17-178"><a href="#cb17-178" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb17-179"><a href="#cb17-179" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
+<span id="cb17-180"><a href="#cb17-180" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-181"><a href="#cb17-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-182"><a href="#cb17-182" aria-hidden="true" tabindex="-1"></a>Write a line of <span class="in">`pandas`</span> code that creates a filtered <span class="in">`DataFrame`</span> named <span class="in">`filtered_parties`</span> from the elections dataset and keeps only the parties that have at least one election % more than 50%.</span>
 <span id="cb17-183"><a href="#cb17-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-184"><a href="#cb17-184" aria-hidden="true" tabindex="-1"></a>Write a line of <span class="in">`pandas`</span> code that creates a filtered <span class="in">`DataFrame`</span> named <span class="in">`filtered_parties`</span> from the elections dataset and keeps only the parties that have at least one election % more than 50%.</span>
-<span id="cb17-185"><a href="#cb17-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a>filtered_parties <span class="op">=</span> elections.groupby(<span class="st">"Party"</span>).<span class="bu">filter</span>(<span class="kw">lambda</span> df: df[<span class="st">"%"</span>].<span class="bu">max</span>() <span class="op">&gt;</span> <span class="dv">50</span>)</span>
-<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a>filtered_parties</span>
-<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
-<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-186"><a href="#cb17-186" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-187"><a href="#cb17-187" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb17-188"><a href="#cb17-188" aria-hidden="true" tabindex="-1"></a>filtered_parties <span class="op">=</span> elections.groupby(<span class="st">"Party"</span>).<span class="bu">filter</span>(<span class="kw">lambda</span> df: df[<span class="st">"%"</span>].<span class="bu">max</span>() <span class="op">&gt;</span> <span class="dv">50</span>)</span>
+<span id="cb17-189"><a href="#cb17-189" aria-hidden="true" tabindex="-1"></a>filtered_parties</span>
+<span id="cb17-190"><a href="#cb17-190" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-191"><a href="#cb17-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-192"><a href="#cb17-192" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb17-193"><a href="#cb17-193" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb17-194"><a href="#cb17-194" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-195"><a href="#cb17-195" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
+<span id="cb17-196"><a href="#cb17-196" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-197"><a href="#cb17-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-198"><a href="#cb17-198" aria-hidden="true" tabindex="-1"></a>This filtering is different from boolean slicing! Boolean slicing considers rows individually, while <span class="in">`.filter()`</span> considers *groups of rows*. Rows of a sub-`DataFrame` either *all* make it, or *none* make it.</span>
 <span id="cb17-199"><a href="#cb17-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a>This filtering is different from boolean slicing! Boolean slicing considers rows individually, while <span class="in">`.filter()`</span> considers *groups of rows*. Rows of a sub-`DataFrame` either *all* make it, or *none* make it.</span>
-<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Group by the **Party** column, creating one sub-<span class="in">`DataFrame`</span> for each party.</span>
-<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections.groupby("Party")`</span></span>
-<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Filter using <span class="in">`.filter()`</span></span>
-<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Pass in a function into <span class="in">`.filter()`</span> that takes in a <span class="in">`DataFrame`</span> and returns <span class="in">`True`</span> or <span class="in">`False`</span>. Can be a lambda function!</span>
-<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`.filter(lambda df: df["%"].max() &gt; 50)`</span></span>
-<span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a><span class="ss">        * </span>If the lambda function returns <span class="in">`True`</span>, it means you keep the entire sub-<span class="in">`DataFrame`</span>. <span class="in">`False`</span> means you exclude it entirely!</span>
-<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
-<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
-<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
-<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a>Write a line of <span class="in">`pandas`</span> code that uses the <span class="in">`filtered_parties`</span> <span class="in">`DataFrame`</span> to return a new</span>
-<span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a><span class="in">`DataFrame`</span> with row indices that correspond to the year and columns that correspond</span>
-<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a>to each party. Each entry should be the total percentage of votes for all the candidates</span>
-<span id="cb17-216"><a href="#cb17-216" aria-hidden="true" tabindex="-1"></a>that ran during that particular year for the specified party. Missing values from the dataset (the cases where a party did not have a candidate in a particular year) should be entered as 0. Below is an example.</span>
+<span id="cb17-200"><a href="#cb17-200" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Group by the **Party** column, creating one sub-<span class="in">`DataFrame`</span> for each party.</span>
+<span id="cb17-201"><a href="#cb17-201" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`elections.groupby("Party")`</span></span>
+<span id="cb17-202"><a href="#cb17-202" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Filter using <span class="in">`.filter()`</span></span>
+<span id="cb17-203"><a href="#cb17-203" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Pass in a function into <span class="in">`.filter()`</span> that takes in a <span class="in">`DataFrame`</span> and returns <span class="in">`True`</span> or <span class="in">`False`</span>. Can be a lambda function!</span>
+<span id="cb17-204"><a href="#cb17-204" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`.filter(lambda df: df["%"].max() &gt; 50)`</span></span>
+<span id="cb17-205"><a href="#cb17-205" aria-hidden="true" tabindex="-1"></a><span class="ss">        * </span>If the lambda function returns <span class="in">`True`</span>, it means you keep the entire sub-<span class="in">`DataFrame`</span>. <span class="in">`False`</span> means you exclude it entirely!</span>
+<span id="cb17-206"><a href="#cb17-206" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb17-207"><a href="#cb17-207" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb17-208"><a href="#cb17-208" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
+<span id="cb17-209"><a href="#cb17-209" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-210"><a href="#cb17-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-211"><a href="#cb17-211" aria-hidden="true" tabindex="-1"></a>Write a line of <span class="in">`pandas`</span> code that uses the <span class="in">`filtered_parties`</span> <span class="in">`DataFrame`</span> to return a new</span>
+<span id="cb17-212"><a href="#cb17-212" aria-hidden="true" tabindex="-1"></a><span class="in">`DataFrame`</span> with row indices that correspond to the year and columns that correspond</span>
+<span id="cb17-213"><a href="#cb17-213" aria-hidden="true" tabindex="-1"></a>to each party. Each entry should be the total percentage of votes for all the candidates</span>
+<span id="cb17-214"><a href="#cb17-214" aria-hidden="true" tabindex="-1"></a>that ran during that particular year for the specified party. Missing values from the dataset (the cases where a party did not have a candidate in a particular year) should be entered as 0. Below is an example.</span>
+<span id="cb17-215"><a href="#cb17-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-216"><a href="#cb17-216" aria-hidden="true" tabindex="-1"></a><span class="al">![](pivot.png)</span></span>
 <span id="cb17-217"><a href="#cb17-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-218"><a href="#cb17-218" aria-hidden="true" tabindex="-1"></a><span class="al">![](pivot.png)</span></span>
-<span id="cb17-219"><a href="#cb17-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a>elections_pivot <span class="op">=</span> filtered_parties.pivot_table(</span>
-<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="st">"Year"</span>,</span>
-<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> <span class="st">"Party"</span>,</span>
-<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> <span class="st">"%"</span>,</span>
-<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a>    aggfunc <span class="op">=</span> np.<span class="bu">sum</span>,</span>
-<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a>    fill_value <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a>elections_pivot.head(<span class="dv">10</span>)</span>
-<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
-<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
-<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-220"><a href="#cb17-220" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb17-221"><a href="#cb17-221" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb17-222"><a href="#cb17-222" aria-hidden="true" tabindex="-1"></a>elections_pivot <span class="op">=</span> filtered_parties.pivot_table(</span>
+<span id="cb17-223"><a href="#cb17-223" aria-hidden="true" tabindex="-1"></a>    index <span class="op">=</span> <span class="st">"Year"</span>,</span>
+<span id="cb17-224"><a href="#cb17-224" aria-hidden="true" tabindex="-1"></a>    columns <span class="op">=</span> <span class="st">"Party"</span>,</span>
+<span id="cb17-225"><a href="#cb17-225" aria-hidden="true" tabindex="-1"></a>    values <span class="op">=</span> <span class="st">"%"</span>,</span>
+<span id="cb17-226"><a href="#cb17-226" aria-hidden="true" tabindex="-1"></a>    aggfunc <span class="op">=</span> np.<span class="bu">sum</span>,</span>
+<span id="cb17-227"><a href="#cb17-227" aria-hidden="true" tabindex="-1"></a>    fill_value <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb17-228"><a href="#cb17-228" aria-hidden="true" tabindex="-1"></a>elections_pivot.head(<span class="dv">10</span>)</span>
+<span id="cb17-229"><a href="#cb17-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb17-230"><a href="#cb17-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-231"><a href="#cb17-231" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb17-232"><a href="#cb17-232" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Explanation&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb17-233"><a href="#cb17-233" aria-hidden="true" tabindex="-1"></a>&lt;br&gt;</span>
+<span id="cb17-234"><a href="#cb17-234" aria-hidden="true" tabindex="-1"></a>&lt;span style="color:blue"&gt;</span>
+<span id="cb17-235"><a href="#cb17-235" aria-hidden="true" tabindex="-1"></a>&lt;div&gt;</span>
+<span id="cb17-236"><a href="#cb17-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-237"><a href="#cb17-237" aria-hidden="true" tabindex="-1"></a>First thing to notice is that the columns are values of the **Party** column! This tells us that what we see is a **pivot table**. </span>
 <span id="cb17-238"><a href="#cb17-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a>First thing to notice is that the columns are values of the **Party** column! This tells us that what we see is a **pivot table**. </span>
-<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Use the <span class="in">`.pivot_table()`</span> function on <span class="in">`filtered_parties`</span></span>
-<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`index = "Year"`</span> and <span class="in">`columns = "Party"`</span>, saying that the unique values of **Year** should make up the row indices, and the unique values of **Party** should make up the columns.</span>
-<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`values = "%"`</span> indicates that we populate the cells with the **%** values for each combination of **Year, Party**</span>
-<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`aggfunc = np.sum`</span> describes how to aggregate the values in a cell</span>
-<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`fill_value = 0`</span> says to impute 0 in case there is no **%** value for a specific **Year, Party** combination</span>
-<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>           </span>
-<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
-<span id="cb17-248"><a href="#cb17-248" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
-<span id="cb17-249"><a href="#cb17-249" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb17-239"><a href="#cb17-239" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Use the <span class="in">`.pivot_table()`</span> function on <span class="in">`filtered_parties`</span></span>
+<span id="cb17-240"><a href="#cb17-240" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`index = "Year"`</span> and <span class="in">`columns = "Party"`</span>, saying that the unique values of **Year** should make up the row indices, and the unique values of **Party** should make up the columns.</span>
+<span id="cb17-241"><a href="#cb17-241" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`values = "%"`</span> indicates that we populate the cells with the **%** values for each combination of **Year, Party**</span>
+<span id="cb17-242"><a href="#cb17-242" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`aggfunc = np.sum`</span> describes how to aggregate the values in a cell</span>
+<span id="cb17-243"><a href="#cb17-243" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span><span class="in">`fill_value = 0`</span> says to impute 0 in case there is no **%** value for a specific **Year, Party** combination</span>
+<span id="cb17-244"><a href="#cb17-244" aria-hidden="true" tabindex="-1"></a>           </span>
+<span id="cb17-245"><a href="#cb17-245" aria-hidden="true" tabindex="-1"></a>&lt;/div&gt;</span>
+<span id="cb17-246"><a href="#cb17-246" aria-hidden="true" tabindex="-1"></a>&lt;/span&gt;</span>
+<span id="cb17-247"><a href="#cb17-247" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

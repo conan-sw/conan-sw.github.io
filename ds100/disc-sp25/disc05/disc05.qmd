@@ -16,6 +16,8 @@ format:
 jupyter: python3
 ---
 
+### [Link to Slides](https://docs.google.com/presentation/d/1tG01Vk5fFSLahguai93LRctNI-uOURD8spgM8RzMT-k/edit?usp=sharing)
+
 ## Logarithmic Transformations
 
 Ishani is a development economist interested in studying the relationship between literacy rates

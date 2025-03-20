@@ -16,6 +16,8 @@ format:
 jupyter: python3
 ---
 
+### [Link to Slides](https://docs.google.com/presentation/d/1LdGcAguKYiFmvtjMQjIOfr0NFSJWmFaAU-I7EqRWaug/edit?usp=sharing)
+
 ## Linear Algebra Fundamentals
 
 Linear algebra is what powers linear regression, logistic regression, and PCA (concepts that we will be studying in this course). This question aims to build an understanding of how matrix-vector operations work. 

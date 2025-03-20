@@ -16,6 +16,8 @@ format:
 jupyter: python3
 ---
 
+### [Link to Slides](https://docs.google.com/presentation/d/1S1pfolGsQU9k8VuZMThXjh3aLMQjFSJYx4-mvkTxYp8/edit?usp=sharing)
+
 ## Driving with a Constant Model
 
 Lillian is trying to use modeling to drive her car autonomously. To do this, she collects a lot

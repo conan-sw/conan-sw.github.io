@@ -16,6 +16,8 @@ format:
 jupyter: python3
 ---
 
+### [Link to Slides](https://docs.google.com/presentation/d/1juHg1jKsVhO4dPRu9xqz-XZ0LhqHRX59ziTh53htfk4/edit?usp=sharing)
+
 ## Regular Expressions
 
 Regular Expressions (RegEx for short) are an immensely powerful tool for parsing strings.

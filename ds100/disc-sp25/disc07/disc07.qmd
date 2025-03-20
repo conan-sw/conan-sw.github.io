@@ -48,7 +48,7 @@ Therefore, the gradient at the optimal values of $\theta_1, \theta_2$ is:
 \begin{align*}
 \nabla L &= \begin{bmatrix} \frac{\partial L}{\partial \theta_1} & \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1
 = \hat{\theta}_1, \theta_2 = \hat{\theta}_2}} \\
-&= [0, \text{undefined}]
+&= [0, \text{undefined}]^T
 \end{align*}
 
 ::: {.callout-note}
@@ -360,15 +360,16 @@ $$
 Which of the following scenarios strike you as unfair and why? You can choose more than
 one. There is no single right answer, but you must explain your reasoning.
 
-$\Box$ **A.** A homeowner those home is assessed at a higher price than it would sell for.
 
-$\Box$ **B.** A homeowner whose home is assessed at a lower price than it would sell for.
+<label><input type="checkbox" value=""><b>A.</b> A homeowner those home is assessed at a higher price than it would sell for.</label>
 
-$\Box$ **C.** An assessment process that systematically overvalues inexpensive properties and under-
-values expensive properties.
+<label><input type="checkbox" value=""><b>B.</b> A homeowner whose home is assessed at a lower price than it would sell for.</label>
 
-$\Box$ **D.** An assessment process that systematically undervalues inexpensive properties and over-
-values expensive properties.
+<label><input type="checkbox" value=""><b>C.</b> An assessment process that systematically overvalues inexpensive properties and under-values expensive properties.</label>
+
+<label><input type="checkbox" value=""><b>D.</b> An assessment process that systematically undervalues inexpensive properties and over-
+values expensive properties.</label>
+
 
 <details>
 <summary><b>Answer</b></summary>
@@ -394,7 +395,11 @@ also have no systematic unfairness.
 * Unfairness of the second type (scenarios C and D) is a form of statistical bias that
 varies as a function of y (the response variable).
 
-::: {.callout-note title="Points from Discussion"}
+::: {.callout-note title="Some comments/opinions from Discussion (not verbose)"}
+
+* All are unfair! Mismatch between predicted vs actual creates unfairness.
+* A, B are *not* unfair. It's inevitable that predicted $\neq$ actual. It becomes unfair when there is *systematic* overvaluing or undervaluing, which can negatively affect many people.
+* D is unfair because owners of undervalued inexpensive properties suffer from a smaller sale price, while owners of overvalued expensive properties can incur much more property tax.
 
 :::
 
@@ -422,10 +427,6 @@ undervalued?
 * Does a low RMSE necessarily mean a model’s predictions are more accurate?
 * Does a low RMSE necessarily mean a model’s predictions are more "fair"?
 * What is the difference between your answers to both questions?
-
-::: {.callout-note title="Points from Discussion"}
-
-:::
 
 </details>
 

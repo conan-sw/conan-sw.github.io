@@ -184,6 +184,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Models, OLS</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../disc07/disc07.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Gradient Descent, Feature Engineering, Housing</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -194,7 +200,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Pandas II, EDA</h2>
    
   <ul>
-  <li><a href="#dealing-with-missing-data" id="toc-dealing-with-missing-data" class="nav-link active" data-scroll-target="#dealing-with-missing-data"><span class="header-section-number">4.1</span> Dealing with Missing Data</a></li>
+  <li><a href="#link-to-slides" id="toc-link-to-slides" class="nav-link active" data-scroll-target="#link-to-slides"><span class="header-section-number">4.0.1</span> Link to Slides</a></li>
+  <li><a href="#dealing-with-missing-data" id="toc-dealing-with-missing-data" class="nav-link" data-scroll-target="#dealing-with-missing-data"><span class="header-section-number">4.1</span> Dealing with Missing Data</a></li>
   <li><a href="#pandas-eda-exam-prep-modeled-after-fa22-midterm-q1" id="toc-pandas-eda-exam-prep-modeled-after-fa22-midterm-q1" class="nav-link" data-scroll-target="#pandas-eda-exam-prep-modeled-after-fa22-midterm-q1"><span class="header-section-number">4.2</span> Pandas + EDA exam prep (modeled after Fa22 Midterm Q1)</a></li>
   </ul>
 </nav>
@@ -221,6 +228,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="link-to-slides" class="level3" data-number="4.0.1">
+<h3 data-number="4.0.1" class="anchored" data-anchor-id="link-to-slides"><span class="header-section-number">4.0.1</span> <a href="https://docs.google.com/presentation/d/1LAiLus5hmP8Zf3aXYhKrGfRhaufncixyx4dfwiEXMJ0/edit?usp=sharing">Link to Slides</a></h3>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -241,7 +250,7 @@ Clarifications from Discussion
 </ul>
 </div>
 </div>
-<div id="654ffb39" class="cell" data-execution_count="1">
+<div id="1313e5e7" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -250,6 +259,7 @@ Clarifications from Discussion
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
 <section id="dealing-with-missing-data" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="dealing-with-missing-data"><span class="header-section-number">4.1</span> Dealing with Missing Data</h2>
 <p>While exploring a Berkeley dataset (separate from <code>babynames</code>) with a million records, you realize that a portion of measurements in different fields are <code>NaN</code> values! You decide to impute these missing values before continuing your EDA. Given the empirical distribution of each of the below variables, determine how to solve the missing data problem. (Note that the data in these graphs are fictional).</p>
@@ -313,7 +323,7 @@ Clarifications from Discussion
 <p>It’s the annual Monopoly World Championship! The finalists: Shawn, Amanda, Neil, and Annie are playing Monopoly, a board game where players pay a price to buy properties, which can then generate income for them. Each property can be owned by only one player at a time. At the end of the game, the player with the most money wins.</p>
 <p>Shawn wants to figure out which properties are most worth buying. He creates a <code>DataFrame</code> income with data on the current game state, shown on the <strong>left</strong>. He also finds a <code>DataFrame</code> properties with data on Monopoly properties, shown on the <strong>right</strong>.</p>
 <p>Both tables have 28 rows. For brevity, only the first few rows of each <code>DataFrame</code> are shown.</p>
-<div id="eab7ad7f" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="2">
+<div id="c7478cf9" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First DataFrame: income</span></span>
@@ -394,7 +404,7 @@ Clarifications from Discussion
 <li><code>Property</code> is a property currently owned by the player, as a <strong>str</strong>.</li>
 <li><code>Income Generated</code> is the amount of income a player has earned from that property so far, as a <strong>str</strong>.</li>
 </ul>
-<div id="de3cdd6e" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="3">
+<div id="60d24e06" class="cell" data-jupyter="{&quot;source_hidden&quot;:true}" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Second DataFrame: properties</span></span>
@@ -508,7 +518,7 @@ Clarifications from Discussion
 <li><code>income.groupby("Player").size()</code></li>
 </ul>
 </details>
-<div id="cc6031d3" class="cell" data-execution_count="4">
+<div id="56d070fa" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>income.groupby(<span class="st">"Player"</span>).agg(pd.value_counts)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -557,7 +567,7 @@ Clarifications from Discussion
 </div>
 </div>
 </div>
-<div id="45c4341b" class="cell" data-execution_count="5">
+<div id="add87e76" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Player"</span>].value_counts()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -571,7 +581,7 @@ Annie     1
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="1249ea6f" class="cell" data-execution_count="6">
+<div id="41ec0444" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># income["Player", "Property"].groupby("Player").size()</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -590,7 +600,7 @@ Warning
 <p>The above code will error! Make sure to use <strong>double brackets</strong> when selecting columns.</p>
 </div>
 </div>
-<div id="6f5301e1" class="cell" data-execution_count="7">
+<div id="27707cd8" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>income.groupby(<span class="st">"Player"</span>)[[<span class="st">"Player"</span>]].count()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -635,7 +645,7 @@ Warning
 </div>
 <p><strong>(d)</strong> He now decides to calculate the amount of profit from each property. He wants to store this in a column called <code>Profit</code> in the income <code>DataFrame</code>. To do this, he first has to transform the Income Generated column to be of a <code>float</code> datatype.</p>
 <p><strong>Write one line</strong> of code to replace the old column with a new column, also called <code>Income Generated</code>, with the datatype modification described above. You may assume that each entry in <code>Income Generated</code> consists of a dollar sign ($) followed by a number, except for the <code>NaN</code> values.</p>
-<div id="6c3331aa" class="cell" data-execution_count="8">
+<div id="11d6ba55" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Income Generated"</span>] <span class="op">=</span> income[<span class="st">"Income Generated"</span>].<span class="bu">str</span>[<span class="dv">1</span>:].astype(<span class="bu">float</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -645,7 +655,7 @@ Warning
 <p><strong>Note:</strong> Profit is calculated by subtracting the purchase price from generated income.</p>
 <p><code>combined_df = income._____A_____(_______B_______)</code></p>
 <p><code>income["Profit"] = _______C_______</code></p>
-<div id="d7126298" class="cell" data-execution_count="9">
+<div id="2022e2ed" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> income.merge(properties, on <span class="op">=</span> <span class="st">"Property"</span>)</span>
@@ -653,7 +663,7 @@ Warning
 </details>
 </div>
 <p>Shawn realizes he’s lost more money than he’s made. To solve this problem, he begins by writing some <code>Pandas</code> code to merge the <code>Property Color</code> column into the <code>income</code> <code>DataFrame</code> and drops all rows with <code>NaN</code> values. He calls this <code>DataFrame</code> <code>merged_df</code>. Shown below are the first few rows.</p>
-<div id="fc5f94bd" class="cell" data-execution_count="10">
+<div id="86d9b80a" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.DataFrame({<span class="st">"Player"</span>: [<span class="st">"Shawn"</span>, <span class="st">"Amanda"</span>, <span class="st">"Neil"</span>, <span class="st">"Shawn"</span>, <span class="st">"Annie"</span>, <span class="st">"Amanda"</span>],</span>
@@ -735,7 +745,7 @@ Warning
 </div>
 <p>Shawn decides he will now only buy properties from a color group that he deems “profitable.” He deems a color group “profitable” if at least 50% of the properties in the group that are currently owned by players have made a positive (non-zero) profit for those players.</p>
 <p><strong>Fill in the following lines of code</strong> to help him display a <code>DataFrame</code> with a subset of the rows in <code>merged_df</code>: the rows with properties that belong to profitable color groups. Your solution may use fewer lines of code than we provide.</p>
-<div id="3ffd4b63" class="cell" data-execution_count="11">
+<div id="caa91953" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> func(group):</span>
@@ -1296,235 +1306,237 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> python3</span></span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
-<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Clarifications from Discussion</span></span>
-<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One way of determining whether a variable is **quantitative** or **qualitative ordinal** is to think about what the difference between levels indicate. </span>
-<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>The number of boba pearls in a cup is **quantitative** because we know the difference between 4 pearls and 5 pearls is objectively 1 pearl.</span>
-<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>The rating of a restaurant (out of 5) is **qualitative** because the numbers are determined rather arbitrarily. What is the difference between a 3 and a 4? Why can't the ratings be out of 10 instead of 5? Does that change anything?</span>
-<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The graph in 1b) uses KDE. Although the values look continuous, you can assume the modes of the distribution to be 0 and 100.</span>
-<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
-<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
-<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dealing with Missing Data</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">### [Link to Slides](https://docs.google.com/presentation/d/1LAiLus5hmP8Zf3aXYhKrGfRhaufncixyx4dfwiEXMJ0/edit?usp=sharing)</span></span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Clarifications from Discussion</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One way of determining whether a variable is **quantitative** or **qualitative ordinal** is to think about what the difference between levels indicate. </span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>The number of boba pearls in a cup is **quantitative** because we know the difference between 4 pearls and 5 pearls is objectively 1 pearl.</span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>The rating of a restaurant (out of 5) is **qualitative** because the numbers are determined rather arbitrarily. What is the difference between a 3 and a 4? Why can't the ratings be out of 10 instead of 5? Does that change anything?</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The graph in 1b) uses KDE. Although the values look continuous, you can assume the modes of the distribution to be 0 and 100.</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> warnings</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a>warnings.simplefilter(action<span class="op">=</span><span class="st">'ignore'</span>, category<span class="op">=</span><span class="pp">FutureWarning</span>)</span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>While exploring a Berkeley dataset (separate from <span class="in">`babynames`</span>) with a million records, you realize that a portion of measurements in different fields are <span class="in">`NaN`</span> values! You decide to impute these missing values before continuing your EDA. Given the empirical distribution of each of the below variables, determine how to solve the missing data problem. (Note that the data in these graphs are fictional).</span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Dealing with Missing Data</span></span>
 <span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>Suppose that you plot "cups of coffee sold at V&amp;A Cafe per day" versus "inches of rain per day" across a period of 2 months, shown below. V&amp;A Cafe is not missing any data, but 30% of the data in "inches of rain" are <span class="in">`NaN`</span> values that have been represented with "-2", an impossible amount of rain. Which of the following techniques would be **most** effective in solving the issue of missing data? (Select all that apply)</span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>While exploring a Berkeley dataset (separate from <span class="in">`babynames`</span>) with a million records, you realize that a portion of measurements in different fields are <span class="in">`NaN`</span> values! You decide to impute these missing values before continuing your EDA. Given the empirical distribution of each of the below variables, determine how to solve the missing data problem. (Note that the data in these graphs are fictional).</span>
 <span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a><span class="al">![Question 1a](images/2a.png)</span></span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>Suppose that you plot "cups of coffee sold at V&amp;A Cafe per day" versus "inches of rain per day" across a period of 2 months, shown below. V&amp;A Cafe is not missing any data, but 30% of the data in "inches of rain" are <span class="in">`NaN`</span> values that have been represented with "-2", an impossible amount of rain. Which of the following techniques would be **most** effective in solving the issue of missing data? (Select all that apply)</span>
 <span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a>**A.** Using the mean to impute the missing values</span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a><span class="al">![Question 1a](images/2a.png)</span></span>
 <span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>**B.** Using the mode(s) to impute the missing values</span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a>**A.** Using the mean to impute the missing values</span>
 <span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>**C.** Using the median to impute the missing values</span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a>**B.** Using the mode(s) to impute the missing values</span>
 <span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>**D.** Dropping any rows with missing values</span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a>**C.** Using the median to impute the missing values</span>
 <span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>**E.** Imputing missing values through interpolation</span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a>**D.** Dropping any rows with missing values</span>
 <span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>**Correct Options: A, C, E**</span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a>**E.** Imputing missing values through interpolation</span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb13-58"><a href="#cb13-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb13-59"><a href="#cb13-59" aria-hidden="true" tabindex="-1"></a>**Correct Options: A, C, E**</span>
 <span id="cb13-60"><a href="#cb13-60" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>Suppose we examine the amount of money lost/gained in a game of poker and see that this variable is missing 1% of its values. Its distribution, shown below, is constructed from all valid (non-<span class="in">`NaN`</span>) values. Which of the following techniques would be **reasonably** effective in solving this issue of missing data? (Select all that apply)</span>
+<span id="cb13-61"><a href="#cb13-61" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb13-62"><a href="#cb13-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a><span class="al">![Question 1b graph](images/distro2.png)</span></span>
+<span id="cb13-63"><a href="#cb13-63" aria-hidden="true" tabindex="-1"></a>Suppose we examine the amount of money lost/gained in a game of poker and see that this variable is missing 1% of its values. Its distribution, shown below, is constructed from all valid (non-<span class="in">`NaN`</span>) values. Which of the following techniques would be **reasonably** effective in solving this issue of missing data? (Select all that apply)</span>
 <span id="cb13-64"><a href="#cb13-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a>**A.** Using the mean to impute the missing values</span>
+<span id="cb13-65"><a href="#cb13-65" aria-hidden="true" tabindex="-1"></a><span class="al">![Question 1b graph](images/distro2.png)</span></span>
 <span id="cb13-66"><a href="#cb13-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>**B.** Using the mode(s) to impute the missing values</span>
+<span id="cb13-67"><a href="#cb13-67" aria-hidden="true" tabindex="-1"></a>**A.** Using the mean to impute the missing values</span>
 <span id="cb13-68"><a href="#cb13-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>**C.** Using the median to impute the missing values</span>
+<span id="cb13-69"><a href="#cb13-69" aria-hidden="true" tabindex="-1"></a>**B.** Using the mode(s) to impute the missing values</span>
 <span id="cb13-70"><a href="#cb13-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>**D.** Dropping any rows with missing values</span>
+<span id="cb13-71"><a href="#cb13-71" aria-hidden="true" tabindex="-1"></a>**C.** Using the median to impute the missing values</span>
 <span id="cb13-72"><a href="#cb13-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>**E.** Imputing missing values through interpolation</span>
+<span id="cb13-73"><a href="#cb13-73" aria-hidden="true" tabindex="-1"></a>**D.** Dropping any rows with missing values</span>
 <span id="cb13-74"><a href="#cb13-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>**Correct Options: B, D**</span>
+<span id="cb13-75"><a href="#cb13-75" aria-hidden="true" tabindex="-1"></a>**E.** Imputing missing values through interpolation</span>
+<span id="cb13-76"><a href="#cb13-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-77"><a href="#cb13-77" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb13-78"><a href="#cb13-78" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb13-79"><a href="#cb13-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb13-80"><a href="#cb13-80" aria-hidden="true" tabindex="-1"></a>**Correct Options: B, D**</span>
 <span id="cb13-81"><a href="#cb13-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>Suppose that the relationship between students’ time asleep (in hours) and the amount of extra credit they received in Data 100 is shown below. There is no missing data for "hours asleep", but 0.5% of "extra credit score" is missing. Like in part a, the missing NaN values were replaced with an impossible score of -0.002, making the graph look funky. Which of the following techniques would be **most** effective in solving this issue of missing data? (Select all that apply)</span>
+<span id="cb13-82"><a href="#cb13-82" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb13-83"><a href="#cb13-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a><span class="al">![Question 1c graph](images/2c.jpeg)</span></span>
+<span id="cb13-84"><a href="#cb13-84" aria-hidden="true" tabindex="-1"></a>Suppose that the relationship between students’ time asleep (in hours) and the amount of extra credit they received in Data 100 is shown below. There is no missing data for "hours asleep", but 0.5% of "extra credit score" is missing. Like in part a, the missing NaN values were replaced with an impossible score of -0.002, making the graph look funky. Which of the following techniques would be **most** effective in solving this issue of missing data? (Select all that apply)</span>
 <span id="cb13-85"><a href="#cb13-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a>**A.** Using the mean to impute the missing values</span>
+<span id="cb13-86"><a href="#cb13-86" aria-hidden="true" tabindex="-1"></a><span class="al">![Question 1c graph](images/2c.jpeg)</span></span>
 <span id="cb13-87"><a href="#cb13-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>**B.** Using the mode(s) to impute the missing values</span>
+<span id="cb13-88"><a href="#cb13-88" aria-hidden="true" tabindex="-1"></a>**A.** Using the mean to impute the missing values</span>
 <span id="cb13-89"><a href="#cb13-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>**C.** Using the median to impute the missing values</span>
+<span id="cb13-90"><a href="#cb13-90" aria-hidden="true" tabindex="-1"></a>**B.** Using the mode(s) to impute the missing values</span>
 <span id="cb13-91"><a href="#cb13-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>**D.** Dropping any rows with missing values</span>
+<span id="cb13-92"><a href="#cb13-92" aria-hidden="true" tabindex="-1"></a>**C.** Using the median to impute the missing values</span>
 <span id="cb13-93"><a href="#cb13-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>**E.** Imputing missing values through interpolation</span>
+<span id="cb13-94"><a href="#cb13-94" aria-hidden="true" tabindex="-1"></a>**D.** Dropping any rows with missing values</span>
 <span id="cb13-95"><a href="#cb13-95" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>**Correct Options: D, E**</span>
+<span id="cb13-96"><a href="#cb13-96" aria-hidden="true" tabindex="-1"></a>**E.** Imputing missing values through interpolation</span>
+<span id="cb13-97"><a href="#cb13-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-98"><a href="#cb13-98" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb13-99"><a href="#cb13-99" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
 <span id="cb13-100"><a href="#cb13-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb13-101"><a href="#cb13-101" aria-hidden="true" tabindex="-1"></a>**Correct Options: D, E**</span>
 <span id="cb13-102"><a href="#cb13-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pandas + EDA exam prep (modeled after Fa22 Midterm Q1)</span></span>
+<span id="cb13-103"><a href="#cb13-103" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb13-104"><a href="#cb13-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a>It’s the annual Monopoly World Championship! The finalists: Shawn, Amanda, Neil, and Annie are playing Monopoly, a board game where players pay a price to buy properties, which can then generate income for them. Each property can be owned by only one player at a time. At the end of the game, the player with the most money wins.</span>
-<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a>Shawn wants to figure out which properties are most worth buying. He creates a <span class="in">`DataFrame`</span> income with data on the current game state, shown on the **left**. He also finds a `DataFrame` properties with data on Monopoly properties, shown on the **right**.</span>
+<span id="cb13-105"><a href="#cb13-105" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pandas + EDA exam prep (modeled after Fa22 Midterm Q1)</span></span>
+<span id="cb13-106"><a href="#cb13-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-107"><a href="#cb13-107" aria-hidden="true" tabindex="-1"></a>It’s the annual Monopoly World Championship! The finalists: Shawn, Amanda, Neil, and Annie are playing Monopoly, a board game where players pay a price to buy properties, which can then generate income for them. Each property can be owned by only one player at a time. At the end of the game, the player with the most money wins.</span>
 <span id="cb13-108"><a href="#cb13-108" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>Both tables have 28 rows. For brevity, only the first few rows of each <span class="in">`DataFrame`</span> are shown.</span>
-<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-113"><a href="#cb13-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-114"><a href="#cb13-114" aria-hidden="true" tabindex="-1"></a><span class="co">#| colab: {base_uri: https://localhost:8080/, height: 286}</span></span>
-<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a><span class="co">#| jupyter: {source_hidden: true}</span></span>
-<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a><span class="co"># First DataFrame: income</span></span>
-<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a>data_income <span class="op">=</span> {</span>
-<span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Player'</span>: [<span class="st">'Shawn'</span>, <span class="st">'Amanda'</span>, <span class="st">'Neil'</span>, np.nan, <span class="st">'Shawn'</span>, <span class="st">'Annie'</span>, <span class="st">'Amanda'</span>],</span>
-<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Property'</span>: [<span class="st">'Boardwalk'</span>, <span class="st">'Park Place'</span>, <span class="st">'Marvin Gardens'</span>, <span class="st">'Kentucky Ave'</span>, <span class="st">'Pennsylvania Ave'</span>, <span class="st">'Oriental Ave'</span>, <span class="st">'Baltic Ave'</span>],</span>
-<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Income Generated'</span>: [<span class="st">'$425'</span>, <span class="st">'$375'</span>, <span class="st">'$200'</span>, np.nan, <span class="st">'$150'</span>, <span class="st">'$50'</span>, <span class="st">'$60'</span>]</span>
-<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a>income <span class="op">=</span> pd.DataFrame(data_income)</span>
-<span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a>income</span>
-<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a><span class="in">`income`</span></span>
+<span id="cb13-109"><a href="#cb13-109" aria-hidden="true" tabindex="-1"></a>Shawn wants to figure out which properties are most worth buying. He creates a <span class="in">`DataFrame`</span> income with data on the current game state, shown on the **left**. He also finds a `DataFrame` properties with data on Monopoly properties, shown on the **right**.</span>
+<span id="cb13-110"><a href="#cb13-110" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-111"><a href="#cb13-111" aria-hidden="true" tabindex="-1"></a>Both tables have 28 rows. For brevity, only the first few rows of each <span class="in">`DataFrame`</span> are shown.</span>
+<span id="cb13-112"><a href="#cb13-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-115"><a href="#cb13-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-116"><a href="#cb13-116" aria-hidden="true" tabindex="-1"></a><span class="co">#| colab: {base_uri: https://localhost:8080/, height: 286}</span></span>
+<span id="cb13-117"><a href="#cb13-117" aria-hidden="true" tabindex="-1"></a><span class="co">#| jupyter: {source_hidden: true}</span></span>
+<span id="cb13-118"><a href="#cb13-118" aria-hidden="true" tabindex="-1"></a><span class="co"># First DataFrame: income</span></span>
+<span id="cb13-119"><a href="#cb13-119" aria-hidden="true" tabindex="-1"></a>data_income <span class="op">=</span> {</span>
+<span id="cb13-120"><a href="#cb13-120" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Player'</span>: [<span class="st">'Shawn'</span>, <span class="st">'Amanda'</span>, <span class="st">'Neil'</span>, np.nan, <span class="st">'Shawn'</span>, <span class="st">'Annie'</span>, <span class="st">'Amanda'</span>],</span>
+<span id="cb13-121"><a href="#cb13-121" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Property'</span>: [<span class="st">'Boardwalk'</span>, <span class="st">'Park Place'</span>, <span class="st">'Marvin Gardens'</span>, <span class="st">'Kentucky Ave'</span>, <span class="st">'Pennsylvania Ave'</span>, <span class="st">'Oriental Ave'</span>, <span class="st">'Baltic Ave'</span>],</span>
+<span id="cb13-122"><a href="#cb13-122" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Income Generated'</span>: [<span class="st">'$425'</span>, <span class="st">'$375'</span>, <span class="st">'$200'</span>, np.nan, <span class="st">'$150'</span>, <span class="st">'$50'</span>, <span class="st">'$60'</span>]</span>
+<span id="cb13-123"><a href="#cb13-123" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-124"><a href="#cb13-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-125"><a href="#cb13-125" aria-hidden="true" tabindex="-1"></a>income <span class="op">=</span> pd.DataFrame(data_income)</span>
+<span id="cb13-126"><a href="#cb13-126" aria-hidden="true" tabindex="-1"></a>income</span>
+<span id="cb13-127"><a href="#cb13-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-128"><a href="#cb13-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Player`</span> is the name of the player, as a **str**.</span>
-<span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Property`</span> is a property currently owned by the player, as a **str**.</span>
-<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Income Generated`</span> is the amount of income a player has earned from that property so far, as a **str**.</span>
-<span id="cb13-132"><a href="#cb13-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-135"><a href="#cb13-135" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-136"><a href="#cb13-136" aria-hidden="true" tabindex="-1"></a><span class="co">#| colab: {base_uri: https://localhost:8080/, height: 303}</span></span>
-<span id="cb13-137"><a href="#cb13-137" aria-hidden="true" tabindex="-1"></a><span class="co">#| jupyter: {source_hidden: true}</span></span>
-<span id="cb13-138"><a href="#cb13-138" aria-hidden="true" tabindex="-1"></a><span class="co"># Second DataFrame: properties</span></span>
-<span id="cb13-139"><a href="#cb13-139" aria-hidden="true" tabindex="-1"></a>data_properties <span class="op">=</span> {</span>
-<span id="cb13-140"><a href="#cb13-140" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Property'</span>: [<span class="st">'Park Place'</span>, <span class="st">'Oriental Ave'</span>, <span class="st">'Vermont Ave'</span>, <span class="st">'Pacific Ave'</span>, <span class="st">'Boardwalk'</span>, <span class="st">'Illinois Ave'</span>, <span class="st">'Atlantic Ave'</span>],</span>
-<span id="cb13-141"><a href="#cb13-141" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Property Color'</span>: [<span class="st">'Dark Blue'</span>, <span class="st">'Light Blue'</span>, <span class="st">'Light Blue'</span>, <span class="st">'Green'</span>, <span class="st">'Dark Blue'</span>, <span class="st">'Red'</span>, <span class="st">'Yellow'</span>],</span>
-<span id="cb13-142"><a href="#cb13-142" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Purchase Price'</span>: [<span class="fl">350.0</span>, <span class="fl">100.0</span>, <span class="fl">100.0</span>, <span class="fl">300.0</span>, <span class="fl">400.0</span>, <span class="fl">240.0</span>, <span class="fl">260.0</span>]</span>
-<span id="cb13-143"><a href="#cb13-143" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb13-144"><a href="#cb13-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a>properties <span class="op">=</span> pd.DataFrame(data_properties)</span>
-<span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a>properties</span>
-<span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-148"><a href="#cb13-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a><span class="in">`properties`</span></span>
+<span id="cb13-129"><a href="#cb13-129" aria-hidden="true" tabindex="-1"></a><span class="in">`income`</span></span>
+<span id="cb13-130"><a href="#cb13-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-131"><a href="#cb13-131" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Player`</span> is the name of the player, as a **str**.</span>
+<span id="cb13-132"><a href="#cb13-132" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Property`</span> is a property currently owned by the player, as a **str**.</span>
+<span id="cb13-133"><a href="#cb13-133" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Income Generated`</span> is the amount of income a player has earned from that property so far, as a **str**.</span>
+<span id="cb13-134"><a href="#cb13-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-137"><a href="#cb13-137" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-138"><a href="#cb13-138" aria-hidden="true" tabindex="-1"></a><span class="co">#| colab: {base_uri: https://localhost:8080/, height: 303}</span></span>
+<span id="cb13-139"><a href="#cb13-139" aria-hidden="true" tabindex="-1"></a><span class="co">#| jupyter: {source_hidden: true}</span></span>
+<span id="cb13-140"><a href="#cb13-140" aria-hidden="true" tabindex="-1"></a><span class="co"># Second DataFrame: properties</span></span>
+<span id="cb13-141"><a href="#cb13-141" aria-hidden="true" tabindex="-1"></a>data_properties <span class="op">=</span> {</span>
+<span id="cb13-142"><a href="#cb13-142" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Property'</span>: [<span class="st">'Park Place'</span>, <span class="st">'Oriental Ave'</span>, <span class="st">'Vermont Ave'</span>, <span class="st">'Pacific Ave'</span>, <span class="st">'Boardwalk'</span>, <span class="st">'Illinois Ave'</span>, <span class="st">'Atlantic Ave'</span>],</span>
+<span id="cb13-143"><a href="#cb13-143" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Property Color'</span>: [<span class="st">'Dark Blue'</span>, <span class="st">'Light Blue'</span>, <span class="st">'Light Blue'</span>, <span class="st">'Green'</span>, <span class="st">'Dark Blue'</span>, <span class="st">'Red'</span>, <span class="st">'Yellow'</span>],</span>
+<span id="cb13-144"><a href="#cb13-144" aria-hidden="true" tabindex="-1"></a>    <span class="st">'Purchase Price'</span>: [<span class="fl">350.0</span>, <span class="fl">100.0</span>, <span class="fl">100.0</span>, <span class="fl">300.0</span>, <span class="fl">400.0</span>, <span class="fl">240.0</span>, <span class="fl">260.0</span>]</span>
+<span id="cb13-145"><a href="#cb13-145" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb13-146"><a href="#cb13-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-147"><a href="#cb13-147" aria-hidden="true" tabindex="-1"></a>properties <span class="op">=</span> pd.DataFrame(data_properties)</span>
+<span id="cb13-148"><a href="#cb13-148" aria-hidden="true" tabindex="-1"></a>properties</span>
+<span id="cb13-149"><a href="#cb13-149" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-150"><a href="#cb13-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Property`</span> is the name of the property, as a **str**. There are 28 unique properties.</span>
-<span id="cb13-152"><a href="#cb13-152" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Property Color`</span> is a color group that the property belongs to, as a **str**. There are 10 unique color groups, and each property belongs to a single group.</span>
-<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Purchase Price`</span> is the price to buy the property, as a **float**.</span>
-<span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a>**Note:** For the properties that are not currently owned by any player, the <span class="in">`Player`</span> and <span class="in">`Income Generated`</span> columns in the <span class="in">`income`</span> table have a <span class="in">`NaN`</span> value.</span>
+<span id="cb13-151"><a href="#cb13-151" aria-hidden="true" tabindex="-1"></a><span class="in">`properties`</span></span>
+<span id="cb13-152"><a href="#cb13-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-153"><a href="#cb13-153" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Property`</span> is the name of the property, as a **str**. There are 28 unique properties.</span>
+<span id="cb13-154"><a href="#cb13-154" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Property Color`</span> is a color group that the property belongs to, as a **str**. There are 10 unique color groups, and each property belongs to a single group.</span>
+<span id="cb13-155"><a href="#cb13-155" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`Purchase Price`</span> is the price to buy the property, as a **float**.</span>
 <span id="cb13-156"><a href="#cb13-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a>**(a)** What is the granularity of the <span class="in">`income`</span> table?</span>
+<span id="cb13-157"><a href="#cb13-157" aria-hidden="true" tabindex="-1"></a>**Note:** For the properties that are not currently owned by any player, the <span class="in">`Player`</span> and <span class="in">`Income Generated`</span> columns in the <span class="in">`income`</span> table have a <span class="in">`NaN`</span> value.</span>
 <span id="cb13-158"><a href="#cb13-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a>    &lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;&lt;br&gt;</span>
-<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a>**Property**</span>
-<span id="cb13-163"><a href="#cb13-163" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb13-164"><a href="#cb13-164" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Each unique property has its own row</span>
-<span id="cb13-165"><a href="#cb13-165" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Notice how one player can have own multiple properties and can appear in multiple rows! This tells us that the granularity of this table is not **Player**.</span>
-<span id="cb13-166"><a href="#cb13-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-167"><a href="#cb13-167" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb13-159"><a href="#cb13-159" aria-hidden="true" tabindex="-1"></a>**(a)** What is the granularity of the <span class="in">`income`</span> table?</span>
+<span id="cb13-160"><a href="#cb13-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-161"><a href="#cb13-161" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb13-162"><a href="#cb13-162" aria-hidden="true" tabindex="-1"></a>    &lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;&lt;br&gt;</span>
+<span id="cb13-163"><a href="#cb13-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-164"><a href="#cb13-164" aria-hidden="true" tabindex="-1"></a>**Property**</span>
+<span id="cb13-165"><a href="#cb13-165" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-166"><a href="#cb13-166" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Each unique property has its own row</span>
+<span id="cb13-167"><a href="#cb13-167" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Notice how one player can have own multiple properties and can appear in multiple rows! This tells us that the granularity of this table is not **Player**.</span>
 <span id="cb13-168"><a href="#cb13-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-169"><a href="#cb13-169" aria-hidden="true" tabindex="-1"></a>**(b)** Consider the <span class="in">`Player`</span> and <span class="in">`Purchase Price`</span> variables. What type of variable is each one? (quantitative, qualitative nominal, qualitative ordinal)</span>
+<span id="cb13-169"><a href="#cb13-169" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb13-170"><a href="#cb13-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-171"><a href="#cb13-171" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb13-172"><a href="#cb13-172" aria-hidden="true" tabindex="-1"></a>    &lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-174"><a href="#cb13-174" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Player**: Qualitative nominal</span>
-<span id="cb13-175"><a href="#cb13-175" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Purchase Price**: Quantitative</span>
-<span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-177"><a href="#cb13-177" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb13-171"><a href="#cb13-171" aria-hidden="true" tabindex="-1"></a>**(b)** Consider the <span class="in">`Player`</span> and <span class="in">`Purchase Price`</span> variables. What type of variable is each one? (quantitative, qualitative nominal, qualitative ordinal)</span>
+<span id="cb13-172"><a href="#cb13-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-173"><a href="#cb13-173" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb13-174"><a href="#cb13-174" aria-hidden="true" tabindex="-1"></a>    &lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb13-175"><a href="#cb13-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-176"><a href="#cb13-176" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Player**: Qualitative nominal</span>
+<span id="cb13-177"><a href="#cb13-177" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Purchase Price**: Quantitative</span>
 <span id="cb13-178"><a href="#cb13-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-179"><a href="#cb13-179" aria-hidden="true" tabindex="-1"></a>**(c)** Which of the following line(s) of code successfully returns a `Series` with the number of properties each player owns? **Select all that apply**.</span>
+<span id="cb13-179"><a href="#cb13-179" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
 <span id="cb13-180"><a href="#cb13-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-181"><a href="#cb13-181" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb13-182"><a href="#cb13-182" aria-hidden="true" tabindex="-1"></a>    &lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb13-183"><a href="#cb13-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-184"><a href="#cb13-184" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`income["Player"].value_counts()`</span></span>
-<span id="cb13-185"><a href="#cb13-185" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`income.groupby("Player").size()`</span></span>
-<span id="cb13-186"><a href="#cb13-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-187"><a href="#cb13-187" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb13-181"><a href="#cb13-181" aria-hidden="true" tabindex="-1"></a>**(c)** Which of the following line(s) of code successfully returns a `Series` with the number of properties each player owns? **Select all that apply**.</span>
+<span id="cb13-182"><a href="#cb13-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-183"><a href="#cb13-183" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb13-184"><a href="#cb13-184" aria-hidden="true" tabindex="-1"></a>    &lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb13-185"><a href="#cb13-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-186"><a href="#cb13-186" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`income["Player"].value_counts()`</span></span>
+<span id="cb13-187"><a href="#cb13-187" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`income.groupby("Player").size()`</span></span>
 <span id="cb13-188"><a href="#cb13-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-191"><a href="#cb13-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-192"><a href="#cb13-192" aria-hidden="true" tabindex="-1"></a>income.groupby(<span class="st">"Player"</span>).agg(pd.value_counts)</span>
-<span id="cb13-193"><a href="#cb13-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-194"><a href="#cb13-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-197"><a href="#cb13-197" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-198"><a href="#cb13-198" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Player"</span>].value_counts()</span>
-<span id="cb13-199"><a href="#cb13-199" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-200"><a href="#cb13-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-203"><a href="#cb13-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-204"><a href="#cb13-204" aria-hidden="true" tabindex="-1"></a><span class="co"># income["Player", "Property"].groupby("Player").size()</span></span>
-<span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
-<span id="cb13-208"><a href="#cb13-208" aria-hidden="true" tabindex="-1"></a>The above code will error! Make sure to use **double brackets** when selecting columns.</span>
-<span id="cb13-209"><a href="#cb13-209" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb13-210"><a href="#cb13-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-213"><a href="#cb13-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-214"><a href="#cb13-214" aria-hidden="true" tabindex="-1"></a>income.groupby(<span class="st">"Player"</span>)[[<span class="st">"Player"</span>]].count()</span>
-<span id="cb13-215"><a href="#cb13-215" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-216"><a href="#cb13-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-217"><a href="#cb13-217" aria-hidden="true" tabindex="-1"></a>**(d)** He now decides to calculate the amount of profit from each property. He wants to store this in a column called <span class="in">`Profit`</span> in the income <span class="in">`DataFrame`</span>. To do this, he first has to transform the Income Generated column to be of a <span class="in">`float`</span> datatype. </span>
+<span id="cb13-189"><a href="#cb13-189" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb13-190"><a href="#cb13-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-193"><a href="#cb13-193" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-194"><a href="#cb13-194" aria-hidden="true" tabindex="-1"></a>income.groupby(<span class="st">"Player"</span>).agg(pd.value_counts)</span>
+<span id="cb13-195"><a href="#cb13-195" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-196"><a href="#cb13-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-199"><a href="#cb13-199" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-200"><a href="#cb13-200" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Player"</span>].value_counts()</span>
+<span id="cb13-201"><a href="#cb13-201" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-202"><a href="#cb13-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-205"><a href="#cb13-205" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-206"><a href="#cb13-206" aria-hidden="true" tabindex="-1"></a><span class="co"># income["Player", "Property"].groupby("Player").size()</span></span>
+<span id="cb13-207"><a href="#cb13-207" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-208"><a href="#cb13-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-209"><a href="#cb13-209" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning}</span>
+<span id="cb13-210"><a href="#cb13-210" aria-hidden="true" tabindex="-1"></a>The above code will error! Make sure to use **double brackets** when selecting columns.</span>
+<span id="cb13-211"><a href="#cb13-211" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb13-212"><a href="#cb13-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-215"><a href="#cb13-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-216"><a href="#cb13-216" aria-hidden="true" tabindex="-1"></a>income.groupby(<span class="st">"Player"</span>)[[<span class="st">"Player"</span>]].count()</span>
+<span id="cb13-217"><a href="#cb13-217" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-218"><a href="#cb13-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a>**Write one line** of code to replace the old column with a new column, also called <span class="in">`Income Generated`</span>, with the datatype modification described above. You may assume that each entry in <span class="in">`Income Generated`</span> consists of a dollar sign ($) followed by a number, except for the <span class="in">`NaN`</span> values.</span>
+<span id="cb13-219"><a href="#cb13-219" aria-hidden="true" tabindex="-1"></a>**(d)** He now decides to calculate the amount of profit from each property. He wants to store this in a column called <span class="in">`Profit`</span> in the income <span class="in">`DataFrame`</span>. To do this, he first has to transform the Income Generated column to be of a <span class="in">`float`</span> datatype. </span>
 <span id="cb13-220"><a href="#cb13-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-223"><a href="#cb13-223" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-224"><a href="#cb13-224" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Income Generated"</span>] <span class="op">=</span> income[<span class="st">"Income Generated"</span>].<span class="bu">str</span>[<span class="dv">1</span>:].astype(<span class="bu">float</span>)</span>
-<span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-226"><a href="#cb13-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-227"><a href="#cb13-227" aria-hidden="true" tabindex="-1"></a>**(e)** Assuming that the answer to (d) is correct, let’s add a <span class="in">`Profit`</span> column to the <span class="in">`income`</span> <span class="in">`DataFrame`</span>. Fill in the following blanks to do this, and please add arguments to function class as you see appropriate.</span>
+<span id="cb13-221"><a href="#cb13-221" aria-hidden="true" tabindex="-1"></a>**Write one line** of code to replace the old column with a new column, also called <span class="in">`Income Generated`</span>, with the datatype modification described above. You may assume that each entry in <span class="in">`Income Generated`</span> consists of a dollar sign ($) followed by a number, except for the <span class="in">`NaN`</span> values.</span>
+<span id="cb13-222"><a href="#cb13-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-225"><a href="#cb13-225" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-226"><a href="#cb13-226" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Income Generated"</span>] <span class="op">=</span> income[<span class="st">"Income Generated"</span>].<span class="bu">str</span>[<span class="dv">1</span>:].astype(<span class="bu">float</span>)</span>
+<span id="cb13-227"><a href="#cb13-227" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-228"><a href="#cb13-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-229"><a href="#cb13-229" aria-hidden="true" tabindex="-1"></a>**Note:** Profit is calculated by subtracting the purchase price from generated income.</span>
+<span id="cb13-229"><a href="#cb13-229" aria-hidden="true" tabindex="-1"></a>**(e)** Assuming that the answer to (d) is correct, let’s add a <span class="in">`Profit`</span> column to the <span class="in">`income`</span> <span class="in">`DataFrame`</span>. Fill in the following blanks to do this, and please add arguments to function class as you see appropriate.</span>
 <span id="cb13-230"><a href="#cb13-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a><span class="in">`combined_df = income._____A_____(_______B_______)`</span></span>
+<span id="cb13-231"><a href="#cb13-231" aria-hidden="true" tabindex="-1"></a>**Note:** Profit is calculated by subtracting the purchase price from generated income.</span>
 <span id="cb13-232"><a href="#cb13-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-233"><a href="#cb13-233" aria-hidden="true" tabindex="-1"></a><span class="in">`income["Profit"] = _______C_______`</span></span>
+<span id="cb13-233"><a href="#cb13-233" aria-hidden="true" tabindex="-1"></a><span class="in">`combined_df = income._____A_____(_______B_______)`</span></span>
 <span id="cb13-234"><a href="#cb13-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-237"><a href="#cb13-237" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-238"><a href="#cb13-238" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> income.merge(properties, on <span class="op">=</span> <span class="st">"Property"</span>)</span>
-<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Profit"</span>] <span class="op">=</span> combined_df[<span class="st">"Income Generated"</span>] <span class="op">-</span> combined_df[<span class="st">"Purchase Price"</span>]</span>
-<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-241"><a href="#cb13-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-242"><a href="#cb13-242" aria-hidden="true" tabindex="-1"></a>Shawn realizes he’s lost more money than he’s made. To solve this problem, he begins by writing some <span class="in">`Pandas`</span> code to merge the <span class="in">`Property Color`</span> column into the <span class="in">`income`</span> <span class="in">`DataFrame`</span> and drops all rows with <span class="in">`NaN`</span> values. He calls this <span class="in">`DataFrame`</span> <span class="in">`merged_df`</span>. Shown below are the first few rows.</span>
+<span id="cb13-235"><a href="#cb13-235" aria-hidden="true" tabindex="-1"></a><span class="in">`income["Profit"] = _______C_______`</span></span>
+<span id="cb13-236"><a href="#cb13-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-239"><a href="#cb13-239" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-240"><a href="#cb13-240" aria-hidden="true" tabindex="-1"></a>combined_df <span class="op">=</span> income.merge(properties, on <span class="op">=</span> <span class="st">"Property"</span>)</span>
+<span id="cb13-241"><a href="#cb13-241" aria-hidden="true" tabindex="-1"></a>income[<span class="st">"Profit"</span>] <span class="op">=</span> combined_df[<span class="st">"Income Generated"</span>] <span class="op">-</span> combined_df[<span class="st">"Purchase Price"</span>]</span>
+<span id="cb13-242"><a href="#cb13-242" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-243"><a href="#cb13-243" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-246"><a href="#cb13-246" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-247"><a href="#cb13-247" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.DataFrame({<span class="st">"Player"</span>: [<span class="st">"Shawn"</span>, <span class="st">"Amanda"</span>, <span class="st">"Neil"</span>, <span class="st">"Shawn"</span>, <span class="st">"Annie"</span>, <span class="st">"Amanda"</span>],</span>
-<span id="cb13-248"><a href="#cb13-248" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Property"</span>: [<span class="st">"Boardwalk"</span>, <span class="st">"Park Place"</span>, <span class="st">"Marvin Gardens"</span>, <span class="st">"Pennsylvania Ave"</span>, <span class="st">"Oriental Ave"</span>, <span class="st">"Baltic Ave"</span>],</span>
-<span id="cb13-249"><a href="#cb13-249" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Income Generated"</span>: [<span class="fl">425.</span>, <span class="fl">375.</span>, <span class="fl">200.</span>, <span class="fl">150.</span>, <span class="fl">50.</span>, <span class="fl">60.</span>],</span>
-<span id="cb13-250"><a href="#cb13-250" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Profit"</span>: [<span class="op">-</span><span class="fl">25.</span>, <span class="fl">25.</span>, <span class="fl">50.</span>, <span class="op">-</span><span class="fl">100.</span>, <span class="fl">0.</span>, <span class="fl">0.</span>],</span>
-<span id="cb13-251"><a href="#cb13-251" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Property Color"</span>: [<span class="st">"Dark Blue"</span>, <span class="st">"Dark Blue"</span>, <span class="st">"Yellow"</span>, <span class="st">"Green"</span>, <span class="st">"Light Blue"</span>, <span class="st">"Purple"</span>]})</span>
-<span id="cb13-252"><a href="#cb13-252" aria-hidden="true" tabindex="-1"></a>merged_df</span>
-<span id="cb13-253"><a href="#cb13-253" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb13-254"><a href="#cb13-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-255"><a href="#cb13-255" aria-hidden="true" tabindex="-1"></a>Shawn decides he will now only buy properties from a color group that he deems “profitable.” He deems a color group “profitable” if at least 50% of the properties in the group that are currently owned by players have made a positive (non-zero) profit for those players.</span>
+<span id="cb13-244"><a href="#cb13-244" aria-hidden="true" tabindex="-1"></a>Shawn realizes he’s lost more money than he’s made. To solve this problem, he begins by writing some <span class="in">`Pandas`</span> code to merge the <span class="in">`Property Color`</span> column into the <span class="in">`income`</span> <span class="in">`DataFrame`</span> and drops all rows with <span class="in">`NaN`</span> values. He calls this <span class="in">`DataFrame`</span> <span class="in">`merged_df`</span>. Shown below are the first few rows.</span>
+<span id="cb13-245"><a href="#cb13-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-248"><a href="#cb13-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-249"><a href="#cb13-249" aria-hidden="true" tabindex="-1"></a>merged_df <span class="op">=</span> pd.DataFrame({<span class="st">"Player"</span>: [<span class="st">"Shawn"</span>, <span class="st">"Amanda"</span>, <span class="st">"Neil"</span>, <span class="st">"Shawn"</span>, <span class="st">"Annie"</span>, <span class="st">"Amanda"</span>],</span>
+<span id="cb13-250"><a href="#cb13-250" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Property"</span>: [<span class="st">"Boardwalk"</span>, <span class="st">"Park Place"</span>, <span class="st">"Marvin Gardens"</span>, <span class="st">"Pennsylvania Ave"</span>, <span class="st">"Oriental Ave"</span>, <span class="st">"Baltic Ave"</span>],</span>
+<span id="cb13-251"><a href="#cb13-251" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Income Generated"</span>: [<span class="fl">425.</span>, <span class="fl">375.</span>, <span class="fl">200.</span>, <span class="fl">150.</span>, <span class="fl">50.</span>, <span class="fl">60.</span>],</span>
+<span id="cb13-252"><a href="#cb13-252" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Profit"</span>: [<span class="op">-</span><span class="fl">25.</span>, <span class="fl">25.</span>, <span class="fl">50.</span>, <span class="op">-</span><span class="fl">100.</span>, <span class="fl">0.</span>, <span class="fl">0.</span>],</span>
+<span id="cb13-253"><a href="#cb13-253" aria-hidden="true" tabindex="-1"></a>                          <span class="st">"Property Color"</span>: [<span class="st">"Dark Blue"</span>, <span class="st">"Dark Blue"</span>, <span class="st">"Yellow"</span>, <span class="st">"Green"</span>, <span class="st">"Light Blue"</span>, <span class="st">"Purple"</span>]})</span>
+<span id="cb13-254"><a href="#cb13-254" aria-hidden="true" tabindex="-1"></a>merged_df</span>
+<span id="cb13-255"><a href="#cb13-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb13-256"><a href="#cb13-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-257"><a href="#cb13-257" aria-hidden="true" tabindex="-1"></a>**Fill in the following lines of code** to help him display a <span class="in">`DataFrame`</span> with a subset of the rows in <span class="in">`merged_df`</span>: the rows with properties that belong to profitable color groups.</span>
-<span id="cb13-258"><a href="#cb13-258" aria-hidden="true" tabindex="-1"></a>Your solution may use fewer lines of code than we provide.</span>
-<span id="cb13-259"><a href="#cb13-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-262"><a href="#cb13-262" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
-<span id="cb13-263"><a href="#cb13-263" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> func(group):</span>
-<span id="cb13-264"><a href="#cb13-264" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.mean(group[<span class="st">"Profit"</span>] <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&gt;=</span> <span class="fl">0.5</span>:</span>
-<span id="cb13-265"><a href="#cb13-265" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
-<span id="cb13-266"><a href="#cb13-266" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span>
-<span id="cb13-267"><a href="#cb13-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-268"><a href="#cb13-268" aria-hidden="true" tabindex="-1"></a>merged_df.groupby(<span class="st">"Property Color"</span>).<span class="bu">filter</span>(func)</span>
-<span id="cb13-269"><a href="#cb13-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb13-257"><a href="#cb13-257" aria-hidden="true" tabindex="-1"></a>Shawn decides he will now only buy properties from a color group that he deems “profitable.” He deems a color group “profitable” if at least 50% of the properties in the group that are currently owned by players have made a positive (non-zero) profit for those players.</span>
+<span id="cb13-258"><a href="#cb13-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-259"><a href="#cb13-259" aria-hidden="true" tabindex="-1"></a>**Fill in the following lines of code** to help him display a <span class="in">`DataFrame`</span> with a subset of the rows in <span class="in">`merged_df`</span>: the rows with properties that belong to profitable color groups.</span>
+<span id="cb13-260"><a href="#cb13-260" aria-hidden="true" tabindex="-1"></a>Your solution may use fewer lines of code than we provide.</span>
+<span id="cb13-261"><a href="#cb13-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-264"><a href="#cb13-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{python}</span></span>
+<span id="cb13-265"><a href="#cb13-265" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> func(group):</span>
+<span id="cb13-266"><a href="#cb13-266" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> np.mean(group[<span class="st">"Profit"</span>] <span class="op">&gt;</span> <span class="dv">0</span>) <span class="op">&gt;=</span> <span class="fl">0.5</span>:</span>
+<span id="cb13-267"><a href="#cb13-267" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">True</span></span>
+<span id="cb13-268"><a href="#cb13-268" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb13-269"><a href="#cb13-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-270"><a href="#cb13-270" aria-hidden="true" tabindex="-1"></a>merged_df.groupby(<span class="st">"Property Color"</span>).<span class="bu">filter</span>(func)</span>
+<span id="cb13-271"><a href="#cb13-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

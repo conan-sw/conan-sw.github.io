@@ -300,7 +300,7 @@ window.Quarto = {
 <p><span class="math display">\[\begin{align*}
 \nabla L &amp;= \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1
 = \hat{\theta}_1, \theta_2 = \hat{\theta}_2}} \\
-&amp;= [0, \text{undefined}]
+&amp;= [0, \text{undefined}]^T
 \end{align*}\]</span></p>
 <div class="callout callout-style-default callout-note no-icon callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -562,10 +562,10 @@ n_A &amp; 0 &amp; 0 \\
 <section id="human-contexts-and-ethics-case-study" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="human-contexts-and-ethics-case-study"><span class="header-section-number">8.3</span> Human Contexts and Ethics: Case Study</h2>
 <p>Which of the following scenarios strike you as unfair and why? You can choose more than one. There is no single right answer, but you must explain your reasoning.</p>
-<p><span class="math inline">\(\Box\)</span> <strong>A.</strong> A homeowner those home is assessed at a higher price than it would sell for.</p>
-<p><span class="math inline">\(\Box\)</span> <strong>B.</strong> A homeowner whose home is assessed at a lower price than it would sell for.</p>
-<p><span class="math inline">\(\Box\)</span> <strong>C.</strong> An assessment process that systematically overvalues inexpensive properties and under- values expensive properties.</p>
-<p><span class="math inline">\(\Box\)</span> <strong>D.</strong> An assessment process that systematically undervalues inexpensive properties and over- values expensive properties.</p>
+<p><label><input type="checkbox" value=""><b>A.</b> A homeowner those home is assessed at a higher price than it would sell for.</label></p>
+<p><label><input type="checkbox" value=""><b>B.</b> A homeowner whose home is assessed at a lower price than it would sell for.</label></p>
+<p><label><input type="checkbox" value=""><b>C.</b> An assessment process that systematically overvalues inexpensive properties and under-values expensive properties.</label></p>
+<p><label><input type="checkbox" value=""><b>D.</b> An assessment process that systematically undervalues inexpensive properties and over- values expensive properties.</label></p>
 <details>
 <summary>
 <b>Answer</b>
@@ -584,17 +584,21 @@ n_A &amp; 0 &amp; 0 \\
 <li>It is possible to have a tax scheme that is systematically fair tax (i.e., not regressive or progressive) but is still quite inaccurate and still generates errors for individual homeowners. However, a tax scheme that generates no errors for homeowners will also have no systematic unfairness.</li>
 <li>Unfairness of the second type (scenarios C and D) is a form of statistical bias that varies as a function of y (the response variable).</li>
 </ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Points from Discussion">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Some comments/opinions from Discussion (not verbose)">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Points from Discussion
+Some comments/opinions from Discussion (not verbose)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<ul>
+<li>All are unfair! Mismatch between predicted vs actual creates unfairness.</li>
+<li>A, B are <em>not</em> unfair. It’s inevitable that predicted <span class="math inline">\(\neq\)</span> actual. It becomes unfair when there is <em>systematic</em> overvaluing or undervaluing, which can negatively affect many people.</li>
+<li>D is unfair because owners of undervalued inexpensive properties suffer from a smaller sale price, while owners of overvalued expensive properties can incur much more property tax.</li>
+</ul>
 </div>
 </div>
 </details>
@@ -617,19 +621,6 @@ Points from Discussion
 <li>Does a low RMSE necessarily mean a model’s predictions are more “fair”?</li>
 <li>What is the difference between your answers to both questions?</li>
 </ul>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Points from Discussion">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Points from Discussion
-</div>
-</div>
-<div class="callout-body-container callout-body">
-
-</div>
-</div>
 </details>
 
 
@@ -1165,7 +1156,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>\begin{align*}</span>
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>\nabla L &amp;= \begin{bmatrix} \frac{\partial L}{\partial \theta_1} &amp; \frac{\partial L}{\partial \theta_2} \end{bmatrix}^T \Bigr|_{\substack{\theta_1</span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>= \hat{\theta}_1, \theta_2 = \hat{\theta}_2}} <span class="sc">\\</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>&amp;= <span class="co">[</span><span class="ot">0, \text{undefined}</span><span class="co">]</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>&amp;= <span class="co">[</span><span class="ot">0, \text{undefined}</span><span class="co">]</span>^T</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>\end{align*}</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}</span>
@@ -1477,74 +1468,75 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a>Which of the following scenarios strike you as unfair and why? You can choose more than</span>
 <span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a>one. There is no single right answer, but you must explain your reasoning.</span>
 <span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a>$\Box$ **A.** A homeowner those home is assessed at a higher price than it would sell for.</span>
-<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>$\Box$ **B.** A homeowner whose home is assessed at a lower price than it would sell for.</span>
-<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a>$\Box$ **C.** An assessment process that systematically overvalues inexpensive properties and under-</span>
-<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>values expensive properties.</span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a>&lt;label&gt;&lt;input type="checkbox" value=""&gt;&lt;b&gt;A.&lt;/b&gt; A homeowner those home is assessed at a higher price than it would sell for.&lt;/label&gt;</span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a>&lt;label&gt;&lt;input type="checkbox" value=""&gt;&lt;b&gt;B.&lt;/b&gt; A homeowner whose home is assessed at a lower price than it would sell for.&lt;/label&gt;</span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>&lt;label&gt;&lt;input type="checkbox" value=""&gt;&lt;b&gt;C.&lt;/b&gt; An assessment process that systematically overvalues inexpensive properties and under-values expensive properties.&lt;/label&gt;</span>
 <span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>$\Box$ **D.** An assessment process that systematically undervalues inexpensive properties and over-</span>
-<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a>values expensive properties.</span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>&lt;label&gt;&lt;input type="checkbox" value=""&gt;&lt;b&gt;D.&lt;/b&gt; An assessment process that systematically undervalues inexpensive properties and over-</span>
+<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a>values expensive properties.&lt;/label&gt;</span>
 <span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a>Findings can be used for Project A2, so explicit solutions will not be released for this question. However, here are some discussion points:</span>
-<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is the definition of “fairness” in this context?</span>
-<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which individual or group of people are considered when we evaluate fairness?</span>
-<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Are we talking about whether each situation above is fair to an individual home-</span>
-<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>owner, a subgroup of society, or the whole society?</span>
-<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At the level of the individual homeowner, any error can feel unfair: why am I be</span>
-<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a>over-/under-taxed?</span>
-<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At the level of the society, is it fair to have a general over or underestimation that varies with the value of the home (a regressive or progressive tax scheme)?</span>
-<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a>Other important things to note:</span>
-<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Some may feel that both regressive and progressive are unfair; that any systematic</span>
-<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>errors should not depend at all on the value of the property</span>
-<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>It is possible to have a tax scheme that is systematically fair tax (i.e., not regressive</span>
-<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a>or progressive) but is still quite inaccurate and still generates errors for individual</span>
-<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a>homeowners. However, a tax scheme that generates no errors for homeowners will</span>
-<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a>also have no systematic unfairness.</span>
-<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Unfairness of the second type (scenarios C and D) is a form of statistical bias that</span>
-<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a>varies as a function of y (the response variable).</span>
-<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Points from Discussion"}</span>
-<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
-<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a>Suppose you created a model to predict property values (as you are doing presently!) and</span>
-<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a>wanted to understand whether your model’s predictions align more with Scenario C or D from</span>
-<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a>the last question. You decide to break down your data into different intervals depending on</span>
-<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a>the true Log Sale Price and compute the Root Mean Squared Error (RMSE) and percentage of</span>
-<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a>property values overestimated for each interval. Using this information, you create the plots</span>
-<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a>below:</span>
-<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a><span class="al">![Log Sale Price plots](images/plots.png)</span></span>
-<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>Which plot would be more useful in determining whether the model’s predicted property val-</span>
-<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a>ues align more with Scenario C or D? Provide a brief justification for your answer.</span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a>Findings can be used for Project A2, so explicit solutions will not be released for this question. However, here are some discussion points:</span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is the definition of “fairness” in this context?</span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Which individual or group of people are considered when we evaluate fairness?</span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Are we talking about whether each situation above is fair to an individual home-</span>
+<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a>owner, a subgroup of society, or the whole society?</span>
+<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At the level of the individual homeowner, any error can feel unfair: why am I be</span>
+<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>over-/under-taxed?</span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>At the level of the society, is it fair to have a general over or underestimation that varies with the value of the home (a regressive or progressive tax scheme)?</span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a>Other important things to note:</span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Some may feel that both regressive and progressive are unfair; that any systematic</span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a>errors should not depend at all on the value of the property</span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>It is possible to have a tax scheme that is systematically fair tax (i.e., not regressive</span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a>or progressive) but is still quite inaccurate and still generates errors for individual</span>
+<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a>homeowners. However, a tax scheme that generates no errors for homeowners will</span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a>also have no systematic unfairness.</span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Unfairness of the second type (scenarios C and D) is a form of statistical bias that</span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a>varies as a function of y (the response variable).</span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Some comments/opinions from Discussion (not verbose)"}</span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>All are unfair! Mismatch between predicted vs actual creates unfairness.</span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>A, B are *not* unfair. It's inevitable that predicted $\neq$ actual. It becomes unfair when there is *systematic* overvaluing or undervaluing, which can negatively affect many people.</span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>D is unfair because owners of undervalued inexpensive properties suffer from a smaller sale price, while owners of overvalued expensive properties can incur much more property tax.</span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a>Suppose you created a model to predict property values (as you are doing presently!) and</span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a>wanted to understand whether your model’s predictions align more with Scenario C or D from</span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a>the last question. You decide to break down your data into different intervals depending on</span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a>the true Log Sale Price and compute the Root Mean Squared Error (RMSE) and percentage of</span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>property values overestimated for each interval. Using this information, you create the plots</span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a>below:</span>
 <span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
-<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
-<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a>Again, findings here can be used for Project A2, so explicit solutions will not be released. However, some questions to consider:</span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a><span class="al">![Log Sale Price plots](images/plots.png)</span></span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a>Which plot would be more useful in determining whether the model’s predicted property val-</span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a>ues align more with Scenario C or D? Provide a brief justification for your answer.</span>
 <span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>How does the sign of the residual relate to whether a property is overvalued or</span>
-<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a>undervalued?</span>
-<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Does a low RMSE necessarily mean a model’s predictions are more accurate?</span>
-<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Does a low RMSE necessarily mean a model’s predictions are more "fair"?</span>
-<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is the difference between your answers to both questions?</span>
-<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>::: {.callout-note title="Points from Discussion"}</span>
-<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>&lt;details&gt;</span>
+<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a>&lt;summary&gt;&lt;b&gt;Answer&lt;/b&gt;&lt;/summary&gt;</span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a>Again, findings here can be used for Project A2, so explicit solutions will not be released. However, some questions to consider:</span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>How does the sign of the residual relate to whether a property is overvalued or</span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>undervalued?</span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Does a low RMSE necessarily mean a model’s predictions are more accurate?</span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Does a low RMSE necessarily mean a model’s predictions are more "fair"?</span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>What is the difference between your answers to both questions?</span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a>&lt;/details&gt;</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
