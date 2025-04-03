@@ -1,0 +1,253 @@
+---
+title: Cross-Validation and Regularization
+execute:
+  echo: true
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    toc: true
+    toc-title: Cross-Validation and Regularization
+    page-layout: full
+    theme:
+      - cosmo
+      - cerulean
+    callout-icon: false
+jupyter: python3
+---
+
+### [Link to Slides](https://docs.google.com/presentation/d/1F0IMB7RTXk-XbvDGfUlS13cwRPKp7pRtdv0HfZc2Irs/edit?usp=sharing)
+
+## Cross Validation
+
+### (a)
+After running $5$-fold cross-validation, we get the following mean squared errors for each fold and value of $\lambda$ when using Ridge regularization:
+
+| Fold Num. | $\lambda = 0.1$ | $\lambda = 0.2$ | $\lambda = 0.3$ | $\lambda = 0.4$ | Row Avg |
+| :-- | :-: | :-: | :-: | :-: | :-: |
+| 1 | 80.2 | 70.2 | 91.2 | 91.8 | 83.4 |
+| 2 | 76.8 | 66.8 | 88.8 | 98.8 | 82.8 |
+| 3 | 81.5 | 71.5 | 86.5 | 88.5 | 82.0 |
+| 4 | 79.4 | 68.4 | 92.3 | 92.4 | 83.1 |
+| 5 | 77.3 | 67.3 | 93.4 | 94.3 | 83.0 |
+| Col Avg | 79.0 | 68.8 | 90.4 | 93.2 | |
+
+Suppose we wish to use the results of this 5-fold cross-validation to choose our hyperparameter $\lambda$, among the following four choices in the table. Using the information in the table, which $\lambda$ would you choose? Why?
+
+<details>
+<summary><b>Answer</b></summary>
+
+We should use $\lambda = 0.2$ because this value has the least average MSE across all folds.
+
+</details>
+
+### (b)
+You build a model with two hyperparameters, the coefficient for the regularization term ($\lambda$) and our learning rate ($\alpha$). You have 4 good candidate values for $\lambda$ and 3 possible values for $\alpha$, and you are wondering which $\lambda,
+\alpha$ pair will be the best choice. If you were to perform 5-fold cross-validation, how many validation
+ errors would you need to calculate?
+
+ <details>
+ <summary><b>Answer</b></summary>
+
+There are $4 \times 3 = 12$ pairs of $\lambda, \alpha$, and each pair will have $5$ validation errors, one for each fold. So, there would be 60 validation errors in total.
+
+ </details>
+
+## Ridge and LASSO Regression
+
+The goal of linear regression is to find the $\theta$ value that minimizes the average squared loss. In other words, we want to find $\hat{\theta}$ that satisfies the equation below:
+
+$$\hat{\theta}
+= \underset{\theta}{\operatorname{argmin}} L(\theta) 
+= \underset{\theta}{\operatorname{argmin}} \dfrac{1}{n}||\mathbb{Y} - \mathbb{X}{\theta}||_2^2$$
+
+Here, $\Bbb{X}$ is a $n \times (p + 1)$ matrix, $\theta$ is a $(p + 1) \times 1$ vector and $\mathbb{Y}$ is a $n \times 1$ vector. Recall that the extra $1$ in $(p+1)$ comes from the intercept term. As we saw in lecture, the optimal $\hat{\theta}$ is given by the closed-form expression $\hat{\theta} = (\Bbb{X}^T\Bbb{X})^{-1}\Bbb{X}^T \mathbb{Y}$.
+
+To prevent overfitting, we saw that we can instead minimize the sum of the average squared loss plus a regularization term $\lambda g(\theta)$.
+The optimization problem for such a \textit{regularized} loss function then becomes:
+
+\begin{align*}
+    \hat{\theta} = \underset{\theta}{\operatorname{argmin}} L(\theta) = \underset{\theta}{\operatorname{argmin}} \left[\frac{1}{n} \|\mathbb{Y} - \mathbb{X}\theta\|_{2}^{2} + \lambda g(\theta) \right]
+\end{align*}
+
+* If we use the function $g(\theta) = \sum_{j=1}^p\theta_j^2 = ||{\theta}||_2^2$, we have "Ridge regression". Recall that $g$ is the $\ell_2$ norm of $\theta$, so this is also referred to as "$\ell_2 / L_2$ regularization".
+* If we use the function $g(\theta) = \sum_{j=1}^p |\theta_j| = ||{\theta}||_1$, we have "LASSO regression". Recall that $g$ is the $\ell_1$ norm of $\theta$, so this is also referred to as "$\ell_1 / L_1$ regularization".
+
+![ridge_lasso](images/ridge_lasso.gif)
+
+**In this question, we intentionally choose to regularize also on the intercept term** to simplify the mathematical formulation of the Ridge and LASSO regression. In practice, we would not actually want to regularize the intercept term (and you should always assume that there should not be a regularization on the intercept term).
+
+For example, if we choose  $g(\theta) = ||{\theta}||_2^2$, our goal is to find $\hat{\theta}$ that satisfies the equation below:
+
+\begin{align*}
+\hat\theta
+= \underset{\theta}{\operatorname{argmin}} L_2(\theta) 
+&= \underset{\theta}{\operatorname{argmin}} \left[ \dfrac{1}{n}||\mathbb{Y} - \Bbb{X}{\theta}||_2^2 + \lambda ||{\theta}||_2^2 
+\right] \\
+&= \underset{\theta}{\operatorname{argmin}} \left[ \dfrac{1}{n}\sum_{i=1}^n (y_i - \Bbb{X}_{i,\cdot}^T \theta) ^2 + \lambda \sum_{j=0}^d\theta_j^2 \right]
+\end{align*}
+
+Recall that $\lambda$ is a hyperparameter that determines the impact of the regularization term. Like ordinary least squares, we can also find a closed-form solution to Ridge regression: $\hat{\theta}=(\Bbb{X}^T\Bbb{X} + n \lambda \mathbf{I})^{-1} \Bbb{X}^T \mathbb{Y}$. For LASSO regression, there is no such closed-form expression.
+
+### (a)
+Suppose we are dealing with the OLS case (i.e., don't worry about regularization yet). We increase the complexity of the model until test error stops decreasing. If we continue to increase model complexity, what do we expect to happen to the training error of the model trained using OLS? What about the test error?
+
+$\Box$ Training error decreases
+
+$\Box$ Training error increases
+
+$\Box$ Test error decreases
+
+$\Box$ Test error increases
+
+<details>
+<summary><b>Answer</b></summary>
+
+**Training error decreases, Test error increases**
+
+The training error decreases since the model fits/recognizes more relationships between features and responses found in the training dataset. However, these relationships increasingly become specific to the training set and will not necessarily generalize to the test set, so we expect the test error to increase.
+
+*Note:* The above is what we expect to happen, but there may be *rare cases* where this might not be true.
+
+</details>
+
+### (b)
+Now suppose we choose one of the above regularization methods, either $L1$ or $L2$, for some regularization parameter $\lambda > 0$ then we solve for our optimum. In terms of variance, how does a regularized model compare to ordinary least squares regression (assuming the same features between both models)?
+
+<details>
+<summary><b>Answer</b></summary>
+
+Regularized regression has a **lower** variance relative to ordinary least squares regression. This is because regularization tends to make the model "simpler" (pushing the vector of regression coefficients to be in some ball around the origin). So, upon slight changes in input variables, our predictions will vary less under regularization than under no regularization.
+
+</details>
+
+### (c)
+
+Suppose we have a large number of features (10,000+), and we suspect that only a handful of features are useful. Would LASSO or Ridge regression be more helpful in interpreting useful features? Why?
+
+<details>
+<summary><b>Answer</b></summary>
+
+LASSO would be better as it sets many values to 0, so it would be effectively selecting useful features and "ignoring" less useful ones.
+
+You can see this behavior in the GIF above with two parameters!
+
+</details>
+
+### (d)
+
+What are the two benefits of using Ridge regression over OLS?
+
+<details>
+<summary><b>Answer</b></summary>
+
+1. If $\mathbb{X}^T\mathbb{X}$ is not full rank (not invertible), then we end up with infinitely many solutions for least squares. On the other hand, using Ridge regression guarantees invertibility of $(\mathbb{X}^T\mathbb{X} + n \lambda \mathbb{I})$ and ensures that $\hat\theta = (\mathbb{X}^T\mathbb{X} + n \lambda \mathbb{I})^{-1}\mathbb{X}^T\mathbb{Y}$ always has a unique solution when $\lambda > 0$; the proof for these facts is out of scope for Data 100.
+
+2. Ridge regression also allows for feature selection/reducing overfitting because it down weights features that are less important in predicting the response. However, it still stands that LASSO is normally better for feature selection since LASSO will actually set these unimportant coefficients to $0$ as opposed to just down-weighting them.
+
+</details>
+
+### (e)
+
+In Ridge regression, what happens to $\hat{\theta}$ if we set $\lambda = 0$? What happens as $\lambda$ approaches $\infty$?
+
+<details>
+<summary><b>Answer</b></summary>
+
+* $\lambda = 0$: $$\hat{\theta}=(\Bbb{X}^T\Bbb{X} + n \lambda \mathbf{I})^{-1} \Bbb{X}^T \mathbb{Y} =(\Bbb{X}^T\Bbb{X})^{-1} \Bbb{X}^T \mathbb{Y}$$ Which is the normal OLS solution.
+
+* $\lambda \rightarrow \infty$: $$ (\Bbb{X}^T\Bbb{X} + n \lambda \mathbf{I})^{-1} \rightarrow \vec{0} \text{  as  } \lambda \rightarrow \infty $$ Therefore, $\hat{\theta} \rightarrow \vec{0}$ as well
+    * Intuitively: As $\lambda \rightarrow \infty$, the penalty term will dominat ethe least-squares term. After a certain point, it will be more optimal to set $\hat{\theta} = 0$ and simply incur the loss of a constant model.
+
+</details>
+
+## Guessing at Random
+
+A multiple choice test has 100 questions, each with five answer choices. Assume for each question that there is only one correct choice. The grading scheme is as follows:
+
+* 4 points are awarded for each right answer.
+* For each other answer (wrong, missing, etc), one point is taken off; that is, -1 point is awarded.
+
+A student hasn't studied at all and therefore selects each question's answer uniformly at random, independently of all the other questions. 
+
+Define the following random variables:
+
+* $R$: The number of answers the student gets right.
+* $W$: The number of answers the student does not get right.
+* $S$: The student's score on the test.
+
+### (a)
+What is the distribution of $R$? Provide the name and parameters of the appropriate distribution. Explain your answer.
+
+<details>
+<summary><b>Answer</b></summary>
+
+$R$ is counting the number of "successes" (or 1s) out of $100$ total independent Bernoulli trials, where a "success" is defined as answering the question correctly, and each question is a trial. The trials are independent because the student selects a random answer with the same probability distribution, no matter whether the other answers are chosen. The probability of "success" on any single trial is $1/5 = 0.2$, so, $R$ must follow a binomial distribution with $n = 100$ and $p = 0.2$.
+
+</details>
+
+### (b)
+Find $\mathbb{E}[R]$
+
+<details>
+<summary><b>Answer</b></summary>
+
+From class, the expectation of a $\text{Binomial}(n,p)$ random variable is always $np$. So, we obtain:
+$$\mathbb{E}[R] = n \cdot p = 100 \cdot 0.2 = 20$$
+
+</details>
+
+### (c)
+True or False: $\text{SD}(R) = \text{SD}(W)$? Remember that $\text{Var}(X) = \text{SD}(X)^2$.
+
+<details>
+<summary><b>Answer</b></summary>
+
+True. Note that $R + W = 100$. Hence,
+\begin{align*}
+    \text{Var}(R) &= \text{Var}(100 - W) \\
+     &= (-1)^2\text{Var}(W)\\
+     &= \text{Var}(W)
+\end{align*}
+
+We use the non-linearity of variance, $\text{Var}(aX+b) = a^2\text{Var}(X)$, to simplify our expression. 
+
+</details>
+
+### (d)
+Find $\mathbb{E}[S]$, the student's expected score on the test.
+
+<details>
+<summary><b>Answer</b></summary>
+
+The student's score on the test is a function of how many they get correct and how many they get incorrect. Using the point scheme given in the question, we can write this score as $S = 4R - W$ since each correct answer is awarded $4$ points, and each wrong answer is penalized by $1$ point. Note that $S$ is also a random variable since it is a function of random variables $R$ and $W$. Note that $R + W = 100$, since there are $100$ questions. Substituting $W = 100 - R$ and using linearity of expectations, we see:
+
+\begin{align*}
+    \mathbb{E}[S] &= \mathbb{E}[4R - W] \\
+    &= \mathbb{E}[4R - 100 + R] \\
+    &= \mathbb{E}[5R - 100] \\
+    &= 5\mathbb{E}[R] - 100 \\
+\end{align*}
+
+Substituting $\mathbb{E}[R] = 20$ from part (b), we see the students expected score on the exam using this guessing strategy is $0$.
+
+</details>
+
+### (e)
+Find $\text{SD}(S)$
+
+<details>
+<summary><b>Answer</b></summary>
+
+We know from the question above that we can write $4R - W$ as $5R - 100$. Since the variance of a random variable plus a constant is just the variance of the original random variable:
+
+\begin{align*}
+    \text{Var}(S) &= \text{Var}(5R - 100) \\
+    &= 5^{2}\text{Var}(R) \\
+    &= 25\text{Var}(R)
+\end{align*}
+
+We know that the variance of a $\text{Binomial}(n,p)$ variable is $np(1-p)$. Plugging in the values of $n, p$ from part (a), we see $\text{Var}(R) = 16$, giving us $\text{Var}(S) = 400$. Hence, $SD(S) = \sqrt{400} = 20$. 
+
+</details>
+
