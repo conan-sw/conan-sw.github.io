@@ -1,0 +1,306 @@
+---
+title: Logistic Regression
+execute:
+  echo: true
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    toc: true
+    toc-title: Logistic Regression
+    page-layout: full
+    theme:
+      - cosmo
+      - cerulean
+    callout-icon: false
+jupyter: python3
+---
+
+## [Link to Slides](https://docs.google.com/presentation/d/1Uity00kUjV7JK2PUXR3LvIb0tIxF2y74bGXA4pYGwOg/edit?usp=sharing)
+
+## Logistic Regression
+
+Suppose we are given the following dataset, with two features ($\Bbb{X}_{:, 0}$ and $\Bbb{X}_{:, 1}$) and one binary response variable ($y$)
+
+<center>
+
+|$\mathbb{X}_{:, 0}$ | $\mathbb{X}_{:, 1}$ | $y$ |
+| :-: | :-: | :-: |
+| 2 | 2 | 0 |
+| 1 | -1 | 1 |
+
+</center>
+
+Here, $\vec{x}^T$ corresponds to a single row of our data matrix, not including the $y$ column. Thus, we can write $\vec{x}_1^T$ as $\vec{x}_1^T = \left[2 \quad 2\right]$. Note that there is no intercept term!
+
+Suppose you run a Logistic Regression model to determine the probability that $Y=1$ given $\vec{x}$. We denote probability as $P_{\hat{\theta}}$ as opposed to just $P$ to show that $\hat{\theta}$ is a \textit{learned parameter} like it is in OLS, where we denote our function as $f_{\theta}(x)$.
+
+$$P_{\hat{\theta}}(Y=1|\vec{x}) = \sigma(\vec{x}^T \theta) = \frac{1}{1 + \exp(- \vec{x}^T \theta)}$$
+
+Your algorithm learns that the optimal $\hat\theta$ value is $\hat\theta = \left[-\frac{1}{2} \quad-\frac{1}{2}\right]^T$.
+
+### (a)
+
+$\sigma(z)$ is called a "sigmoid" function with the equation $$\sigma(z) = \frac{1}{1 + \exp(-z)}$$ for some arbitrary real number $z$. What is the range of possible values for $\sigma(\cdot)$?
+
+<details>
+<summary><b>Answer</b></summary>
+
+* $x \to -\infty: \frac{1}{1 + e^{-z}} \to 0$
+
+* $x \to \infty: \frac{1}{1 + e^{-z}} \to \frac{1}{1 + 0} = 1$
+
+$0 < \sigma(z) < 1$. Note that the sigmoid function can never *equal* 0 or 1.
+
+</details>
+
+### (b)
+
+Calculate $P_{\hat{\theta}}(Y=1|\vec{x}^T=\left[1 \quad   0\right])$.
+
+<details>
+<summary><b>Answer</b></summary>
+
+Calculate $\vec{x}^T\hat{\theta}$ first:
+
+\begin{align*}
+    \vec{x}^T\hat{\theta} &= \begin{bmatrix}1 & 0\end{bmatrix}\begin{bmatrix} -\frac{1}{2} \\ -\frac{1}{2} \end{bmatrix}\\
+    &= 1*-\frac{1}{2} + 0*-\frac{1}{2}\\
+    &= -\frac{1}{2}
+\end{align*}
+
+We can then plug this into the sigmoid function:
+
+\begin{align*}
+    \sigma(-\frac{1}{2}) &= \frac{1}{1 + e^{\frac{1}{2}}}\\
+    &\approx 0.38
+\end{align*}
+
+</details>
+
+### (c)
+Using a threshold of $T = 0.5$, what would our algorithm classify $y$ as given the results of part b?
+
+<details>
+<summary><b>Answer</b></summary>
+
+Our $p$ of $0.38$ is *smaller* than the threshold of $0.5$, so our algorithm would classify $y$ as class $0$.
+
+A **Decision Rule** tells us how to classify a data point:
+
+$$\hat{y} = 
+\begin{cases}
+\text{Class 1} &\text{if } \quad p \geq T\\
+\text{Class 0} &\text{if } \quad p \lt T
+\end{cases}
+$$
+
+</details>
+
+### (d)
+
+The empirical risk using cross-entropy loss is given by the following expression. Remember, whenever you see $\log$ in this course, you must assume the natural logarithm (base-$e$) unless explicitly told otherwise.
+
+\begin{align*}
+	R(\theta) &= -\dfrac{1}{n} \sum_{i=1}^{n} \big( y_i \log P_{\theta}(Y=1|\vec{x_i}) + (1-y_i) \log  P_{\theta}(Y=0|\vec{x_i}) \big)
+\end{align*} 
+
+ Suppose we run a different algorithm and obtain $\hat\theta_{new} = \left[0 \quad 0\right]^T$. Calculate the empirical risk for $\hat\theta_{new}$ on our dataset.
+
+<details>
+<summary><b>Answer</b></summary>
+
+\begin{align*}
+	R(\hat\theta_{new}) &= -\dfrac{1}{2} \sum_{i=1}^{2} \big( y_i \log P_{\hat{\theta_{new}}}(Y=1|\vec{x_i}) + (1-y_i) \log  P_{\hat{\theta_{new}}}(Y=0|\vec{x_i}) )\\
+	&= -\frac{1}{2} [(0 \log P_{\hat{\theta_{new}}}(Y=1|\vec{x_1}) + 1 \log  P_{\hat{\theta_{new}}}(Y=0|\vec{x_1})) + \\ & (1 \log P_{\hat{\theta_{new}}}(Y=1|\vec{x_2}) + 0 \log  P_{\hat{\theta_{new}}}(Y=0|\vec{x_2}))] \\
+	&= -\frac{1}{2} (\log P_{\hat{\theta_{new}}}(Y=0|\vec{x_1}) + \log P_{\hat{\theta_{new}}}(Y=1|\vec{x_2})) \\
+	&= -\frac{1}{2} (\log (1 - \sigma(0)) + \log \sigma(0)) \\ 
+	&= -\log(0.5) = \log 2 \approx 0.693
+\end{align*}
+
+Notice that the inputs to the sigmoid function are $0$ because $\hat{\theta}_{new}$ is the zero vector, making all $\vec{x}^T\hat{\theta}_{new} = 0$
+
+</details>
+
+## Linearly Separable Data
+
+Suppose we have two different Logistic Regression models, A and B, and we run gradient descent for 1000 steps to obtain the model parameters $\hat\theta_A = \left[-\frac{1}{2} \quad-\frac{1}{2}\right]^T$ and $\hat\theta_B = \left[0 \quad0\right]^T$. How do they compare?
+
+The dataset is reproduced below for your convenience.
+
+<center>
+
+|$\mathbb{X}_{:, 0}$ | $\mathbb{X}_{:, 1}$ | $y$ |
+| :-: | :-: | :-: |
+| 2 | 2 | 0 |
+| 1 | -1 | 1 |
+
+</center>
+
+### (a)
+Is our dataset linearly separable? If so, write the equation of a hyperplane that separates the two classes. Otherwise, briefly explain why not (Hint: draw the two data points).
+
+<details>
+<summary><b>Answer</b></summary>
+
+Yes, the line $\mathbb{X}_{:, 1} = 0$ (line on horizontal axis) separates the data in feature space!
+
+<center><img src = "images/q2a.png" width = 500></center>
+
+</details>
+
+### (b)
+If we let gradient descent keep running indefinitely for our two models, will either of them converge given the design matrix above? Why? If not, how can we remedy this?
+
+<details>
+<summary><b>Answer</b></summary>
+
+No.
+
+Our dataset is linearly separable, so the *optimal* cross-entropy loss is 0. However, a cross-entropy loss of 0 can never be achieved. Remember that $\sigma(z)$ never outputs *exactly* 0 or 1, but it can get arbitrarily close! 
+
+Hence, no single value of $\theta$ will ever "minimize" cross-entropy loss (ie. let $\sigma(x^T \theta) = 0$), but gradient descent can bring the cross-entropy loss closer and closer to 0 as $\theta$ goes to $\pm \infty$.
+
+To avoid our absolute values of the weights diverging to $\infty$, we can regularize our cross-entropy loss and penalize arbitrarily large $\theta$! 
+
+</details>
+
+### (c)
+Assume we add the data point $[3, -2]$ to the design matrix such that our resulting design matrix is as follows:
+
+<center>
+
+| $\mathbb{X}_{:, 0}$ | $\mathbb{X}_{:, 1}$ | $y$ |
+| :-: | :-: | :-: |
+| 2 | 2 | 0 |
+| 1 | -1 | 1 |
+| 3 | -2 | 0 |
+
+</center>
+
+Is it possible to achive a perfect accuracy using logistic regression?
+
+<details>
+<summary><b>Answer</b></summary>
+
+The data is still linearly separable, so we can train a logistic regression model to achieve perfect accuracy! For example, $\mathbb{X}_{:, 0} = 1.5$ would result in perfect accuracy.
+
+<center><img src = "images/q2c.png" width = 500></center>
+
+</details>
+
+## ROC Curves
+Consider the following ROC (receiver operating characteristic) curves that were each created from different models. 
+
+<center><img src="images/roc.png" width = 500></center>
+
+### (a)
+Compare the Area Under the Curve (AUC) of Line 1 and Line 4. What kind of model would predict Line 1? What kind of model would predict Line 4? 
+
+<details>
+<summary><b>Answer</b></summary>
+
+Line 1 (solid black line) is known as a "perfect predictor"; it always predicts the correct class for $y$, so its true positive rate (TPR) is 1, and its false positive rate (FPR) is 0. Because we want our classifier to be as close as possible to the perfect predictor, we aim to maximize the AUC.
+
+On the other hand, Line 4 (solid grey line) is a random predictor that predicts $y=1$ with a probability of 0.5 and $y=0$ with a probability of 0.5. It's AUC = 0.5, and it does no better than a random coin flip (proof in course notes).
+
+</details>
+
+### (b)
+Suppose we fix the decision threshold for all 4 models such that we get an FPR of 0.1 when we evaluate our model. In order of most to least preferred, rank models given their ROC curve. 
+
+<details>
+<summary><b>Answer</b></summary>
+
+Since the FPR is now fixed at 0.1, the only thing that we can adjust is the TPR. To determine the most to least preferred model, we look at each model's TPR at an FPR of 0.1. Higher TPRs are better because they indicate that a greater proportion of true positive cases are correctly identified by the model. Hence, we get the following ranking: 
+$$\text{Line 1} > \text{Line 3} >\text{Line 2} >\text{Line 4} $$
+
+</details>
+
+## Performance Metrics
+
+Here are some classification performance metrics (from Fall 2023 Final Reference Sheet):
+
+<center>
+
+| Metric | Formula | Other Names |
+| :-: | :-: | :-: |
+| Accuracy | $\frac{TP+TN}{n}$ | |
+| Precision | $\frac{TP}{TP + FP}$ | |
+| Recall/TPR | $\frac{TP}{TP + FN}$ | True Positive Rate, Sensitivity |
+| FPR | $\frac{FP}{FP + TN}$ | False Positive Rate, Specificity |
+
+</center>
+
+Suppose we train a binary classifier on the following dataset where $y$ is the set of true labels, and $\hat{y}$ is the set of predicted labels:
+
+<center>
+
+| $y$ | 0 | 0 | 0 | 0 | 0 | 1 | 1 | 1 | 1 | 1 |
+| :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: | :-: |
+| $\hat{y}$ | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 |
+
+</center>
+
+### (a)
+Fill out the confusion matrix for the given data.
+*Hint:* The first row contains the true negatives and false positives, and the second row contains false negatives and true positives (in that order).
+
+<center>
+
+| TN: &nbsp;| FP: &nbsp;|
+| :-: | :-: |
+| **FN:** &nbsp;| **TP:** &nbsp;|
+
+</center>
+
+<details>
+<summary><b>Answer</b></summary>
+
+<center>
+
+| TN: 1| FP: 4|
+| :-: | :-: |
+| **FN: 3** | **TP: 2** |
+
+</center>
+
+</details>
+
+### (b)
+The precision of our classifier. Write your answer as a simplified fraction.
+
+<details>
+<summary><b>Answer</b></summary>
+
+$\text{Precision} = \frac{TP}{TP + FP} = \frac{2}{2 + 4} = \frac{1}{3}$
+
+</details>
+
+### (c)
+The recall of our classifier. Write your answer as a simplified fraction.
+
+<details>
+<summary><b>Answer</b></summary>
+
+$\text{Recall} = \frac{TP}{TP + FN} = \frac{2}{2+3} \frac{2}{5}$
+
+</details>
+
+### (d)
+**(Discussion)** It is revealed that this dataset describes the results of an algorithm used to predict whether someone is at risk of developing a severe disease with expensive treatment. You are tasked with improving the classifier. Which metrics should you aim to optimize for (Accuracy/Precision/Recall)? Explain your reasoning. (Things to consider: cost of treatment, the severity of disease)
+
+<details>
+<summary><b>Answer</b></summary>
+
+There is no singular correct answer, but here are some examples of reasons.
+        
+* **Accuracy**: Since this dataset is fairly balanced, accuracy is not too bad of a metric. (3/10). The main flaw of using accuracy as the metric is that it is agnostic towards the original class of the data point when evaluating performance. 
+
+* **Precision**: Optimizing for precision means that we care more about making sure the positives we output are truly positive. In this setting, we want to ensure that the people we predict to have the disease truly have the disease. If the cost of treatment is very expensive, we don't want to overburden people who may not have this disease financially.
+
+* **Recall**: Optimizing for recall means we care more about detecting all the true positives from the dataset. In this setting, we want to make sure that almost everyone who has the disease knows they have it. If the disease is particularly deadly, then we would be aiming to save the most lives. 
+
+</details>
+
+
