@@ -1,0 +1,389 @@
+---
+title: PCA + Clustering
+execute:
+  echo: true
+format:
+  html:
+    code-fold: true
+    code-tools: true
+    toc: true
+    toc-title: PCA + Clustering
+    page-layout: full
+    theme:
+      - cosmo
+      - cerulean
+    callout-icon: false
+jupyter: python3
+---
+
+## [Link to Slides](https://docs.google.com/presentation/d/17veSqEg53zEslVsYJN9jA5l9_ZwIZaUBFDd7DDFOG4k/edit?usp=sharing)
+
+::: {.callout-note}
+
+**Terminology:** The notation used for PCA starting from Spring 2024 differs from previous semesters a bit.
+
+1. Principal Component: The columns of $V$. These vectors specify the principal coordinate system and represent the directions along which the most variance in the data is captured.
+2. Latent Vector Representation of X: The projection of our data matrix $X$ onto the principal components, $Z = XV = US$ (as denoted in lecture). The columns of $Z$ are called latent factors or component scores. In previous semesters, the terminology was different and this was termed the principal components of $X$.
+3. $S$ (as in SVD): The diagonal matrix containing all the singular values of $X$. 
+4. $\Sigma$ : The covariance matrix of $X$. Assuming $X$ is centered, $\Sigma = X^T X$. In previous semesters, the singular value decomposition of $X$ was written out as $X=U \Sigma V^T$, but we now use $X=USV^T$. Note the difference between $\Sigma$ in that context compared to this semester.
+
+:::
+
+## PCA Basics
+
+Consider the following dataset, where $X$ is the corresponding $4 \times 3$ design matrix. The mean and variance for each of the features are also provided.
+
+<center>
+
+| Observations | Feature 1 | Feature 2 | Feature 3 |
+| :-: | :-: | :-: | :-: |
+| **1** | -3.59 | 7.39 | -0.78 |
+| **2** | -8.37 | -5.32 | 0.90 |
+| **3** | 1.75 | -0.61 | -0.62 |
+| **4** | 10.21 | -1.46 | 0.50 |
+| Mean | 0 | 0 | 0 |
+| Variance | 47.56 | 21.35 | 0.51 |
+
+</center>
+
+Suppose we perform a singular value decomposition (SVD) on this data to obtain $X = U S V^T$:
+
+**Note:** $U$ and $V^T$ are not perfectly orthonormal due to rounding to 2 decimal places.
+
+\begin{align*}
+    U = 
+    \begin{bmatrix}
+        -0.25 & 0.81 & 0.20 \\
+        -0.61 & -0.56 & 0.24 \\
+        0.13 & -0.06 & -0.85 \\
+        0.74 & -0.18 & 0.41 \\
+    \end{bmatrix}, \qquad
+    S = 
+    \begin{bmatrix}
+        13.79 & 0 & 0 \\
+        0 & 9.32 & 0 \\
+        0 & 0 & 0.81 \\
+    \end{bmatrix}, \qquad
+    V^T = 
+    \begin{bmatrix}
+        1.00 & 0.02 & 0.00 \\
+        -0.02 &  0.99 & -0.13 \\
+        0.00 & 0.13 & 0.99 \\
+    \end{bmatrix}
+\end{align*}
+
+### (a)
+Recall that we define the columns of $V$ as the principal components. By projecting $X$ onto the principal components (i.e. computing $XV$), we can construct the latent vector representation of $X$. Alternatively, you can also calculate the latent vector representation using $US$. Using $X=USV^T$ prove that $XV = US$.
+
+<details>
+<summary><b>Answer</b></summary>
+
+Since $V$ is orthonormal, we know that $V^TV = I$. Starting with $X = U S V^T$, we right multiply by $V$ on both sides:
+    
+\begin{align*}
+XV &= U S V^TV\\ 
+&= U S I\\
+&= U S
+\end{align*}
+
+</details>
+
+### (b)
+Compute the projection of $X$ onto the first principal component, also called the first latent factor (round to 2 decimal places).
+
+<details>
+<summary><b>Answer</b></summary>
+
+We compute the first latent factor by multiplying $X$ by the first row of $V^T$ to get $\approx \begin{bmatrix} -3.44 & -8.47 & 1.74 & 10.18 \end{bmatrix}^T$ (your values may differ slightly due to rounding).
+        
+You can also compute the first latent factor by observing that $XV = U S$. Therefore, the first latent factor is also the first column of $U S$.
+
+</details>
+
+### (c)
+What is the component score of the first principal component? In other words, how much of the total variance of $X$ is captured by the first principal component?
+
+<details>
+<summary><b>Answer</b></summary>
+
+The variance captured by $i$-th principal component of the original data $X$  is equal to $$\frac{(i\text{-th singular value})^2}{\text{number of observations } n}$$
+
+In this case, $n = 4$, and $s_1 = 13.79$. Therefore, the component score can be computed as follows:
+
+$$\frac{13.79^2}{4} = 47.54$$
+
+</details>
+
+### (d) (Bonus)
+Given the results of **(a)**, how can we interpret the rows of $V^T$? What do the values in these rows represent?
+
+<details>
+<summary><b>Answer</b></summary>
+
+The rows of $V^T$ are the same as the columns of $V$ which we know are the principal components of $X$. Each latent factor of $X$ is a linear combination of $X$'s features. The rows of $V^T$ correspond to the weights of each feature in the linear combinations that make up their respective latent factors.
+
+</details>
+
+## Applications of PCA
+
+Minoli wants to apply PCA to `food_PCA`, a dataset of food nutrition information to understand the different food groups.
+
+<center><img src="images/food.png" width="500"></img></center>
+
+She needs to preprocess her current dataset in order to use PCA.
+
+### (a)
+
+Which of the following are appropriate preprocessing steps when performing PCA on a dataset? 
+
+$\Box$ Transform each row to have a magnitude of 1 (Normalization)
+
+$\Box$ Transform each column to have a mean of 0 (Centering)
+
+$\Box$ Transform each column to have a mean of 0 and a standard deviation of 1 (Standardization)
+
+$\Box$ None of the above
+
+<details>
+<summary><b>Answer</b></summary>
+
+* Transform each column to have a mean of 0 (Centering)
+
+* Transform each column to have a mean of 0 and a standard deviation of 1 (Standardization)
+
+We can use standardization or centering of the columns for PCA, since each column contains values of a particular feature for many observations. Standardization ensures that the standard deviation of each collection of feature values is $1$, so that the variability in each feature across the data points is on a uniform scale. Additionally, we cannot compute the covariance matrix correctly using SVD if the feature columns are not centered with mean 0. Choice (A) is incorrect because it doesn't really make sense to preprocess by row in PCA, since PCA is all about finding combinations of features (columns) as opposed to rows.
+
+</details>
+
+### (b)
+
+Assume you have correctly preprocessed your data using the correct response in part (a). Write a line of code that returns the first 3 latent factors assuming you have the correctly preprocessed `food_PCA` and the following variables returned by SVD.
+
+`u, s, vt = np.linalg.svd(food_PCA, full_matrices = False)`
+
+`first_3_latent_factors = ___________`
+
+<details>
+<summary><b>Answer</b></summary>
+
+`X @ vt.T[:, :3]`
+
+It is also possible to use `U` and `S` instead, although it may be a little more complicated that way.
+
+Note the following operators:
+
+* **@** for matrix multiplication
+* **.T** to transpose
+
+</details>
+
+### (c)
+
+The scree plot below depicts the proportion of variance captured by each principal component
+
+<center><img src="images/scree_plot.png" width="500"></center>
+
+Which of the following lines of code could have created the plot above?
+
+$\bigcirc$ `plt.plot(s**2/np.sum(s**2), u)`
+
+$\bigcirc$ `plt.plot(food_PCA[:, :7], s**2/np.sum(s))`
+
+$\bigcirc$ `plt.plot(np.arange(1, food_PCA.shape[1]+1), s**2/np.sum(s**2))`
+
+$\bigcirc$ `plt.plot(np.arange(1, food_PCA.shape[1]+1), s**2/np.sum(s))`
+
+$\bigcirc$ `plt.plot(u@s, s**2/np.sum(s**2))`
+
+<details>
+<summary><b>Answer</b></summary>
+
+The variance captured by the $i$-th PC is given by $\frac{s[i]^2}{n}$, where $n$ is the number of rows. Therefore, the *proportion* of variance captured by the $i$-th PC must be given by $$\frac{\frac{s[i]^2}{n}}{\frac{\text{np.sum}(s^2)}{n}}$$ Using `NumPy` operations, we can calculate the $y$-values as 
+
+`s**2/np.sum(s**2)`.
+
+The corresponding $x$-values should run from 1 to the number of columns of 
+
+`food_PCA`, which gives us `np.arange(1, food_PCA.shape[1]+1)`
+
+</details>
+
+### (d)
+
+Using the elbow method, how many principal components should we choose to represent the data? 
+
+<details>
+<summary><b>Answer</b></summary>
+
+The elbow of a scree plot is the point where adding more principal components results in diminishing returns. In other words, we look for the "elbow" in the curve just before the line flattens out. This point is at PC 3 in the graph above, so we choose 3 as the number of principal components. 
+
+Note that not all scree plots will have an obvious elbow. 
+
+</details>
+
+## Interpreting PCA Plots
+
+Xiaorui has three datasets $A$, $B$, and $C \in \mathbb{R}^{100 \times 2}$. That is, each dataset consists of 100 data points in two dimensions. He visualizes the datasets using scatterplots, labeled Plot A, Plot B, and Plot C, respectively:
+
+<center><img src="images/dis13_pca_plots.png" width="600"></center>
+
+### (a)
+
+If he applies PCA to each of the above datasets and uses only the first principal component, which dataset(s) would have the lowest reconstruction error? Select all that apply.
+
+$\Box$ Dataset $A$
+
+$\Box$ Dataset $B$
+
+$\Box$ Dataset $C$
+
+$\Box$ Cannot determine with the given information
+
+<details>
+<summary><b>Answer</b></summary>
+
+**Dataset $B$**
+
+Most of the variance in Plot B lies roughly about a single line. The variance captured by the second PC is far smaller in Plot B compared to plots A and C. In both Plot A and Plot C, there are significant amounts of variance in two orthogonal directions, so PC1 would not be able to capture as much of the total variance.
+
+Since we want to have the lowest reconstruction error while using only 1 PC, we pick Plot B.
+
+</details>
+
+### (b)
+
+If he applies PCA to each of the above datasets and uses the first two principal compo-
+nents, which dataset(s) would have the lowest reconstruction error? Select all that apply.
+
+$\Box$ Dataset $A$
+
+$\Box$ Dataset $B$
+
+$\Box$ Dataset $C$
+
+$\Box$ Cannot determine with the given information
+
+<details>
+<summary><b>Answer</b></summary>
+
+**Dataset $A$, Dataset $B$, Dataset $C$**
+
+Note that all 3 datasets have dimensions $100 \times 2$. Using two principal components corresponds to using the full singular value decomposition of $X$, so we can perfectly reconstruct it. The sum of the variance captured by each PC will be exactly equal to the sum of the variance captured by both features. In all 3 cases, the reconstruction error would be 0.
+
+</details>
+
+### (c)
+
+Suppose he decides to take the Singular Value Decomposition (SVD) of one of the three datasets, which we will call Dataset $X$. He runs the following piece of code:
+
+<center>
+
+`X_bar = X - np.mean(X, axis=0)`
+
+`U, S, V_T = np.linalg.svd(X_bar)`
+
+</center>
+
+He gets the following output for `S`:
+
+<center>
+
+`array([15.59204498, 3.85871854])`
+
+</center>
+
+and the following output for `V_T`:
+
+<center>
+
+`array([[0.89238775, -0.45126944], [0.45126944, 0.89238775]])`
+
+</center>
+
+Based on the given plots and the SVD, which of the following datasets does Dataset $X$ most closely resemble? Select one option.
+
+$\bigcirc$  Dataset $A$
+
+$\bigcirc$ Dataset $B$
+
+$\bigcirc$ Dataset $C$
+
+<details>
+<summary><b>Answer</b></summary>
+
+We can identify the direction of the first principal component and figure out what plot it should correspond to. The first PC is the first column of $V$, which is the same as the first row of $V^T = [0.89, -0.45]^T$. This looks like the yellow arrow on the plot below, which aligns with Plot B because it lies in the direction of greatest variance. The direction that captures the most variance for both Plot A and C seems to be perpendicular to what's provided and does not match up.
+
+<center><img src="images/dis13_pca_plot_annotated.png" width="500"></center>
+
+</details>
+
+## Clustering
+
+### (a)
+
+Describe the difference between clustering and classification.
+
+<details>
+<summary><b>Answer</b></summary>
+
+Both involve assigning arbitrary classes to each observation. In classifi-
+cation, we have a labeled training set, i.e. a ground truth we can use to train our model. In clustering, we have no ground truth, and are instead looking for patterns in
+unlabeled data. Classification falls under supervised machine learning because it is
+concerned with predicting the correct/specific class given the true labels to the data.
+Clustering falls under unsupervised machine learning because there are no provided
+"true" labels - instead it is concerned with the patterns across the data (rather than
+where the data belongs).
+
+</details>
+
+### (b)
+
+Given a set of points and their labels (or cluster assignments) from a K-Means clustering,
+how can we compute the centroids of each of the clusters?
+
+<details>
+<summary><b>Answer</b></summary>
+
+For each label, find the mean of all of the data points corresponding to that label. In other words, compute centroids $c_i$ for each label/cluster's set of data points $L_i$ and corresponding data points $x_j \in L_i$:
+
+$$
+c_i = \frac{1}{n} \sum_{x_j \in L_i} x_j
+$$
+
+</details>
+
+### (c)
+
+Describe qualitatively what it means for a data point to have a negative silhouette score.
+
+<details>
+<summary><b>Answer</b></summary>
+
+The silhouette score of a data point is negative if it is on average closer to the points in the neighboring cluster than its own cluster. 
+
+Recall the formula for calculating the silouhette score:
+
+$$
+S = \frac{B - A}{\max{(A, B)}}
+$$ 
+
+where $A$ is the average distance to the *other* points in the cluster, and *B* is the average distance to points in the *closest* cluster.
+
+</details>
+
+### (d)
+
+Suppose that no two points have the same distance from each other. Are the cluster
+labels computed by K-means always the same for a given dataset? What about for max
+agglomerative clustering?
+
+<details>
+<summary><b>Answer</b></summary>
+
+The cluster labels computed by K-means could be different if we change
+the initial centers. This cannot happen for max agglomerative clustering because
+every point starts in its own cluster, and there is no choice involving initialization.
+
+</details>
+
+
